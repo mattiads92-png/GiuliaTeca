@@ -19,6 +19,10 @@
             --success: #00b894;
             --shadow: 0 8px 30px rgba(0,0,0,0.12);
             --radius: 16px;
+            
+            /* Colori Sedi */
+            --loc-bellocchio: #e17055; /* Un color terracotta caldo */
+            --loc-annunziata: #0984e3; /* Un blu deciso */
         }
 
         [data-theme="dark"] {
@@ -36,264 +40,78 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-gradient);
-            background-attachment: fixed; /* Sfondo fisso mentre scorri */
-            color: var(--text);
-            min-height: 100vh;
-            padding-bottom: 80px; /* Spazio per la nav in basso */
+            margin: 0; padding: 0;
+            background: var(--bg-gradient); background-attachment: fixed;
+            color: var(--text); min-height: 100vh; padding-bottom: 80px;
         }
 
-        /* HEADER */
         header {
-            background: var(--surface);
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: var(--surface); padding: 15px 20px;
+            text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50;
+            backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center;
         }
+        .logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--primary); margin: 0; }
+        .theme-btn { background: none; border: 2px solid var(--primary); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
 
-        .logo {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin: 0;
-        }
+        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
-        .theme-btn {
-            background: none;
-            border: 2px solid var(--primary);
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-
-        /* CONTAINER */
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        /* NAVIGAZIONE IN BASSO (Mobile Style) */
         .bottom-nav {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: var(--surface);
-            backdrop-filter: blur(10px);
-            padding: 10px;
-            border-radius: 30px;
-            display: flex;
-            justify-content: space-around;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            z-index: 100;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: var(--surface); backdrop-filter: blur(10px);
+            padding: 10px; border-radius: 30px; display: flex; justify-content: space-around;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 100;
         }
+        .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; cursor: pointer; }
+        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4); }
 
-        .nav-item {
-            border: none;
-            background: none;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
-            background-color: var(--primary);
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
-        }
-
-        /* SEARCH & FILTER SECTION */
-        .search-area {
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 20px;
-            border-radius: 30px;
-            border: none;
-            background: var(--surface);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            font-size: 1rem;
-            color: var(--text);
-            margin-bottom: 15px;
-            outline: none;
-        }
+        .search-area { margin-bottom: 20px; }
+        .search-input { width: 100%; padding: 16px 20px; border-radius: 30px; border: none; background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 1rem; color: var(--text); margin-bottom: 15px; outline: none; }
         .search-input:focus { border: 2px solid var(--primary); }
 
-        /* SCROLL ORRIZZONTALE GENERI */
-        .genre-scroll {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding-bottom: 10px;
-            /* Nasconde scrollbar */
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
-        }
+        .genre-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scrollbar-width: none; -ms-overflow-style: none; }
         .genre-scroll::-webkit-scrollbar { display: none; }
+        .genre-chip { background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.8); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
+        .genre-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .genre-chip {
-            background: rgba(255,255,255,0.5);
-            border: 1px solid rgba(255,255,255,0.8);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        .genre-chip.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* CARD LIBRO */
-        .book-card {
-            background: var(--surface);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-card::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 6px;
-            background: var(--success);
-        }
-
+        .book-card { background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); }
         .book-card.borrowed::before { background: var(--danger); }
 
-        .book-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+        .location-tag {
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 8px; display: inline-block; padding: 2px 8px; border-radius: 4px; color: white;
+            align-self: flex-start;
         }
+        /* Colori dinamici per le sedi */
+        .loc-bellocchio { background-color: var(--loc-bellocchio); }
+        .loc-annunziata { background-color: var(--loc-annunziata); }
+        .loc-altro { background-color: var(--text-light); }
 
-        .book-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--text);
-        }
+        .book-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .book-title { font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text); }
+        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 10px 0; }
 
-        .book-author {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin: 4px 0 10px 0;
-        }
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .badge { background: rgba(108, 92, 231, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
+        .loan-alert { background: rgba(255, 118, 117, 0.1); color: var(--danger); padding: 8px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
 
-        .badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .badge {
-            background: rgba(108, 92, 231, 0.1);
-            color: var(--primary);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .loan-alert {
-            background: rgba(255, 118, 117, 0.1);
-            color: var(--danger);
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .card-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-        }
-
+        .card-actions { display: flex; gap: 10px; margin-top: 5px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 5px; }
         .btn-action { background: var(--bg-gradient); color: white; }
         .btn-return { background: var(--danger); color: white; }
         .btn-delete { background: transparent; color: var(--text-light); flex: 0; }
 
-        /* FORM */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-        .form-control {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(0,0,0,0.1);
-            font-size: 1rem;
-            background: rgba(255,255,255,0.8);
-        }
+        .form-control { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); font-size: 1rem; background: rgba(255,255,255,0.8); }
+        select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
+
         .btn-block { width: 100%; margin-top: 10px; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
 
-        /* VIEW MANAGEMENT */
         .view-section { display: none; animation: fadeUp 0.3s ease; }
         .view-section.active { display: block; }
-        
         @keyframes fadeUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
-
-        /* LOADING */
         #loader { text-align: center; color: white; font-weight: bold; margin-top: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
     </style>
 </head>
@@ -305,22 +123,16 @@
     </header>
 
     <div class="container">
-        
         <div id="loader">Caricamento Libreria... ☁️</div>
 
         <div id="view-home" class="view-section active">
-            
             <div class="search-area">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore..." oninput="applicaFiltri()">
-                
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore o biblioteca..." oninput="applicaFiltri()">
                 <div class="genre-scroll" id="genreContainer">
                     <div class="genre-chip active" onclick="filtraGenere('Tutti', this)">Tutti</div>
-                    </div>
-            </div>
-
-            <div id="bookList">
                 </div>
-
+            </div>
+            <div id="bookList"></div>
             <div id="emptyState" style="text-align:center; color:white; display:none; margin-top:50px;">
                 <h3 style="margin:0;">Nessun libro trovato 🤷‍♀️</h3>
                 <p>Prova a cambiare filtri o aggiungine uno nuovo!</p>
@@ -332,20 +144,26 @@
                 <h2 style="margin-top:0; color:var(--primary)">Nuovo Libro ✨</h2>
                 
                 <div class="form-group">
+                    <label>Dove si trova?</label>
+                    <select id="inSede" class="form-control" style="background-color: #fff8e1; border-color: #ffeaa7;">
+                        <option value="Biblioteca Bellocchio">🏠 Biblioteca Bellocchio</option>
+                        <option value="Biblioteca Annunziata">🏛️ Biblioteca Annunziata</option>
+                        <option value="Altro">📍 Altro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label>Titolo</label>
                     <input type="text" id="inTitolo" class="form-control" placeholder="Es. Il Piccolo Principe">
                 </div>
-                
                 <div class="form-group">
                     <label>Autore</label>
                     <input type="text" id="inAutore" class="form-control" placeholder="Es. Saint-Exupéry">
                 </div>
-                
                 <div class="form-group">
-                    <label>ISBN (Codice a barre)</label>
+                    <label>ISBN</label>
                     <input type="tel" id="inIsbn" class="form-control" placeholder="Opzionale">
                 </div>
-                
                 <div class="form-group">
                     <label>Genere</label>
                     <input type="text" id="inGenere" list="datalistGeneri" class="form-control" placeholder="Es. Fantasy">
@@ -355,16 +173,11 @@
                 <button class="btn btn-action btn-block" onclick="salvaLibro()">Salva nel Cloud ☁️</button>
             </div>
         </div>
-
     </div>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="cambiaVista('home')" id="nav-home">
-            <span>📚</span> Home
-        </button>
-        <button class="nav-item" onclick="cambiaVista('add')" id="nav-add">
-            <span>➕</span> Aggiungi
-        </button>
+        <button class="nav-item active" onclick="cambiaVista('home')" id="nav-home"><span>📚</span> Home</button>
+        <button class="nav-item" onclick="cambiaVista('add')" id="nav-add"><span>➕</span> Aggiungi</button>
     </nav>
 
     <script type="module">
@@ -372,7 +185,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ⚠️⚠️⚠️ INCOLLA QUI SOTTO LA TUA CONFIGURAZIONE FIREBASE ⚠️⚠️⚠️
-        const firebaseConfig = {
+       const firebaseConfig = {
   apiKey: "AIzaSyAJWYojOgxzKyibGSKnsWa0UPcVaqr4s3E",
   authDomain: "giuliateca-ar.firebaseapp.com",
   projectId: "giuliateca-ar",
@@ -381,45 +194,36 @@
   appId: "1:533414638110:web:8a613a7e6b1fc02e17f40f"
 };
 
-        // Inizializzazione
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const colRef = collection(db, "libri");
-        
-        // Stato dell'app
         let tuttiILibri = [];
         let genereSelezionato = 'Tutti';
 
-        // ASCOLTO DATI REAL-TIME
         onSnapshot(colRef, (snapshot) => {
             tuttiILibri = [];
             snapshot.forEach(doc => {
                 tuttiILibri.push({ ...doc.data(), id: doc.id });
             });
-            
-            // Ordina A-Z
             tuttiILibri.sort((a, b) => a.titolo.localeCompare(b.titolo));
-            
             document.getElementById('loader').style.display = 'none';
             aggiornaFiltriGeneri();
             applicaFiltri();
         });
 
-        // FUNZIONI GLOBALI (ESPOSTE ALL'HTML)
         window.salvaLibro = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autore = document.getElementById('inAutore').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
             let genere = document.getElementById('inGenere').value.trim();
+            const sede = document.getElementById('inSede').value; // NUOVO CAMPO
 
             if(!titolo || !autore) { alert("Manca Titolo o Autore!"); return; }
-            
-            // Prima lettera maiuscola
             genere = genere ? (genere.charAt(0).toUpperCase() + genere.slice(1).toLowerCase()) : "Altro";
 
             try {
                 await addDoc(colRef, {
-                    titolo, autore, isbn, genere,
+                    titolo, autore, isbn, genere, sede, // Salva la sede
                     inPrestito: false, prestatoA: "", dataPrestito: ""
                 });
                 
@@ -428,8 +232,8 @@
                 document.getElementById('inAutore').value = '';
                 document.getElementById('inIsbn').value = '';
                 document.getElementById('inGenere').value = '';
+                // Non resetto la sede perché magari ne inserisci tanti della stessa biblioteca
                 cambiaVista('home');
-                
             } catch(e) {
                 alert("Errore salvataggio: " + e.message);
             }
@@ -437,14 +241,11 @@
 
         window.togglePrestito = async function(id, statoAttuale) {
             const docRef = doc(db, "libri", id);
-            
             if(statoAttuale) {
-                // Restituzione
                 if(confirm("Libro restituito?")) {
                     await updateDoc(docRef, { inPrestito: false, prestatoA: "", dataPrestito: "" });
                 }
             } else {
-                // Nuovo prestito
                 const nome = prompt("A chi lo presti?");
                 if(nome) {
                     const oggi = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
@@ -465,7 +266,13 @@
             listaContainer.innerHTML = '';
 
             const filtrati = tuttiILibri.filter(libro => {
-                const matchTesto = libro.titolo.toLowerCase().includes(ricerca) || libro.autore.toLowerCase().includes(ricerca);
+                // Cerca anche nel nome della sede (Bellocchio/Annunziata)
+                const sedeLower = libro.sede ? libro.sede.toLowerCase() : "";
+                const matchTesto = 
+                    libro.titolo.toLowerCase().includes(ricerca) || 
+                    libro.autore.toLowerCase().includes(ricerca) ||
+                    sedeLower.includes(ricerca);
+                
                 const matchGenere = genereSelezionato === 'Tutti' || libro.genere === genereSelezionato;
                 return matchTesto && matchGenere;
             });
@@ -478,17 +285,23 @@
             }
 
             filtrati.forEach(libro => {
-                // HTML per lo stato prestito
                 const statusHtml = libro.inPrestito 
                     ? `<div class="loan-alert">🔴 Prestato a <b>${libro.prestatoA}</b> (${libro.dataPrestito})</div>`
                     : '';
                 
-                const btnText = libro.inPrestito ? 'Restituisci' : 'Presta';
                 const btnClass = libro.inPrestito ? 'btn-return' : 'btn-action';
                 const cardClass = libro.inPrestito ? 'borrowed' : '';
 
+                // Gestione colore tag sede
+                let sedeClass = 'loc-altro';
+                let sedeText = libro.sede || 'Non specificato';
+                if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
+                if(sedeText.includes('Annunziata')) sedeClass = 'loc-annunziata';
+
                 listaContainer.innerHTML += `
                 <div class="book-card ${cardClass}">
+                    <div class="location-tag ${sedeClass}">📍 ${sedeText}</div>
+                    
                     <div class="book-header">
                         <div>
                             <h3 class="book-title">${libro.titolo}</h3>
@@ -513,24 +326,17 @@
             });
         }
 
-        // Gestione Generi Dinamici
         function aggiornaFiltriGeneri() {
             const generiUnici = ['Tutti', ...new Set(tuttiILibri.map(l => l.genere))].sort();
-            
-            // 1. Aggiorna Scroll Orizzontale (Home)
             const container = document.getElementById('genreContainer');
-            // Salviamo solo i bottoni generati, non rimuoviamo tutto per non perdere selezione
             let html = '';
             generiUnici.forEach(g => {
                 const activeClass = g === genereSelezionato ? 'active' : '';
                 html += `<div class="genre-chip ${activeClass}" onclick="filtraGenere('${g}', this)">${g}</div>`;
             });
             container.innerHTML = html;
-
-            // 2. Aggiorna Datalist (Pagina Aggiungi)
             const dl = document.getElementById('datalistGeneri');
             dl.innerHTML = '';
-            // Rimuovi 'Tutti' per l'inserimento
             generiUnici.filter(g => g !== 'Tutti').forEach(g => {
                 const opt = document.createElement('option');
                 opt.value = g;
@@ -540,17 +346,14 @@
 
         window.filtraGenere = function(genere, elemento) {
             genereSelezionato = genere;
-            // Aggiorna UI pillole
             document.querySelectorAll('.genre-chip').forEach(c => c.classList.remove('active'));
             elemento.classList.add('active');
             applicaFiltri();
         }
 
-        // UI & Navigazione
         window.cambiaVista = function(vista) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + vista).classList.add('active');
-            
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('nav-' + vista).classList.add('active');
         }
@@ -560,7 +363,6 @@
             const target = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', target);
         }
-
     </script>
 </body>
 </html>
