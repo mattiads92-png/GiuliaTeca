@@ -7,33 +7,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Palette Colori Pastello Moderni */
-            --primary: #6c5ce7;
-            --primary-dark: #5849be;
-            --accent: #fd79a8;
-            --bg-gradient: linear-gradient(135deg, #a29bfe 0%, #74b9ff 100%);
+            /* --- PALETTE GIALLO/ROSSA (SOFT) --- */
+            
+            /* Rosso "Tenue" (Corallo/Terracotta) - Colore Primario */
+            --primary: #e15f41; 
+            /* Giallo "Tenue" (Senape/Crema) - Colore Secondario */
+            --accent: #f7d794; 
+            
+            /* Sfondo Sfumato (Crema -> Pesca) */
+            --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #fad390 100%);
+            
             --surface: rgba(255, 255, 255, 0.95);
             --text: #2d3436;
             --text-light: #636e72;
-            --danger: #ff7675;
-            --success: #00b894;
-            --shadow: 0 8px 30px rgba(0,0,0,0.12);
-            --radius: 16px;
             
-            /* Colori Sedi */
-            --loc-bellocchio: #e17055; /* Un color terracotta caldo */
-            --loc-annunziata: #0984e3; /* Un blu deciso */
+            /* Stati funzionali */
+            --danger: #c0392b;
+            --success: #27ae60;
+            
+            --shadow: 0 8px 30px rgba(225, 95, 65, 0.15); /* Ombra rossiccia leggera */
+            --radius: 20px;
+
+            /* Colori specifici Sedi (In tema) */
+            --loc-bellocchio: #e66767; /* Rosso pastello */
+            --loc-annunziata: #f3a683; /* Arancio/Giallo scuro pastello */
         }
 
+        /* --- DARK MODE (Ambra e Mattone) --- */
         [data-theme="dark"] {
-            --primary: #a29bfe;
-            --primary-dark: #8e84d4;
-            --accent: #fd79a8;
-            --bg-gradient: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-            --surface: rgba(45, 45, 68, 0.95);
+            --primary: #ff7675; /* Rosso più chiaro per contrasto scuro */
+            --accent: #fdcb6e;  /* Giallo Ambra */
+            
+            --bg-gradient: linear-gradient(135deg, #2d3436 0%, #1e1e1e 100%);
+            --surface: rgba(45, 45, 50, 0.95);
+            
             --text: #dfe6e9;
             --text-light: #b2bec3;
-            --shadow: 0 8px 30px rgba(0,0,0,0.4);
+            
+            --shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -42,88 +53,148 @@
             font-family: 'Poppins', sans-serif;
             margin: 0; padding: 0;
             background: var(--bg-gradient); background-attachment: fixed;
-            color: var(--text); min-height: 100vh; padding-bottom: 80px;
+            color: var(--text); min-height: 100vh; padding-bottom: 90px;
         }
 
+        /* HEADER */
         header {
             background: var(--surface); padding: 15px 20px;
-            text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+            text-align: center; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
             box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50;
             backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-family: 'Pacifico', cursive; font-size: 1.8rem; color: var(--primary); margin: 0; }
-        .theme-btn { background: none; border: 2px solid var(--primary); border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; }
+        .logo { 
+            font-family: 'Pacifico', cursive; font-size: 1.8rem; 
+            color: var(--primary); margin: 0; 
+            text-shadow: 2px 2px 0px rgba(247, 215, 148, 0.4); /* Ombra gialla sotto il rosso */
+        }
+        .theme-btn { 
+            background: var(--accent); border: none; 
+            color: #574b90; /* Contrasto sul giallo */
+            border-radius: 50%; width: 40px; height: 40px; 
+            display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
+        /* NAVIGAZIONE BASSO */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 400px; background: var(--surface); backdrop-filter: blur(10px);
-            padding: 10px; border-radius: 30px; display: flex; justify-content: space-around;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 100;
+            padding: 12px; border-radius: 35px; display: flex; justify-content: space-around;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 100; border: 1px solid rgba(255,255,255,0.2);
         }
-        .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 20px; transition: all 0.3s; cursor: pointer; }
-        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4); }
+        .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 25px; transition: all 0.3s; cursor: pointer; }
+        
+        .nav-item.active { 
+            background-color: var(--primary); color: white; 
+            transform: translateY(-5px); 
+            box-shadow: 0 5px 15px rgba(225, 95, 65, 0.4); /* Glow rosso */
+        }
 
-        .search-area { margin-bottom: 20px; }
-        .search-input { width: 100%; padding: 16px 20px; border-radius: 30px; border: none; background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.05); font-size: 1rem; color: var(--text); margin-bottom: 15px; outline: none; }
-        .search-input:focus { border: 2px solid var(--primary); }
+        /* INPUT RICERCA */
+        .search-area { margin-bottom: 25px; }
+        .search-input { 
+            width: 100%; padding: 16px 20px; border-radius: 30px; border: 2px solid transparent; 
+            background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
+            font-size: 1rem; color: var(--text); margin-bottom: 15px; outline: none; transition: border 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent); } /* Bordo giallo al focus */
 
+        /* CHIPS GENERI */
         .genre-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scrollbar-width: none; -ms-overflow-style: none; }
         .genre-scroll::-webkit-scrollbar { display: none; }
-        .genre-chip { background: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.8); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; color: var(--text); font-weight: 500; }
-        .genre-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        .genre-chip { 
+            background: rgba(255,255,255,0.6); 
+            border: 1px solid var(--accent); 
+            padding: 8px 18px; border-radius: 25px; 
+            font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; 
+            color: var(--text); font-weight: 500; 
+        }
+        
+        .genre-chip.active { 
+            background: var(--primary); color: white; border-color: var(--primary); 
+            box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3);
+        }
 
-        .book-card { background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        /* CARD LIBRO */
+        .book-card { 
+            background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; overflow: hidden; 
+            border: 1px solid rgba(0,0,0,0.02);
+        }
         .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); }
-        .book-card.borrowed::before { background: var(--danger); }
+        .book-card.borrowed::before { background: var(--accent); } /* Giallo se in prestito */
 
+        /* TAG SEDE */
         .location-tag {
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
-            margin-bottom: 8px; display: inline-block; padding: 2px 8px; border-radius: 4px; color: white;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 10px; display: inline-block; padding: 4px 10px; border-radius: 6px; color: white;
             align-self: flex-start;
         }
-        /* Colori dinamici per le sedi */
         .loc-bellocchio { background-color: var(--loc-bellocchio); }
         .loc-annunziata { background-color: var(--loc-annunziata); }
         .loc-altro { background-color: var(--text-light); }
 
         .book-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .book-title { font-size: 1.1rem; font-weight: 700; margin: 0; color: var(--text); }
-        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 10px 0; }
+        .book-title { font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text); }
+        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 12px 0; }
 
         .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
-        .badge { background: rgba(108, 92, 231, 0.1); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; }
-        .loan-alert { background: rgba(255, 118, 117, 0.1); color: var(--danger); padding: 8px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+        .badge { 
+            background: rgba(247, 215, 148, 0.3); /* Sfondo giallino trasparente */
+            color: #d35400; /* Testo ruggine */
+            padding: 4px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; 
+        }
+        
+        .loan-alert { 
+            background: rgba(253, 203, 110, 0.2); 
+            color: #d35400; 
+            padding: 10px; border-radius: 10px; font-size: 0.9rem; margin-bottom: 15px; 
+            display: flex; align-items: center; gap: 8px; font-weight: 500;
+        }
 
+        /* BOTTONI AZIONE */
         .card-actions { display: flex; gap: 10px; margin-top: 5px; }
-        .btn { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 5px; }
-        .btn-action { background: var(--bg-gradient); color: white; }
-        .btn-return { background: var(--danger); color: white; }
-        .btn-delete { background: transparent; color: var(--text-light); flex: 0; }
+        .btn { flex: 1; padding: 14px; border: none; border-radius: 15px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.98); }
+        
+        .btn-action { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3); }
+        .btn-return { background: var(--accent); color: #2d3436; box-shadow: 0 4px 10px rgba(247, 215, 148, 0.4); }
+        .btn-delete { background: transparent; color: var(--text-light); flex: 0; border: 1px solid rgba(0,0,0,0.1); }
 
+        /* FORM */
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-        .form-control { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.1); font-size: 1rem; background: rgba(255,255,255,0.8); }
-        select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.08); font-size: 1rem; background: rgba(255,255,255,0.6); }
+        
+        /* Dropdown Sede stilizzato */
+        #inSede {
+            background-color: rgba(247, 215, 148, 0.2); 
+            border: 2px solid var(--accent);
+            color: var(--text);
+            font-weight: 500;
+        }
 
-        .btn-block { width: 100%; margin-top: 10px; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
+        .btn-block { width: 100%; margin-top: 10px; background: var(--primary); color: white; padding: 16px; font-size: 1rem; }
 
         .view-section { display: none; animation: fadeUp 0.3s ease; }
         .view-section.active { display: block; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
-        #loader { text-align: center; color: white; font-weight: bold; margin-top: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        #loader { text-align: center; color: var(--primary); font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
 
     <header>
         <h1 class="logo">📚 GiuliaTeca</h1>
-        <button class="theme-btn" onclick="toggleTheme()">🌗</button>
+        <button class="theme-btn" onclick="toggleTheme()">☀️</button>
     </header>
 
     <div class="container">
-        <div id="loader">Caricamento Libreria... ☁️</div>
+        <div id="loader">Lettura database... ☁️</div>
 
         <div id="view-home" class="view-section active">
             <div class="search-area">
@@ -133,36 +204,36 @@
                 </div>
             </div>
             <div id="bookList"></div>
-            <div id="emptyState" style="text-align:center; color:white; display:none; margin-top:50px;">
-                <h3 style="margin:0;">Nessun libro trovato 🤷‍♀️</h3>
-                <p>Prova a cambiare filtri o aggiungine uno nuovo!</p>
+            <div id="emptyState" style="text-align:center; color:var(--text-light); display:none; margin-top:50px; opacity:0.7;">
+                <h3 style="margin:0;">Nessun libro trovato 🍂</h3>
+                <p>Prova a cambiare filtri o sede!</p>
             </div>
         </div>
 
         <div id="view-add" class="view-section">
             <div class="book-card">
-                <h2 style="margin-top:0; color:var(--primary)">Nuovo Libro ✨</h2>
+                <h2 style="margin-top:0; color:var(--primary); font-family:'Pacifico'; font-weight:400;">Nuovo Libro</h2>
                 
                 <div class="form-group">
-                    <label>Dove si trova?</label>
-                    <select id="inSede" class="form-control" style="background-color: #fff8e1; border-color: #ffeaa7;">
+                    <label>📍 Dove si trova il libro?</label>
+                    <select id="inSede" class="form-control">
                         <option value="Biblioteca Bellocchio">🏠 Biblioteca Bellocchio</option>
                         <option value="Biblioteca Annunziata">🏛️ Biblioteca Annunziata</option>
-                        <option value="Altro">📍 Altro</option>
+                        <option value="Altro">📦 Altro</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Titolo</label>
-                    <input type="text" id="inTitolo" class="form-control" placeholder="Es. Il Piccolo Principe">
+                    <input type="text" id="inTitolo" class="form-control" placeholder="Es. Harry Potter">
                 </div>
                 <div class="form-group">
                     <label>Autore</label>
-                    <input type="text" id="inAutore" class="form-control" placeholder="Es. Saint-Exupéry">
+                    <input type="text" id="inAutore" class="form-control" placeholder="Es. J.K. Rowling">
                 </div>
                 <div class="form-group">
-                    <label>ISBN</label>
-                    <input type="tel" id="inIsbn" class="form-control" placeholder="Opzionale">
+                    <label>ISBN (Opzionale)</label>
+                    <input type="tel" id="inIsbn" class="form-control" placeholder="Codice a barre">
                 </div>
                 <div class="form-group">
                     <label>Genere</label>
@@ -170,7 +241,7 @@
                     <datalist id="datalistGeneri"></datalist>
                 </div>
 
-                <button class="btn btn-action btn-block" onclick="salvaLibro()">Salva nel Cloud ☁️</button>
+                <button class="btn btn-block" onclick="salvaLibro()">Salva nel Cloud ☁️</button>
             </div>
         </div>
     </div>
@@ -216,23 +287,21 @@
             const autore = document.getElementById('inAutore').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
             let genere = document.getElementById('inGenere').value.trim();
-            const sede = document.getElementById('inSede').value; // NUOVO CAMPO
+            const sede = document.getElementById('inSede').value;
 
             if(!titolo || !autore) { alert("Manca Titolo o Autore!"); return; }
             genere = genere ? (genere.charAt(0).toUpperCase() + genere.slice(1).toLowerCase()) : "Altro";
 
             try {
                 await addDoc(colRef, {
-                    titolo, autore, isbn, genere, sede, // Salva la sede
+                    titolo, autore, isbn, genere, sede,
                     inPrestito: false, prestatoA: "", dataPrestito: ""
                 });
                 
-                // Reset e cambio vista
                 document.getElementById('inTitolo').value = '';
                 document.getElementById('inAutore').value = '';
                 document.getElementById('inIsbn').value = '';
                 document.getElementById('inGenere').value = '';
-                // Non resetto la sede perché magari ne inserisci tanti della stessa biblioteca
                 cambiaVista('home');
             } catch(e) {
                 alert("Errore salvataggio: " + e.message);
@@ -266,7 +335,6 @@
             listaContainer.innerHTML = '';
 
             const filtrati = tuttiILibri.filter(libro => {
-                // Cerca anche nel nome della sede (Bellocchio/Annunziata)
                 const sedeLower = libro.sede ? libro.sede.toLowerCase() : "";
                 const matchTesto = 
                     libro.titolo.toLowerCase().includes(ricerca) || 
@@ -292,7 +360,7 @@
                 const btnClass = libro.inPrestito ? 'btn-return' : 'btn-action';
                 const cardClass = libro.inPrestito ? 'borrowed' : '';
 
-                // Gestione colore tag sede
+                // Colori tag sede "in tinta" soft
                 let sedeClass = 'loc-altro';
                 let sedeText = libro.sede || 'Non specificato';
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
@@ -312,7 +380,7 @@
                     
                     <div class="badges">
                         <span class="badge">${libro.genere}</span>
-                        ${libro.isbn ? `<span class="badge" style="background:#dfe6e9; color:#636e72;">ISBN ${libro.isbn}</span>` : ''}
+                        ${libro.isbn ? `<span class="badge" style="background:rgba(0,0,0,0.05); color:var(--text-light);">ISBN ${libro.isbn}</span>` : ''}
                     </div>
 
                     ${statusHtml}
@@ -362,6 +430,9 @@
             const current = document.documentElement.getAttribute('data-theme');
             const target = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', target);
+            // Aggiorna icona
+            const btn = document.querySelector('.theme-btn');
+            btn.innerHTML = target === 'dark' ? '☀️' : '🌙';
         }
     </script>
 </body>
