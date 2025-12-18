@@ -24,16 +24,6 @@
             --loc-annunziata: #f3a683;
         }
 
-        [data-theme="dark"] {
-            --primary: #ff7675;
-            --accent: #fdcb6e;
-            --bg-gradient: linear-gradient(135deg, #2d3436 0%, #1e1e1e 100%);
-            --surface: rgba(45, 45, 50, 0.95);
-            --text: #dfe6e9;
-            --text-light: #b2bec3;
-            --shadow: 0 8px 30px rgba(0,0,0,0.5);
-        }
-
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
@@ -48,18 +38,12 @@
             background: var(--surface); padding: 15px 20px;
             text-align: center; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
             box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50;
-            backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center;
         }
         .logo { 
             font-family: 'Pacifico', cursive; font-size: 1.8rem; 
             color: var(--primary); margin: 0; 
             text-shadow: 2px 2px 0px rgba(247, 215, 148, 0.4);
-        }
-        .theme-btn { 
-            background: var(--accent); border: none; color: #574b90;
-            border-radius: 50%; width: 40px; height: 40px; 
-            display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
@@ -79,19 +63,67 @@
         .search-input { 
             width: 100%; padding: 16px 20px; border-radius: 30px; border: 2px solid transparent; 
             background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-            font-size: 1rem; color: var(--text); margin-bottom: 15px; outline: none; transition: border 0.3s;
+            font-size: 1rem; color: var(--text); margin-bottom: 10px; outline: none; transition: border 0.3s;
         }
         .search-input:focus { border-color: var(--accent); }
 
-        /* CHIPS */
-        .genre-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scrollbar-width: none; -ms-overflow-style: none; }
-        .genre-scroll::-webkit-scrollbar { display: none; }
-        .genre-chip { 
-            background: rgba(255,255,255,0.6); border: 1px solid var(--accent); 
-            padding: 8px 18px; border-radius: 25px; font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; 
-            color: var(--text); font-weight: 500; 
+        /* NUOVO MENU A TENDINA MULTI-SELECT */
+        .filter-dropdown-container {
+            position: relative;
+            width: 100%;
         }
-        .genre-chip.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3); }
+
+        .filter-toggle-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.8);
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .filter-toggle-btn::after { content: '▼'; font-size: 0.8rem; color: var(--primary); }
+
+        .genre-checkbox-list {
+            display: none; /* Nascosto di default */
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin-top: 10px;
+            box-shadow: var(--shadow);
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid rgba(0,0,0,0.05);
+            animation: slideDown 0.2s ease-out;
+        }
+        
+        .genre-checkbox-list.show { display: block; }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f2f6;
+            cursor: pointer;
+        }
+        .checkbox-item:last-child { border-bottom: none; }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 20px; height: 20px;
+            margin-right: 15px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+        .checkbox-item span { font-size: 1rem; color: var(--text); }
+
+        @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+
 
         /* CARD LIBRO */
         .book-card { 
@@ -152,7 +184,6 @@
 
     <header>
         <h1 class="logo">📚 GiuliaTeca</h1>
-        <button class="theme-btn" onclick="toggleTheme()">☀️</button>
     </header>
 
     <div class="container">
@@ -161,11 +192,19 @@
         <div id="view-home" class="view-section active">
             <div class="search-area">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore, editore..." oninput="applicaFiltri()">
-                <div class="genre-scroll" id="genreContainer">
-                    <div class="genre-chip active" onclick="filtraGenere('Tutti', this)">Tutti</div>
+                
+                <div class="filter-dropdown-container">
+                    <button class="filter-toggle-btn" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
+                        📂 Filtra per Generi (Tutti)
+                    </button>
+                    <div id="listaCheckboxGeneri" class="genre-checkbox-list">
+                        </div>
                 </div>
+
             </div>
+            
             <div id="bookList"></div>
+            
             <div id="emptyState" style="text-align:center; color:var(--text-light); display:none; margin-top:50px; opacity:0.7;">
                 <h3 style="margin:0;">Nessun libro trovato 🍂</h3>
                 <p>Prova a cercare altro!</p>
@@ -202,6 +241,7 @@
                     <label>Anno Pubblicazione</label>
                     <input type="number" id="inAnno" class="form-control" placeholder="Es. 1997">
                 </div>
+
                 <div class="form-group">
                     <label>ISBN (Opzionale)</label>
                     <input type="tel" id="inIsbn" class="form-control" placeholder="Codice a barre">
@@ -227,7 +267,7 @@
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // ⚠️⚠️⚠️ INCOLLA QUI SOTTO LA TUA CONFIGURAZIONE FIREBASE ⚠️⚠️⚠️
-       const firebaseConfig = {
+        const firebaseConfig = {
   apiKey: "AIzaSyAJWYojOgxzKyibGSKnsWa0UPcVaqr4s3E",
   authDomain: "giuliateca-ar.firebaseapp.com",
   projectId: "giuliateca-ar",
@@ -240,7 +280,9 @@
         const db = getFirestore(app);
         const colRef = collection(db, "libri");
         let tuttiILibri = [];
-        let genereSelezionato = 'Tutti';
+        
+        // ARRAY PER MULTI-SELEZIONE
+        let generiSelezionati = []; 
 
         onSnapshot(colRef, (snapshot) => {
             tuttiILibri = [];
@@ -249,6 +291,7 @@
             });
             tuttiILibri.sort((a, b) => a.titolo.localeCompare(b.titolo));
             document.getElementById('loader').style.display = 'none';
+            
             aggiornaFiltriGeneri();
             applicaFiltri();
         });
@@ -256,8 +299,8 @@
         window.salvaLibro = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autore = document.getElementById('inAutore').value.trim();
-            const editore = document.getElementById('inEditore').value.trim(); // NUOVO
-            const anno = document.getElementById('inAnno').value.trim();       // NUOVO
+            const editore = document.getElementById('inEditore').value.trim();
+            const anno = document.getElementById('inAnno').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
             let genere = document.getElementById('inGenere').value.trim();
             const sede = document.getElementById('inSede').value;
@@ -271,7 +314,6 @@
                     inPrestito: false, prestatoA: "", dataPrestito: ""
                 });
                 
-                // Reset form
                 document.getElementById('inTitolo').value = '';
                 document.getElementById('inAutore').value = '';
                 document.getElementById('inEditore').value = '';
@@ -312,15 +354,13 @@
             listaContainer.innerHTML = '';
 
             const filtrati = tuttiILibri.filter(libro => {
-                // Prepariamo i campi per la ricerca (gestendo il caso in cui siano vuoti)
                 const titolo = libro.titolo ? libro.titolo.toLowerCase() : "";
                 const autore = libro.autore ? libro.autore.toLowerCase() : "";
                 const editore = libro.editore ? libro.editore.toLowerCase() : "";
                 const anno = libro.anno ? libro.anno.toString() : "";
                 const sede = libro.sede ? libro.sede.toLowerCase() : "";
 
-                // LOGICA DI RICERCA "CONTIENE" (Partial match)
-                // Se scrivo "pott" -> titolo.includes("pott") è TRUE
+                // 1. Filtro Testo
                 const matchTesto = 
                     titolo.includes(ricerca) || 
                     autore.includes(ricerca) ||
@@ -328,7 +368,10 @@
                     anno.includes(ricerca) ||
                     sede.includes(ricerca);
                 
-                const matchGenere = genereSelezionato === 'Tutti' || libro.genere === genereSelezionato;
+                // 2. Filtro Generi Multipli
+                // Se l'array è vuoto, mostra tutto. Altrimenti, controlla se il genere è nell'array.
+                const matchGenere = (generiSelezionati.length === 0) || generiSelezionati.includes(libro.genere);
+
                 return matchTesto && matchGenere;
             });
 
@@ -347,7 +390,6 @@
                 const btnClass = libro.inPrestito ? 'btn-return' : 'btn-action';
                 const cardClass = libro.inPrestito ? 'borrowed' : '';
 
-                // Colori Sede
                 let sedeClass = 'loc-altro';
                 let sedeText = libro.sede || 'Non specificato';
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
@@ -383,28 +425,57 @@
             });
         }
 
+        // --- NUOVA LOGICA MENU GENERI ---
+        window.toggleMenuGeneri = function() {
+            const menu = document.getElementById('listaCheckboxGeneri');
+            menu.classList.toggle('show');
+        }
+
         function aggiornaFiltriGeneri() {
-            const generiUnici = ['Tutti', ...new Set(tuttiILibri.map(l => l.genere))].sort();
-            const container = document.getElementById('genreContainer');
-            let html = '';
+            const generiUnici = [...new Set(tuttiILibri.map(l => l.genere))].sort();
+            const container = document.getElementById('listaCheckboxGeneri');
+            const datalist = document.getElementById('datalistGeneri');
+            
+            // Aggiorniamo il datalist per l'inserimento
+            datalist.innerHTML = '';
             generiUnici.forEach(g => {
-                const activeClass = g === genereSelezionato ? 'active' : '';
-                html += `<div class="genre-chip ${activeClass}" onclick="filtraGenere('${g}', this)">${g}</div>`;
-            });
-            container.innerHTML = html;
-            const dl = document.getElementById('datalistGeneri');
-            dl.innerHTML = '';
-            generiUnici.filter(g => g !== 'Tutti').forEach(g => {
                 const opt = document.createElement('option');
                 opt.value = g;
-                dl.appendChild(opt);
+                datalist.appendChild(opt);
+            });
+
+            // Se il menu è già aperto, non distruggiamo tutto per non perdere scroll,
+            // ma per semplicità qui rigeneriamo la lista checkbox
+            container.innerHTML = '';
+            
+            generiUnici.forEach(g => {
+                const isChecked = generiSelezionati.includes(g) ? 'checked' : '';
+                
+                container.innerHTML += `
+                <label class="checkbox-item">
+                    <input type="checkbox" value="${g}" ${isChecked} onchange="cambiaStatoGenere(this)">
+                    <span>${g}</span>
+                </label>
+                `;
             });
         }
 
-        window.filtraGenere = function(genere, elemento) {
-            genereSelezionato = genere;
-            document.querySelectorAll('.genre-chip').forEach(c => c.classList.remove('active'));
-            elemento.classList.add('active');
+        window.cambiaStatoGenere = function(checkbox) {
+            const val = checkbox.value;
+            if(checkbox.checked) {
+                generiSelezionati.push(val);
+            } else {
+                generiSelezionati = generiSelezionati.filter(g => g !== val);
+            }
+            
+            // Aggiorna testo bottone
+            const btn = document.getElementById('btnFiltroGeneri');
+            if(generiSelezionati.length === 0) {
+                btn.innerText = "📂 Filtra per Generi (Tutti)";
+            } else {
+                btn.innerText = `📂 Generi selezionati: ${generiSelezionati.length}`;
+            }
+            
             applicaFiltri();
         }
 
@@ -413,15 +484,11 @@
             document.getElementById('view-' + vista).classList.add('active');
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById('nav-' + vista).classList.add('active');
+            
+            // Chiudi il menu tendina se cambi vista
+            document.getElementById('listaCheckboxGeneri').classList.remove('show');
         }
 
-        window.toggleTheme = function() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const target = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', target);
-            const btn = document.querySelector('.theme-btn');
-            btn.innerHTML = target === 'dark' ? '☀️' : '🌙';
-        }
     </script>
 </body>
 </html>
