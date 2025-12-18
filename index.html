@@ -7,22 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- PALETTE GIALLO/ROSSA (ROMA SOFT) --- */
-            --primary: #e15f41; /* Rosso Corallo */
-            --accent: #f7d794;  /* Giallo Crema */
-            --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #fad390 100%);
+            /* --- NUOVA PALETTE TENUE (AZZURRO & VERDE MENTA) --- */
+            --primary: #778beb; /* Azzurro Polvere */
+            --accent: #b8e994;  /* Verde Menta Chiaro */
+            
+            /* Sfondo sfumato tenue cielo/menta */
+            --bg-gradient: linear-gradient(135deg, #eaf6ff 0%, #f0fff4 100%);
+            
             --surface: rgba(255, 255, 255, 0.95);
             --text: #2d3436;
             --text-light: #636e72;
-            --danger: #c0392b;
-            --success: #27ae60;
-            --edit: #f39c12; /* Colore per modifica */
-            --shadow: 0 8px 30px rgba(225, 95, 65, 0.15);
+            
+            /* Stati funzionali (Versioni pastello) */
+            --danger: #fab1a0; /* Rosso corallo tenue per prestiti */
+            --success: #78e08f; /* Verde pastello */
+            --edit: #ffeaa7;   /* Giallo pastello per modifica */
+            
+            --shadow: 0 8px 30px rgba(119, 139, 235, 0.15); /* Ombra azzurrina */
             --radius: 20px;
 
-            /* Colori Sedi */
-            --loc-bellocchio: #e66767;
-            --loc-annunziata: #f3a683;
+            /* Colori Sedi (In tinta pastello) */
+            --loc-bellocchio: #81ecec; /* Ciano tenue */
+            --loc-annunziata: #55efc4; /* Verde acqua tenue */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -34,17 +40,29 @@
             color: var(--text); min-height: 100vh; padding-bottom: 90px;
         }
 
-        /* HEADER */
+        /* HEADER MODIFICATO */
         header {
-            background: var(--surface); padding: 15px 20px;
+            background: var(--surface); padding: 20px 20px;
             text-align: center; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
             box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50;
-            backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center;
+            backdrop-filter: blur(10px); 
+            /* Modifica per impilare titolo e sottotitolo */
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
         }
         .logo { 
-            font-family: 'Pacifico', cursive; font-size: 1.8rem; 
+            font-family: 'Pacifico', cursive; 
+            font-size: 2.1rem; /* Aumentato del 15% (era 1.8rem) */
             color: var(--primary); margin: 0; 
-            text-shadow: 2px 2px 0px rgba(247, 215, 148, 0.4);
+            /* Ombra testo adattata al nuovo verde menta */
+            text-shadow: 2px 2px 0px rgba(184, 233, 148, 0.4);
+        }
+        /* Nuovo stile per il sottotitolo */
+        .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 5px 0 0 0;
+            font-weight: 500;
         }
 
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
@@ -57,7 +75,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 100; border: 1px solid rgba(255,255,255,0.2);
         }
         .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 25px; transition: all 0.3s; cursor: pointer; }
-        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(225, 95, 65, 0.4); }
+        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(119, 139, 235, 0.4); }
 
         /* RICERCA */
         .search-area { margin-bottom: 25px; }
@@ -103,20 +121,21 @@
             margin-bottom: 10px; display: inline-block; padding: 4px 10px; border-radius: 6px; color: white;
             align-self: flex-start;
         }
-        .loc-bellocchio { background-color: var(--loc-bellocchio); }
-        .loc-annunziata { background-color: var(--loc-annunziata); }
-        .loc-altro { background-color: var(--text-light); }
+        .loc-bellocchio { background-color: var(--loc-bellocchio); color: var(--text); } /* Testo scuro su sfondo chiaro */
+        .loc-annunziata { background-color: var(--loc-annunziata); color: var(--text); }
+        .loc-altro { background-color: var(--text-light); color: white; }
 
         .book-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .book-title { font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text); }
         .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 8px 0; }
 
         .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; }
-        .badge { background: rgba(247, 215, 148, 0.3); color: #d35400; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
+        /* Badges adattati ai nuovi colori */
+        .badge { background: rgba(184, 233, 148, 0.3); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
         .badge-gray { background: rgba(0,0,0,0.05); color: var(--text-light); }
 
         .loan-alert { 
-            background: rgba(253, 203, 110, 0.2); color: #d35400; 
+            background: rgba(250, 177, 160, 0.2); color: #d63031; /* Rosso un po' più deciso per il testo di alert */
             padding: 10px; border-radius: 10px; font-size: 0.9rem; margin-bottom: 15px; 
             display: flex; align-items: center; gap: 8px; font-weight: 500;
         }
@@ -126,18 +145,18 @@
         .btn { padding: 12px; border: none; border-radius: 15px; font-weight: 600; cursor: pointer; font-size: 0.85rem; display: flex; justify-content: center; align-items: center; gap: 6px; transition: transform 0.1s; }
         .btn:active { transform: scale(0.98); }
         
-        .btn-action { background: var(--primary); color: white; flex: 2; box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3); }
-        .btn-return { background: var(--accent); color: #2d3436; flex: 2; box-shadow: 0 4px 10px rgba(247, 215, 148, 0.4); }
+        .btn-action { background: var(--primary); color: white; flex: 2; box-shadow: 0 4px 10px rgba(119, 139, 235, 0.3); }
+        .btn-return { background: var(--accent); color: var(--text); flex: 2; box-shadow: 0 4px 10px rgba(184, 233, 148, 0.4); }
         
-        /* Modifica ed Elimina */
-        .btn-edit { background: #ffeaa7; color: #e67e22; flex: 1; border: 1px solid #fdcb6e; }
+        /* Modifica ed Elimina (Colori pastello) */
+        .btn-edit { background: var(--edit); color: #d35400; flex: 1; border: 1px solid rgba(0,0,0,0.05); }
         .btn-delete { background: transparent; color: var(--text-light); flex: 0; border: 1px solid rgba(0,0,0,0.1); padding: 12px 16px;}
 
         /* FORM */
         .form-group { margin-bottom: 18px; }
         .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem; }
         .form-control { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.08); font-size: 1rem; background: rgba(255,255,255,0.6); }
-        #inSede { background-color: rgba(247, 215, 148, 0.2); border: 2px solid var(--accent); color: var(--text); font-weight: 500; }
+        #inSede { background-color: rgba(184, 233, 148, 0.2); border: 2px solid var(--accent); color: var(--text); font-weight: 500; }
         
         .btn-block { width: 100%; margin-top: 10px; background: var(--primary); color: white; padding: 16px; font-size: 1rem; }
         .view-section { display: none; animation: fadeUp 0.3s ease; }
@@ -150,6 +169,7 @@
 
     <header>
         <h1 class="logo">📚 GiuliaTeca</h1>
+        <p class="subtitle">la biblioteca delle scuole di Giulianova</p>
     </header>
 
     <div class="container">
@@ -245,7 +265,7 @@
         const colRef = collection(db, "libri");
         let tuttiILibri = [];
         let generiSelezionati = []; 
-        let idLibroInModifica = null; // Variabile per tracciare se stiamo modificando
+        let idLibroInModifica = null;
 
         onSnapshot(colRef, (snapshot) => {
             tuttiILibri = [];
@@ -259,9 +279,6 @@
             applicaFiltri();
         });
 
-        // --- GESTIONE AGGIUNTA / MODIFICA ---
-
-        // Funzione chiamata dal bottone Salva/Aggiorna
         window.gestisciSalvataggio = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autore = document.getElementById('inAutore').value.trim();
@@ -276,14 +293,12 @@
 
             try {
                 if (idLibroInModifica) {
-                    // SIAMO IN MODALITÀ MODIFICA
                     const docRef = doc(db, "libri", idLibroInModifica);
                     await updateDoc(docRef, {
                         titolo, autore, editore, anno, isbn, genere, sede
                     });
                     alert("Libro aggiornato con successo! ✅");
                 } else {
-                    // SIAMO IN MODALITÀ CREAZIONE
                     await addDoc(colRef, {
                         titolo, autore, editore, anno, isbn, genere, sede,
                         inPrestito: false, prestatoA: "", dataPrestito: ""
@@ -299,7 +314,6 @@
             }
         }
 
-        // Prepara il form per inserire un NUOVO libro
         window.preparaAggiunta = function() {
             pulisciForm();
             idLibroInModifica = null;
@@ -308,12 +322,10 @@
             cambiaVista('add');
         }
 
-        // Prepara il form per MODIFICARE un libro esistente
         window.modificaLibro = function(id) {
             if(confirm("Vuoi modificare i dati di questo libro?")) {
                 const libro = tuttiILibri.find(l => l.id === id);
                 if(libro) {
-                    // Compila i campi
                     document.getElementById('inTitolo').value = libro.titolo || "";
                     document.getElementById('inAutore').value = libro.autore || "";
                     document.getElementById('inEditore').value = libro.editore || "";
@@ -322,7 +334,6 @@
                     document.getElementById('inGenere').value = libro.genere || "";
                     document.getElementById('inSede').value = libro.sede || "Altro";
 
-                    // Imposta stato modifica
                     idLibroInModifica = id;
                     document.getElementById('titoloForm').innerText = "Modifica Libro ✏️";
                     document.getElementById('btnSalva').innerText = "🔄 Aggiorna Dati";
@@ -340,8 +351,6 @@
             document.getElementById('inIsbn').value = '';
             document.getElementById('inGenere').value = '';
         }
-
-        // --- GESTIONE PRESTITI E CANCELLAZIONE ---
 
         window.togglePrestito = async function(id, statoAttuale) {
             const docRef = doc(db, "libri", id);
@@ -363,8 +372,6 @@
                 await deleteDoc(doc(db, "libri", id));
             }
         }
-
-        // --- FILTRI E VISUALIZZAZIONE ---
 
         window.applicaFiltri = function() {
             const ricerca = document.getElementById('searchInput').value.toLowerCase();
