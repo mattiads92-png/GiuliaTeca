@@ -7,43 +7,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- PALETTE GIALLO/ROSSA (SOFT) --- */
-            
-            /* Rosso "Tenue" (Corallo/Terracotta) - Colore Primario */
-            --primary: #e15f41; 
-            /* Giallo "Tenue" (Senape/Crema) - Colore Secondario */
-            --accent: #f7d794; 
-            
-            /* Sfondo Sfumato (Crema -> Pesca) */
+            /* --- PALETTE GIALLO/ROSSA (ROMA SOFT) --- */
+            --primary: #e15f41; /* Rosso Corallo */
+            --accent: #f7d794;  /* Giallo Crema */
             --bg-gradient: linear-gradient(135deg, #fdfbf7 0%, #fad390 100%);
-            
             --surface: rgba(255, 255, 255, 0.95);
             --text: #2d3436;
             --text-light: #636e72;
-            
-            /* Stati funzionali */
             --danger: #c0392b;
             --success: #27ae60;
-            
-            --shadow: 0 8px 30px rgba(225, 95, 65, 0.15); /* Ombra rossiccia leggera */
+            --shadow: 0 8px 30px rgba(225, 95, 65, 0.15);
             --radius: 20px;
 
-            /* Colori specifici Sedi (In tema) */
-            --loc-bellocchio: #e66767; /* Rosso pastello */
-            --loc-annunziata: #f3a683; /* Arancio/Giallo scuro pastello */
+            /* Colori Sedi */
+            --loc-bellocchio: #e66767;
+            --loc-annunziata: #f3a683;
         }
 
-        /* --- DARK MODE (Ambra e Mattone) --- */
         [data-theme="dark"] {
-            --primary: #ff7675; /* Rosso più chiaro per contrasto scuro */
-            --accent: #fdcb6e;  /* Giallo Ambra */
-            
+            --primary: #ff7675;
+            --accent: #fdcb6e;
             --bg-gradient: linear-gradient(135deg, #2d3436 0%, #1e1e1e 100%);
             --surface: rgba(45, 45, 50, 0.95);
-            
             --text: #dfe6e9;
             --text-light: #b2bec3;
-            
             --shadow: 0 8px 30px rgba(0,0,0,0.5);
         }
 
@@ -66,11 +53,10 @@
         .logo { 
             font-family: 'Pacifico', cursive; font-size: 1.8rem; 
             color: var(--primary); margin: 0; 
-            text-shadow: 2px 2px 0px rgba(247, 215, 148, 0.4); /* Ombra gialla sotto il rosso */
+            text-shadow: 2px 2px 0px rgba(247, 215, 148, 0.4);
         }
         .theme-btn { 
-            background: var(--accent); border: none; 
-            color: #574b90; /* Contrasto sul giallo */
+            background: var(--accent); border: none; color: #574b90;
             border-radius: 50%; width: 40px; height: 40px; 
             display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.2rem; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -78,7 +64,7 @@
 
         .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
 
-        /* NAVIGAZIONE BASSO */
+        /* NAVIGAZIONE */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 400px; background: var(--surface); backdrop-filter: blur(10px);
@@ -86,38 +72,26 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 100; border: 1px solid rgba(255,255,255,0.2);
         }
         .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 25px; transition: all 0.3s; cursor: pointer; }
-        
-        .nav-item.active { 
-            background-color: var(--primary); color: white; 
-            transform: translateY(-5px); 
-            box-shadow: 0 5px 15px rgba(225, 95, 65, 0.4); /* Glow rosso */
-        }
+        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(225, 95, 65, 0.4); }
 
-        /* INPUT RICERCA */
+        /* RICERCA */
         .search-area { margin-bottom: 25px; }
         .search-input { 
             width: 100%; padding: 16px 20px; border-radius: 30px; border: 2px solid transparent; 
             background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
             font-size: 1rem; color: var(--text); margin-bottom: 15px; outline: none; transition: border 0.3s;
         }
-        .search-input:focus { border-color: var(--accent); } /* Bordo giallo al focus */
+        .search-input:focus { border-color: var(--accent); }
 
-        /* CHIPS GENERI */
+        /* CHIPS */
         .genre-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scrollbar-width: none; -ms-overflow-style: none; }
         .genre-scroll::-webkit-scrollbar { display: none; }
-        
         .genre-chip { 
-            background: rgba(255,255,255,0.6); 
-            border: 1px solid var(--accent); 
-            padding: 8px 18px; border-radius: 25px; 
-            font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; 
+            background: rgba(255,255,255,0.6); border: 1px solid var(--accent); 
+            padding: 8px 18px; border-radius: 25px; font-size: 0.9rem; white-space: nowrap; cursor: pointer; transition: all 0.2s; 
             color: var(--text); font-weight: 500; 
         }
-        
-        .genre-chip.active { 
-            background: var(--primary); color: white; border-color: var(--primary); 
-            box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3);
-        }
+        .genre-chip.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3); }
 
         /* CARD LIBRO */
         .book-card { 
@@ -126,9 +100,8 @@
             border: 1px solid rgba(0,0,0,0.02);
         }
         .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); }
-        .book-card.borrowed::before { background: var(--accent); } /* Giallo se in prestito */
+        .book-card.borrowed::before { background: var(--accent); }
 
-        /* TAG SEDE */
         .location-tag {
             font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
             margin-bottom: 10px; display: inline-block; padding: 4px 10px; border-radius: 6px; color: white;
@@ -140,46 +113,35 @@
 
         .book-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .book-title { font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text); }
-        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 12px 0; }
+        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 8px 0; }
 
-        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; }
         .badge { 
-            background: rgba(247, 215, 148, 0.3); /* Sfondo giallino trasparente */
-            color: #d35400; /* Testo ruggine */
-            padding: 4px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; 
+            background: rgba(247, 215, 148, 0.3); color: #d35400; 
+            padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; 
         }
-        
+        .badge-gray { background: rgba(0,0,0,0.05); color: var(--text-light); }
+
         .loan-alert { 
-            background: rgba(253, 203, 110, 0.2); 
-            color: #d35400; 
+            background: rgba(253, 203, 110, 0.2); color: #d35400; 
             padding: 10px; border-radius: 10px; font-size: 0.9rem; margin-bottom: 15px; 
             display: flex; align-items: center; gap: 8px; font-weight: 500;
         }
 
-        /* BOTTONI AZIONE */
         .card-actions { display: flex; gap: 10px; margin-top: 5px; }
         .btn { flex: 1; padding: 14px; border: none; border-radius: 15px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; transition: transform 0.1s; }
         .btn:active { transform: scale(0.98); }
-        
         .btn-action { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(225, 95, 65, 0.3); }
         .btn-return { background: var(--accent); color: #2d3436; box-shadow: 0 4px 10px rgba(247, 215, 148, 0.4); }
         .btn-delete { background: transparent; color: var(--text-light); flex: 0; border: 1px solid rgba(0,0,0,0.1); }
 
         /* FORM */
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); font-size: 0.9rem; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem; }
         .form-control { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.08); font-size: 1rem; background: rgba(255,255,255,0.6); }
+        #inSede { background-color: rgba(247, 215, 148, 0.2); border: 2px solid var(--accent); color: var(--text); font-weight: 500; }
         
-        /* Dropdown Sede stilizzato */
-        #inSede {
-            background-color: rgba(247, 215, 148, 0.2); 
-            border: 2px solid var(--accent);
-            color: var(--text);
-            font-weight: 500;
-        }
-
         .btn-block { width: 100%; margin-top: 10px; background: var(--primary); color: white; padding: 16px; font-size: 1rem; }
-
         .view-section { display: none; animation: fadeUp 0.3s ease; }
         .view-section.active { display: block; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
@@ -198,7 +160,7 @@
 
         <div id="view-home" class="view-section active">
             <div class="search-area">
-                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore o biblioteca..." oninput="applicaFiltri()">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore, editore..." oninput="applicaFiltri()">
                 <div class="genre-scroll" id="genreContainer">
                     <div class="genre-chip active" onclick="filtraGenere('Tutti', this)">Tutti</div>
                 </div>
@@ -206,7 +168,7 @@
             <div id="bookList"></div>
             <div id="emptyState" style="text-align:center; color:var(--text-light); display:none; margin-top:50px; opacity:0.7;">
                 <h3 style="margin:0;">Nessun libro trovato 🍂</h3>
-                <p>Prova a cambiare filtri o sede!</p>
+                <p>Prova a cercare altro!</p>
             </div>
         </div>
 
@@ -215,7 +177,7 @@
                 <h2 style="margin-top:0; color:var(--primary); font-family:'Pacifico'; font-weight:400;">Nuovo Libro</h2>
                 
                 <div class="form-group">
-                    <label>📍 Dove si trova il libro?</label>
+                    <label>📍 Dove si trova?</label>
                     <select id="inSede" class="form-control">
                         <option value="Biblioteca Bellocchio">🏠 Biblioteca Bellocchio</option>
                         <option value="Biblioteca Annunziata">🏛️ Biblioteca Annunziata</option>
@@ -230,6 +192,15 @@
                 <div class="form-group">
                     <label>Autore</label>
                     <input type="text" id="inAutore" class="form-control" placeholder="Es. J.K. Rowling">
+                </div>
+                
+                <div class="form-group">
+                    <label>Casa Editrice</label>
+                    <input type="text" id="inEditore" class="form-control" placeholder="Es. Salani">
+                </div>
+                <div class="form-group">
+                    <label>Anno Pubblicazione</label>
+                    <input type="number" id="inAnno" class="form-control" placeholder="Es. 1997">
                 </div>
                 <div class="form-group">
                     <label>ISBN (Opzionale)</label>
@@ -285,6 +256,8 @@
         window.salvaLibro = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autore = document.getElementById('inAutore').value.trim();
+            const editore = document.getElementById('inEditore').value.trim(); // NUOVO
+            const anno = document.getElementById('inAnno').value.trim();       // NUOVO
             const isbn = document.getElementById('inIsbn').value.trim();
             let genere = document.getElementById('inGenere').value.trim();
             const sede = document.getElementById('inSede').value;
@@ -294,14 +267,18 @@
 
             try {
                 await addDoc(colRef, {
-                    titolo, autore, isbn, genere, sede,
+                    titolo, autore, editore, anno, isbn, genere, sede,
                     inPrestito: false, prestatoA: "", dataPrestito: ""
                 });
                 
+                // Reset form
                 document.getElementById('inTitolo').value = '';
                 document.getElementById('inAutore').value = '';
+                document.getElementById('inEditore').value = '';
+                document.getElementById('inAnno').value = '';
                 document.getElementById('inIsbn').value = '';
                 document.getElementById('inGenere').value = '';
+                
                 cambiaVista('home');
             } catch(e) {
                 alert("Errore salvataggio: " + e.message);
@@ -335,11 +312,21 @@
             listaContainer.innerHTML = '';
 
             const filtrati = tuttiILibri.filter(libro => {
-                const sedeLower = libro.sede ? libro.sede.toLowerCase() : "";
+                // Prepariamo i campi per la ricerca (gestendo il caso in cui siano vuoti)
+                const titolo = libro.titolo ? libro.titolo.toLowerCase() : "";
+                const autore = libro.autore ? libro.autore.toLowerCase() : "";
+                const editore = libro.editore ? libro.editore.toLowerCase() : "";
+                const anno = libro.anno ? libro.anno.toString() : "";
+                const sede = libro.sede ? libro.sede.toLowerCase() : "";
+
+                // LOGICA DI RICERCA "CONTIENE" (Partial match)
+                // Se scrivo "pott" -> titolo.includes("pott") è TRUE
                 const matchTesto = 
-                    libro.titolo.toLowerCase().includes(ricerca) || 
-                    libro.autore.toLowerCase().includes(ricerca) ||
-                    sedeLower.includes(ricerca);
+                    titolo.includes(ricerca) || 
+                    autore.includes(ricerca) ||
+                    editore.includes(ricerca) ||
+                    anno.includes(ricerca) ||
+                    sede.includes(ricerca);
                 
                 const matchGenere = genereSelezionato === 'Tutti' || libro.genere === genereSelezionato;
                 return matchTesto && matchGenere;
@@ -360,7 +347,7 @@
                 const btnClass = libro.inPrestito ? 'btn-return' : 'btn-action';
                 const cardClass = libro.inPrestito ? 'borrowed' : '';
 
-                // Colori tag sede "in tinta" soft
+                // Colori Sede
                 let sedeClass = 'loc-altro';
                 let sedeText = libro.sede || 'Non specificato';
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
@@ -373,14 +360,16 @@
                     <div class="book-header">
                         <div>
                             <h3 class="book-title">${libro.titolo}</h3>
-                            <p class="book-author">${libro.autore}</p>
+                            <p class="book-author">✍️ ${libro.autore}</p>
                         </div>
                         <button class="btn btn-delete" onclick="elimina('${libro.id}')">🗑️</button>
                     </div>
                     
                     <div class="badges">
                         <span class="badge">${libro.genere}</span>
-                        ${libro.isbn ? `<span class="badge" style="background:rgba(0,0,0,0.05); color:var(--text-light);">ISBN ${libro.isbn}</span>` : ''}
+                        ${libro.editore ? `<span class="badge badge-gray">📖 ${libro.editore}</span>` : ''}
+                        ${libro.anno ? `<span class="badge badge-gray">📅 ${libro.anno}</span>` : ''}
+                        ${libro.isbn ? `<span class="badge badge-gray">||| ${libro.isbn}</span>` : ''}
                     </div>
 
                     ${statusHtml}
@@ -430,7 +419,6 @@
             const current = document.documentElement.getAttribute('data-theme');
             const target = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', target);
-            // Aggiorna icona
             const btn = document.querySelector('.theme-btn');
             btn.innerHTML = target === 'dark' ? '☀️' : '🌙';
         }
