@@ -7,29 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- PALETTE MODERN SOFT (INDIGO & PEARL) --- */
-            --primary: #6c5ce7;       /* Indaco Soft (Moderno ed elegante) */
-            --primary-light: #a29bfe; /* Lilla per sfondi chiari */
-            --bg-body: #dfe6e9;       /* Grigio Perla (Sfondo moderno piatto) */
-            --surface: #ffffff;       /* Bianco Puro */
+            /* --- PALETTE MODERN SOFT --- */
+            --primary: #6c5ce7;
+            --primary-light: #a29bfe;
+            --bg-body: #dfe6e9;
+            --surface: #ffffff;
             
-            --text-main: #2d3436;     /* Grigio Antracite (non nero) */
-            --text-sub: #636e72;      /* Grigio Medio */
+            --text-main: #2d3436;
+            --text-sub: #636e72;
             
-            /* Stati funzionali moderni */
-            --danger: #ff7675;        /* Rosa Corallo */
-            --success: #55efc4;       /* Verde Acqua */
-            --edit: #ffeaa7;          /* Crema */
+            --danger: #ff7675;
+            --success: #55efc4;
+            --edit: #ffeaa7;
             
-            /* Ombra moderna "diffusa" */
             --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
             --shadow-float: 0 15px 35px rgba(108, 92, 231, 0.25);
             
-            --radius: 24px; /* Angoli molto arrotondati */
+            --radius: 24px;
 
             /* Colori Sedi */
-            --loc-bellocchio: #81ecec; /* Ciano Tenue */
-            --loc-annunziata: #fab1a0; /* Pesca Tenue */
+            --loc-bellocchio: #81ecec;
+            --loc-annunziata: #fab1a0;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -42,133 +40,72 @@
             min-height: 100vh;
         }
 
-        /* HEADER: CLEAN & FLOATING */
+        /* HEADER */
         header {
-            background: rgba(255, 255, 255, 0.9); /* Quasi trasparente */
+            background: rgba(255, 255, 255, 0.9);
             padding: 15px 25px;
             position: sticky; top: 0; z-index: 50;
-            backdrop-filter: blur(20px); /* Effetto vetro moderno */
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(0,0,0,0.03);
             display: flex; justify-content: space-between; align-items: center;
         }
 
-        .logo-container {
-            display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1;
-            transition: opacity 0.2s;
-        }
-        .logo-container:active { opacity: 0.7; }
-
-        .logo-icon-svg {
-            width: 38px; height: 38px;
-            fill: var(--primary);
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1; }
+        .logo-icon-svg { width: 38px; height: 38px; fill: var(--primary); }
         .text-group { display: flex; flex-direction: column; }
-
-        .logo { 
-            font-family: 'Pacifico', cursive; 
-            font-size: 1.9rem; /* +15% circa */
-            color: var(--text-main); margin: 0; line-height: 1;
-        }
-        /* Coloro solo la "G" e la "T" per stile */
+        .logo { font-family: 'Pacifico', cursive; font-size: 1.9rem; color: var(--text-main); margin: 0; line-height: 1; }
         .logo span { color: var(--primary); }
-        
-        .subtitle {
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.7rem;
-            color: var(--text-sub);
-            margin: 3px 0 0 2px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+        .subtitle { font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: var(--text-sub); margin: 3px 0 0 2px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
 
-        /* BOTTONE AGGIUNGI FLUTTUANTE */
         .header-add-btn {
-            background: var(--primary);
-            color: white;
-            width: 44px; height: 44px;
-            border-radius: 16px; /* Squircle (tra cerchio e quadrato) */
-            border: none;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-float);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            flex-shrink: 0;
+            background: var(--primary); color: white; width: 44px; height: 44px; border-radius: 16px;
+            border: none; display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-float); cursor: pointer; transition: transform 0.2s; flex-shrink: 0;
         }
-        .header-add-btn svg { width: 22px; height: 22px; fill: white; stroke: white; stroke-width: 1.5; }
         .header-add-btn:active { transform: scale(0.92); }
+        .header-add-btn svg { width: 22px; height: 22px; fill: white; stroke: white; stroke-width: 1.5; }
 
         .container { max-width: 650px; margin: 30px auto; padding: 0 20px; }
 
-        /* INPUT RICERCA MODERNO (Stile iOS) */
+        /* INPUT & FILTRI */
         .search-area { margin-bottom: 30px; }
         .search-input { 
-            width: 100%; padding: 18px 24px; 
-            border-radius: 20px; 
-            border: none; 
-            background: #ffffff; /* Bianco su grigio */
-            box-shadow: var(--shadow-card);
-            font-size: 1rem; color: var(--text-main); 
-            margin-bottom: 12px; outline: none; 
-            transition: transform 0.2s;
+            width: 100%; padding: 18px 24px; border-radius: 20px; border: none; 
+            background: #ffffff; box-shadow: var(--shadow-card); font-size: 1rem; 
+            color: var(--text-main); margin-bottom: 12px; outline: none; transition: transform 0.2s;
         }
         .search-input:focus { transform: translateY(-2px); }
-        .search-input::placeholder { color: #b2bec3; }
 
-        /* MENU FILTRO */
-        .filter-dropdown-container { position: relative; width: 100%; }
         .filter-toggle-btn {
-            width: 100%; padding: 12px 20px; 
-            background: transparent;
-            border: 2px solid rgba(108, 92, 231, 0.15); /* Bordo sottile colorato */
-            border-radius: 15px; 
-            text-align: left;
-            font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600;
-            color: var(--primary);
-            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            transition: background 0.2s;
+            width: 100%; padding: 12px 20px; background: transparent;
+            border: 2px solid rgba(108, 92, 231, 0.15); border-radius: 15px; 
+            text-align: left; font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600;
+            color: var(--primary); cursor: pointer; display: flex; justify-content: space-between; align-items: center;
         }
-        .filter-toggle-btn:active { background: rgba(108, 92, 231, 0.05); }
         .filter-toggle-btn::after { content: '▼'; font-size: 0.7rem; color: var(--primary); opacity: 0.7; }
 
         .genre-checkbox-list {
             display: none; background: white; border-radius: 20px; padding: 20px; margin-top: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
-            max-height: 350px; overflow-y: auto; 
-            border: none;
-            animation: slideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); max-height: 350px; overflow-y: auto; 
             position: absolute; width: 100%; z-index: 20;
         }
         .genre-checkbox-list.show { display: block; }
-        
         .checkbox-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f6fa; cursor: pointer; }
-        .checkbox-item:last-child { border-bottom: none; }
-        .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--primary); cursor: pointer; }
-        .checkbox-item span { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
-        @keyframes slideDown { from { opacity:0; transform:translateY(-10px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+        .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--primary); }
 
-        /* CARD LIBRO MODERNA */
+        /* CARD LIBRO */
         .book-card { 
-            background: var(--surface); 
-            border-radius: var(--radius); 
-            padding: 24px; 
-            margin-bottom: 20px; 
-            box-shadow: var(--shadow-card); 
-            display: flex; flex-direction: column; position: relative; overflow: hidden; 
-            border: 1px solid white; /* Bordo bianco per risaltare sul grigio */
-            transition: transform 0.2s;
+            background: var(--surface); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; 
+            box-shadow: var(--shadow-card); display: flex; flex-direction: column; position: relative; overflow: hidden; 
+            border: 1px solid white; transition: transform 0.2s;
         }
         .book-card:active { transform: scale(0.99); }
-        
         .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); opacity: 0.8; }
         .book-card.borrowed::before { background: var(--danger); }
 
-        /* TAG SEDE */
         .location-tag {
             font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 12px; display: inline-block; padding: 5px 12px; border-radius: 30px; 
-            align-self: flex-start;
+            margin-bottom: 12px; display: inline-block; padding: 5px 12px; border-radius: 30px; align-self: flex-start;
         }
         .loc-bellocchio { background-color: var(--loc-bellocchio); color: #006266; }
         .loc-annunziata { background-color: var(--loc-annunziata); color: #b33939; }
@@ -179,36 +116,35 @@
         .book-author { color: var(--text-sub); font-size: 0.95rem; margin: 4px 0 12px 0; font-weight: 400; }
 
         .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .badge { background: #f1f2f6; color: var(--text-sub); padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; }
-        .badge-main { background: var(--primary-light); color: white; } /* Per il genere */
+        
+        /* Stile base badge, il colore specifico viene iniettato via JS */
+        .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #2d3436; } 
+        .badge-info { background: #f1f2f6; color: var(--text-sub); }
 
         .loan-alert { 
-            background: #ffeaa7; color: #d63031;
-            padding: 12px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 20px; 
-            display: flex; align-items: center; gap: 10px; font-weight: 600;
+            background: #ffeaa7; color: #d63031; padding: 12px; border-radius: 12px; 
+            font-size: 0.9rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 600;
         }
 
-        /* BOTTONI AZIONE */
         .card-actions { display: flex; gap: 10px; margin-top: auto; }
-        .btn { padding: 14px; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; transition: opacity 0.2s; }
-        .btn:active { opacity: 0.8; }
-        
+        .btn { padding: 14px; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-action { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
         .btn-return { background: var(--text-main); color: white; flex: 1; }
-        
         .btn-edit { background: #f1f2f6; color: var(--text-main); width: 48px; flex: none; }
         .btn-delete { background: transparent; color: #b2bec3; width: 40px; flex: none; font-size: 0.8rem; }
 
         /* FORM */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-left: 5px;}
+        
+        /* Select stilizzata */
         .form-control { width: 100%; padding: 16px; border-radius: 18px; border: none; font-size: 1rem; background: #f1f2f6; color: var(--text-main); transition: background 0.2s; }
         .form-control:focus { background: #ffffff; box-shadow: 0 0 0 2px var(--primary-light); outline: none; }
-        #inSede { background-color: #e3f2fd; color: #2980b9; font-weight: 600; }
         
+        select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
+
         .btn-block { width: 100%; margin-top: 15px; background: var(--primary); color: white; padding: 18px; font-size: 1.05rem; box-shadow: var(--shadow-float); }
 
-        /* ANIMAZIONI E UTILS */
         .view-section { display: none; animation: fadeUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
         .view-section.active { display: block; }
         @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -223,17 +159,13 @@
                 <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="none" opacity="0"/>
                 <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5zM6.5 6c-1.2 0-2.4.15-3.5.5v11.5c1.1-.35 2.3-.5 3.5-.5 1.7 0 4.15.65 5.5 1.5V8C10.65 7.15 8.2 6.5 6.5 6zm3.6 6.13c-.22.61-.41 1.25-.56 1.87-.29-1.38-.85-2.67-1.59-3.82.78.53 1.5 1.19 2.15 1.95z"/>
             </svg>
-            
             <div class="text-group">
                 <h1 class="logo"><span>G</span>iulia<span>T</span>eca</h1>
                 <p class="subtitle">la biblioteca delle scuole di Giulianova</p>
             </div>
         </div>
-
         <button class="header-add-btn" onclick="preparaAggiunta()" title="Aggiungi Libro">
-            <svg viewBox="0 0 24 24">
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
         </button>
     </header>
 
@@ -266,7 +198,7 @@
                 
                 <div class="form-group">
                     <label>📍 Dove si trova?</label>
-                    <select id="inSede" class="form-control">
+                    <select id="inSede" class="form-control" style="background-color: #e3f2fd; color: #2980b9; font-weight: 600;">
                         <option value="Biblioteca Bellocchio">🏠 Biblioteca Bellocchio</option>
                         <option value="Biblioteca Annunziata">🏛️ Biblioteca Annunziata</option>
                         <option value="Altro">📦 Altro</option>
@@ -295,10 +227,64 @@
                     <label>ISBN (Opzionale)</label>
                     <input type="tel" id="inIsbn" class="form-control" placeholder="Codice a barre">
                 </div>
+                
                 <div class="form-group">
-                    <label>Genere</label>
-                    <input type="text" id="inGenere" list="datalistGeneri" class="form-control" placeholder="Es. Fantasy">
-                    <datalist id="datalistGeneri"></datalist>
+                    <label>Genere Letterario</label>
+                    <select id="inGenere" class="form-control">
+                        <option value="" disabled selected>Seleziona un genere...</option>
+                        
+                        <optgroup label="Narrativa">
+                            <option value="Narrativa Contemporanea">Narrativa Contemporanea</option>
+                            <option value="Classici">Classici</option>
+                            <option value="Giallo / Thriller">Giallo / Thriller</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Fantascienza">Fantascienza</option>
+                            <option value="Avventura">Avventura</option>
+                            <option value="Romanzo Storico">Romanzo Storico</option>
+                            <option value="Horror / Gotico">Horror / Gotico</option>
+                            <option value="Rosa / Romance">Rosa / Romance</option>
+                            <option value="Umoristico">Umoristico</option>
+                            <option value="Poesia">Poesia</option>
+                            <option value="Teatro / Drammaturgia">Teatro / Drammaturgia</option>
+                            <option value="Racconti / Antologie">Racconti / Antologie</option>
+                        </optgroup>
+
+                        <optgroup label="Ragazzi e Infanzia">
+                            <option value="Albi Illustrati">Albi Illustrati</option>
+                            <option value="Fiabe e Favole">Fiabe e Favole</option>
+                            <option value="Prime Letture">Prime Letture (6-8 anni)</option>
+                            <option value="Narrativa per Ragazzi">Narrativa per Ragazzi (9-12)</option>
+                            <option value="Young Adult">Young Adult</option>
+                            <option value="Miti e Leggende">Miti e Leggende</option>
+                        </optgroup>
+
+                        <optgroup label="Fumetti e Graphic Novel">
+                            <option value="Fumetti">Fumetti</option>
+                            <option value="Graphic Novel">Graphic Novel</option>
+                            <option value="Manga">Manga</option>
+                        </optgroup>
+
+                        <optgroup label="Saggistica">
+                            <option value="Storia">Storia</option>
+                            <option value="Biografie">Biografie</option>
+                            <option value="Scienza / Natura">Scienza / Natura</option>
+                            <option value="Arte / Architettura">Arte / Architettura</option>
+                            <option value="Filosofia">Filosofia</option>
+                            <option value="Psicologia">Psicologia</option>
+                            <option value="Religione / Spiritualità">Religione / Spiritualità</option>
+                            <option value="Attualità / Politica">Attualità / Politica</option>
+                            <option value="Musica / Cinema">Musica / Cinema</option>
+                            <option value="Viaggi / Guide">Viaggi / Guide</option>
+                            <option value="Cucina">Cucina</option>
+                            <option value="Hobby / Fai da te">Hobby / Fai da te</option>
+                        </optgroup>
+
+                        <optgroup label="Altro">
+                            <option value="Dizionari / Enciclopedie">Dizionari / Enciclopedie</option>
+                            <option value="Scolastica">Scolastica</option>
+                            <option value="Lingue Straniere">Lingue Straniere</option>
+                        </optgroup>
+                    </select>
                 </div>
 
                 <button id="btnSalva" class="btn btn-block" onclick="gestisciSalvataggio()">Salva nel Cloud ✨</button>
@@ -339,28 +325,56 @@
             applicaFiltri();
         });
 
+        // Funzione per assegnare i colori ai generi
+        window.colorePerGenere = function(genere) {
+            // Palette colori pastello
+            const colors = {
+                purple: "background:#dcd6f7; color:#424874;", // Narrativa, Classici
+                red:    "background:#ffcccc; color:#b33939;", // Giallo, Horror
+                blue:   "background:#d1ecef; color:#0c2461;", // Scienza, Saggistica
+                green:  "background:#d4edda; color:#155724;", // Ragazzi, Natura
+                yellow: "background:#fff3cd; color:#856404;", // Fumetti, Umoristico
+                pink:   "background:#f8d7da; color:#721c24;", // Rosa
+                cyan:   "background:#cff4fc; color:#055160;", // Fantasy
+                gray:   "background:#e2e3e5; color:#383d41;"  // Altro
+            };
+
+            if(!genere) return colors.gray;
+            const g = genere.toLowerCase();
+
+            if(g.includes("giallo") || g.includes("thriller") || g.includes("horror")) return colors.red;
+            if(g.includes("fantasy") || g.includes("fantascienza") || g.includes("avventura")) return colors.cyan;
+            if(g.includes("rosa") || g.includes("romance")) return colors.pink;
+            if(g.includes("ragazzi") || g.includes("fiabe") || g.includes("infanzia") || g.includes("illustrati")) return colors.green;
+            if(g.includes("fumetti") || g.includes("manga") || g.includes("graphic") || g.includes("umoristico")) return colors.yellow;
+            if(g.includes("saggistica") || g.includes("storia") || g.includes("scienza") || g.includes("biografie")) return colors.blue;
+            if(g.includes("narrativa") || g.includes("classici") || g.includes("poesia") || g.includes("teatro")) return colors.purple;
+
+            return colors.gray; // Default
+        }
+
         window.gestisciSalvataggio = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autore = document.getElementById('inAutore').value.trim();
             const editore = document.getElementById('inEditore').value.trim();
             const anno = document.getElementById('inAnno').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
-            let genere = document.getElementById('inGenere').value.trim();
+            // Prendo il valore dalla Select
+            let genere = document.getElementById('inGenere').value; 
             const sede = document.getElementById('inSede').value;
 
             if(!titolo || !autore) { alert("Manca Titolo o Autore!"); return; }
-            genere = genere ? (genere.charAt(0).toUpperCase() + genere.slice(1).toLowerCase()) : "Altro";
+            if(!genere) { alert("Seleziona un genere!"); return; }
 
             try {
+                const datiLibro = { titolo, autore, editore, anno, isbn, genere, sede };
+                
                 if (idLibroInModifica) {
-                    const docRef = doc(db, "libri", idLibroInModifica);
-                    await updateDoc(docRef, {
-                        titolo, autore, editore, anno, isbn, genere, sede
-                    });
+                    await updateDoc(doc(db, "libri", idLibroInModifica), datiLibro);
                     alert("Libro aggiornato! ✅");
                 } else {
                     await addDoc(colRef, {
-                        titolo, autore, editore, anno, isbn, genere, sede,
+                        ...datiLibro,
                         inPrestito: false, prestatoA: "", dataPrestito: ""
                     });
                     alert("Libro salvato! ✨");
@@ -391,7 +405,8 @@
                     document.getElementById('inEditore').value = libro.editore || "";
                     document.getElementById('inAnno').value = libro.anno || "";
                     document.getElementById('inIsbn').value = libro.isbn || "";
-                    document.getElementById('inGenere').value = libro.genere || "";
+                    // Imposta la select del genere
+                    document.getElementById('inGenere').value = libro.genere || ""; 
                     document.getElementById('inSede').value = libro.sede || "Altro";
 
                     idLibroInModifica = id;
@@ -477,6 +492,9 @@
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
                 if(sedeText.includes('Annunziata')) sedeClass = 'loc-annunziata';
 
+                // Calcolo stile colore genere
+                const styleGenere = colorePerGenere(libro.genere);
+
                 listaContainer.innerHTML += `
                 <div class="book-card ${cardClass}">
                     <div class="location-tag ${sedeClass}">📍 ${sedeText}</div>
@@ -489,10 +507,10 @@
                     </div>
                     
                     <div class="badges">
-                        <span class="badge badge-main">${libro.genere}</span>
-                        ${libro.editore ? `<span class="badge">📖 ${libro.editore}</span>` : ''}
-                        ${libro.anno ? `<span class="badge">📅 ${libro.anno}</span>` : ''}
-                        ${libro.isbn ? `<span class="badge">||| ${libro.isbn}</span>` : ''}
+                        <span class="badge" style="${styleGenere}">${libro.genere}</span>
+                        ${libro.editore ? `<span class="badge badge-info">📖 ${libro.editore}</span>` : ''}
+                        ${libro.anno ? `<span class="badge badge-info">📅 ${libro.anno}</span>` : ''}
+                        ${libro.isbn ? `<span class="badge badge-info">||| ${libro.isbn}</span>` : ''}
                     </div>
 
                     ${statusHtml}
@@ -514,17 +532,10 @@
         }
 
         function aggiornaFiltriGeneri() {
+            // Continua a prendere i generi dal DB per il filtro, così se ci sono vecchi libri non si rompe
             const generiUnici = [...new Set(tuttiILibri.map(l => l.genere))].sort();
             const container = document.getElementById('listaCheckboxGeneri');
-            const datalist = document.getElementById('datalistGeneri');
             
-            datalist.innerHTML = '';
-            generiUnici.forEach(g => {
-                const opt = document.createElement('option');
-                opt.value = g;
-                datalist.appendChild(opt);
-            });
-
             container.innerHTML = '';
             generiUnici.forEach(g => {
                 const isChecked = generiSelezionati.includes(g) ? 'checked' : '';
