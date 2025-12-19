@@ -15,7 +15,7 @@
             --text-main: #2d3436;
             --text-sub: #636e72;
             --danger: #ff7675;
-            --success: #55efc4;
+            --success: #55efc4; /* Verde Menta */
             --edit: #ffeaa7;
             --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
             --shadow-float: 0 15px 35px rgba(108, 92, 231, 0.25);
@@ -51,13 +51,26 @@
         .logo span { color: var(--primary); }
         .subtitle { font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: var(--text-sub); margin: 3px 0 0 2px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
 
-        .header-add-btn {
-            background: var(--primary); color: white; width: 44px; height: 44px; border-radius: 16px;
+        /* HEADER ACTIONS (Destra) */
+        .header-actions { display: flex; gap: 10px; align-items: center; }
+
+        .header-btn {
+            width: 44px; height: 44px; border-radius: 16px;
             border: none; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-float); cursor: pointer; transition: transform 0.2s; flex-shrink: 0;
+            cursor: pointer; transition: transform 0.2s; flex-shrink: 0;
+            font-size: 1.2rem;
         }
-        .header-add-btn:active { transform: scale(0.92); }
-        .header-add-btn svg { width: 22px; height: 22px; fill: white; stroke: white; stroke-width: 1.5; }
+        .header-btn:active { transform: scale(0.92); }
+        
+        /* Tasto Login (Lucchetto) */
+        .btn-login { background: #f1f2f6; color: var(--text-main); }
+        
+        /* Tasto Aggiungi (+) - Visibile solo Admin */
+        .btn-add { background: var(--primary); color: white; box-shadow: var(--shadow-float); display: none; }
+        .btn-add svg { width: 22px; height: 22px; fill: white; stroke: white; stroke-width: 1.5; }
+
+        /* Tasto Logout - Visibile solo Admin */
+        .btn-logout { background: var(--danger); color: white; display: none; font-size: 1rem; }
 
         .container { max-width: 650px; margin: 30px auto; padding: 0 20px; }
 
@@ -110,16 +123,22 @@
         .book-title { font-size: 1.2rem; font-weight: 700; margin: 0; color: var(--text-main); letter-spacing: -0.5px; }
         .book-author { color: var(--text-sub); font-size: 0.95rem; margin: 4px 0 12px 0; font-weight: 400; }
 
-        .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; color: #2d3436; } 
         .badge-info { background: #f1f2f6; color: var(--text-sub); }
 
-        .loan-alert { 
-            background: #ffeaa7; color: #d63031; padding: 12px; border-radius: 12px; 
-            font-size: 0.9rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-weight: 600;
+        /* Status Bar (Disponibile / Prestato) */
+        .status-bar {
+            padding: 12px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 15px; 
+            display: flex; align-items: center; gap: 10px; font-weight: 600;
         }
+        .status-available { background: #d4edda; color: #155724; }
+        .status-borrowed { background: #ffeaa7; color: #d63031; }
 
-        .card-actions { display: flex; gap: 10px; margin-top: auto; }
+        /* Card Actions: Nascoste di default, visibili solo Admin */
+        .card-actions { display: none; gap: 10px; margin-top: auto; }
+        .card-actions.visible { display: flex; }
+
         .btn { padding: 14px; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-action { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
         .btn-return { background: var(--text-main); color: white; flex: 1; }
@@ -132,10 +151,9 @@
         .form-control { width: 100%; padding: 16px; border-radius: 18px; border: none; font-size: 1rem; background: #f1f2f6; color: var(--text-main); transition: background 0.2s; }
         .form-control:focus { background: #ffffff; box-shadow: 0 0 0 2px var(--primary-light); outline: none; }
         select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
-
         .btn-block { width: 100%; margin-top: 15px; background: var(--primary); color: white; padding: 18px; font-size: 1.05rem; box-shadow: var(--shadow-float); }
 
-        /* MODAL */
+        /* MODALE */
         .custom-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px); animation: fadeIn 0.2s ease-out; }
         .custom-modal-overlay.active { display: flex; }
         .custom-modal-box { background: white; width: 85%; max-width: 350px; padding: 25px; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); text-align: center; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -147,7 +165,6 @@
         .modal-btn { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
         .modal-btn-cancel { background: #f1f2f6; color: var(--text-sub); }
         .modal-btn-confirm { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -169,9 +186,15 @@
                 <p class="subtitle">la biblioteca delle scuole di Giulianova</p>
             </div>
         </div>
-        <button class="header-add-btn" onclick="preparaAggiunta()" title="Aggiungi Libro">
-            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        </button>
+        
+        <div class="header-actions">
+            <button id="btnLogin" class="header-btn btn-login" onclick="login()" title="Area Riservata">🔒</button>
+            
+            <button id="btnAdd" class="header-btn btn-add" onclick="preparaAggiunta()" title="Aggiungi Libro">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </button>
+            <button id="btnLogout" class="header-btn btn-logout" onclick="logout()" title="Esci">🏃</button>
+        </div>
     </header>
 
     <div class="container">
@@ -230,18 +253,9 @@
                 
                 <div class="form-group">
                     <label>Generi (Opzionali, max 3)</label>
-                    
-                    <select id="inGenere1" class="form-control" style="margin-bottom: 8px;">
-                        <option value="">-- Seleziona Genere 1 --</option>
-                    </select>
-                    
-                    <select id="inGenere2" class="form-control" style="margin-bottom: 8px;">
-                        <option value="">-- Seleziona Genere 2 --</option>
-                    </select>
-                    
-                    <select id="inGenere3" class="form-control">
-                        <option value="">-- Seleziona Genere 3 --</option>
-                    </select>
+                    <select id="inGenere1" class="form-control" style="margin-bottom: 8px;"><option value="">-- Seleziona Genere 1 --</option></select>
+                    <select id="inGenere2" class="form-control" style="margin-bottom: 8px;"><option value="">-- Seleziona Genere 2 --</option></select>
+                    <select id="inGenere3" class="form-control"><option value="">-- Seleziona Genere 3 --</option></select>
                 </div>
 
                 <button id="btnSalva" class="btn btn-block" onclick="gestisciSalvataggio()">Salva nel Cloud ✨</button>
@@ -253,7 +267,7 @@
         <div class="custom-modal-box">
             <div class="modal-title">GiuliaTeca</div>
             <div id="modalMessage" class="modal-message"></div>
-            <input type="text" id="modalInput" class="modal-input" style="display:none;" placeholder="Scrivi qui...">
+            <input type="password" id="modalInput" class="modal-input" style="display:none;" placeholder="Inserisci Password">
             <div class="modal-buttons">
                 <button id="btnModalCancel" class="modal-btn modal-btn-cancel">Annulla</button>
                 <button id="btnModalConfirm" class="modal-btn modal-btn-confirm">OK</button>
@@ -281,8 +295,55 @@
         let tuttiILibri = [];
         let generiSelezionati = []; 
         let idLibroInModifica = null;
+        
+        // --- GESTIONE PASSWORD & ADMIN ---
+        const PASSWORD_SEGRETA = "scuola2025"; // CAMBIA QUI LA PASSWORD DEFINITIVA
+        let isAdmin = false;
 
-        // LISTA GENERI CENTRALIZZATA
+        // Controlla se l'utente era già loggato
+        if(localStorage.getItem('giuliateca_admin') === 'true') {
+            isAdmin = true;
+            aggiornaInterfacciaAdmin();
+        }
+
+        window.login = async function() {
+            const pass = await customPrompt("Inserisci la password amministratore:", true); // true = campo password
+            if(pass === PASSWORD_SEGRETA) {
+                isAdmin = true;
+                localStorage.setItem('giuliateca_admin', 'true');
+                await customAlert("Accesso effettuato! 🔓");
+                aggiornaInterfacciaAdmin();
+                applicaFiltri(); // Ridisegna i libri con i bottoni
+            } else if (pass !== null) {
+                await customAlert("Password errata! ⛔");
+            }
+        }
+
+        window.logout = function() {
+            isAdmin = false;
+            localStorage.removeItem('giuliateca_admin');
+            aggiornaInterfacciaAdmin();
+            applicaFiltri(); // Ridisegna i libri senza bottoni
+            cambiaVista('home');
+        }
+
+        function aggiornaInterfacciaAdmin() {
+            const btnLogin = document.getElementById('btnLogin');
+            const btnAdd = document.getElementById('btnAdd');
+            const btnLogout = document.getElementById('btnLogout');
+
+            if(isAdmin) {
+                btnLogin.style.display = 'none';
+                btnAdd.style.display = 'flex';
+                btnLogout.style.display = 'flex';
+            } else {
+                btnLogin.style.display = 'flex';
+                btnAdd.style.display = 'none';
+                btnLogout.style.display = 'none';
+            }
+        }
+
+        // --- LISTA GENERI ---
         const listaGeneri = {
             "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror / Gotico", "Rosa / Romance", "Umoristico", "Poesia", "Teatro / Drammaturgia", "Racconti / Antologie"],
             "Ragazzi": ["Albi Illustrati", "Fiabe e Favole", "Prime Letture", "Narrativa per Ragazzi", "Young Adult", "Miti e Leggende"],
@@ -291,33 +352,24 @@
             "Altro": ["Dizionari / Enciclopedie", "Scolastica", "Lingue Straniere"]
         };
 
-        // Popola i 3 select con i generi all'avvio
         function popolaOpzioniGeneri() {
             const selects = ['inGenere1', 'inGenere2', 'inGenere3'];
             let htmlOptions = '<option value="">-- Seleziona --</option>';
-
             for (const [gruppo, generi] of Object.entries(listaGeneri)) {
                 htmlOptions += `<optgroup label="${gruppo}">`;
-                generi.forEach(g => {
-                    htmlOptions += `<option value="${g}">${g}</option>`;
-                });
+                generi.forEach(g => { htmlOptions += `<option value="${g}">${g}</option>`; });
                 htmlOptions += `</optgroup>`;
             }
-
             selects.forEach(id => {
                 const el = document.getElementById(id);
-                // Manteniamo il placeholder corretto
                 const placeholder = id.slice(-1);
                 el.innerHTML = `<option value="">-- Seleziona Genere ${placeholder} --</option>` + htmlOptions;
             });
         }
-        
-        // Eseguiamo subito
         popolaOpzioniGeneri();
 
-
         // --- MODALE ---
-        function showCustomModal(type, message, placeholder = "") {
+        function showCustomModal(type, message, isPassword = false) {
             return new Promise((resolve) => {
                 const modal = document.getElementById('customModal');
                 const msgEl = document.getElementById('modalMessage');
@@ -327,7 +379,8 @@
 
                 msgEl.innerText = message;
                 inputEl.value = "";
-                inputEl.placeholder = placeholder;
+                inputEl.placeholder = isPassword ? "Password" : "Scrivi qui...";
+                inputEl.type = isPassword ? "password" : "text"; // Gestione tipo input
                 
                 if (type === 'alert') {
                     inputEl.style.display = 'none';
@@ -365,8 +418,7 @@
         }
         window.customAlert = (msg) => showCustomModal('alert', msg);
         window.customConfirm = (msg) => showCustomModal('confirm', msg);
-        window.customPrompt = (msg) => showCustomModal('prompt', msg);
-
+        window.customPrompt = (msg, isPwd) => showCustomModal('prompt', msg, isPwd);
 
         // --- LOGICA APP ---
         onSnapshot(colRef, (snapshot) => {
@@ -382,14 +434,10 @@
 
         window.colorePerGenere = function(genere) {
             const colors = {
-                purple: "background:#dcd6f7; color:#424874;", 
-                red:    "background:#ffcccc; color:#b33939;", 
-                blue:   "background:#d1ecef; color:#0c2461;", 
-                green:  "background:#d4edda; color:#155724;", 
-                yellow: "background:#fff3cd; color:#856404;", 
-                pink:   "background:#f8d7da; color:#721c24;", 
-                cyan:   "background:#cff4fc; color:#055160;", 
-                gray:   "background:#e2e3e5; color:#383d41;"  
+                purple: "background:#dcd6f7; color:#424874;", red: "background:#ffcccc; color:#b33939;", 
+                blue: "background:#d1ecef; color:#0c2461;", green: "background:#d4edda; color:#155724;", 
+                yellow: "background:#fff3cd; color:#856404;", pink: "background:#f8d7da; color:#721c24;", 
+                cyan: "background:#cff4fc; color:#055160;", gray: "background:#e2e3e5; color:#383d41;"  
             };
             if(!genere) return colors.gray;
             const g = genere.toLowerCase();
@@ -410,17 +458,12 @@
             const anno = document.getElementById('inAnno').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
             const sede = document.getElementById('inSede').value;
-            
-            // RACCOLTA GENERI (Fino a 3)
             const g1 = document.getElementById('inGenere1').value;
             const g2 = document.getElementById('inGenere2').value;
             const g3 = document.getElementById('inGenere3').value;
-            // Creo un array pulito rimuovendo quelli vuoti
             const generi = [g1, g2, g3].filter(g => g !== "");
 
             if(!titolo || !autore) { await customAlert("⚠️ Manca Titolo o Autore!"); return; }
-            // Rimosso obbligo genere
-            // if(generi.length === 0) { await customAlert("⚠️ Seleziona almeno un genere!"); return; }
 
             try {
                 const datiLibro = { titolo, autore, editore, anno, isbn, generi, sede };
@@ -438,10 +481,7 @@
                 
                 pulisciForm();
                 cambiaVista('home');
-
-            } catch(e) {
-                await customAlert("Errore: " + e.message);
-            }
+            } catch(e) { await customAlert("Errore: " + e.message); }
         }
 
         window.preparaAggiunta = function() {
@@ -462,16 +502,9 @@
                     document.getElementById('inAnno').value = libro.anno || "";
                     document.getElementById('inIsbn').value = libro.isbn || "";
                     document.getElementById('inSede').value = libro.sede || "Altro";
-
-                    // COMPATIBILITÀ VECCHI LIBRI (Stringa vs Array)
                     let listaGeneriLibro = [];
-                    if (Array.isArray(libro.generi)) {
-                        listaGeneriLibro = libro.generi;
-                    } else if (libro.genere) {
-                        listaGeneriLibro = [libro.genere];
-                    }
-
-                    // Riempio i 3 select
+                    if (Array.isArray(libro.generi)) listaGeneriLibro = libro.generi;
+                    else if (libro.genere) listaGeneriLibro = [libro.genere];
                     document.getElementById('inGenere1').value = listaGeneriLibro[0] || "";
                     document.getElementById('inGenere2').value = listaGeneriLibro[1] || "";
                     document.getElementById('inGenere3').value = listaGeneriLibro[2] || "";
@@ -479,7 +512,6 @@
                     idLibroInModifica = id;
                     document.getElementById('titoloForm').innerText = "Modifica Libro ✏️";
                     document.getElementById('btnSalva').innerText = "Salva Modifiche";
-                    
                     cambiaVista('add');
                 }
             }
@@ -528,23 +560,11 @@
                 const editore = libro.editore ? libro.editore.toLowerCase() : "";
                 const anno = libro.anno ? libro.anno.toString() : "";
                 const sede = libro.sede ? libro.sede.toLowerCase() : "";
-
-                // GESTIONE LISTA GENERI LIBRO (Compatibilità)
                 let generiLibro = [];
-                if (Array.isArray(libro.generi)) {
-                    generiLibro = libro.generi;
-                } else if (libro.genere) {
-                    generiLibro = [libro.genere];
-                }
+                if (Array.isArray(libro.generi)) generiLibro = libro.generi;
+                else if (libro.genere) generiLibro = [libro.genere];
 
-                const matchTesto = 
-                    titolo.includes(ricerca) || 
-                    autore.includes(ricerca) ||
-                    editore.includes(ricerca) ||
-                    anno.includes(ricerca) ||
-                    sede.includes(ricerca);
-                
-                // Filtro generi: Se ho selezionato filtri, controllo se il libro ha ALMENO UNO dei generi selezionati
+                const matchTesto = titolo.includes(ricerca) || autore.includes(ricerca) || editore.includes(ricerca) || anno.includes(ricerca) || sede.includes(ricerca);
                 const matchGenere = (generiSelezionati.length === 0) || generiSelezionati.some(gSel => generiLibro.includes(gSel));
 
                 return matchTesto && matchGenere;
@@ -558,28 +578,30 @@
             }
 
             filtrati.forEach(libro => {
-                const statusHtml = libro.inPrestito 
-                    ? `<div class="loan-alert">🔴 Prestato a <b>${libro.prestatoA}</b> (${libro.dataPrestito})</div>`
-                    : '';
-                
                 const btnClass = libro.inPrestito ? 'btn-return' : 'btn-action';
                 const cardClass = libro.inPrestito ? 'borrowed' : '';
-
                 let sedeClass = 'loc-altro';
                 let sedeText = libro.sede || 'Non specificato';
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
                 if(sedeText.includes('Annunziata')) sedeClass = 'loc-annunziata';
 
-                // GENERAZIONE PILLOLE GENERI
                 let generiLibro = [];
                 if (Array.isArray(libro.generi)) generiLibro = libro.generi;
                 else if (libro.genere) generiLibro = [libro.genere];
-
                 let htmlBadgesGeneri = '';
-                generiLibro.forEach(g => {
-                    const style = colorePerGenere(g);
-                    htmlBadgesGeneri += `<span class="badge" style="${style}">${g}</span>`;
-                });
+                generiLibro.forEach(g => { htmlBadgesGeneri += `<span class="badge" style="${colorePerGenere(g)}">${g}</span>`; });
+
+                // VISUALIZZAZIONE PUBBLICA: STATUS BAR (NON CLICCABILE)
+                let statusHtml = '';
+                if (libro.inPrestito) {
+                    statusHtml = `<div class="status-bar status-borrowed">🔴 In prestito a ${libro.prestatoA}</div>`;
+                } else {
+                    statusHtml = `<div class="status-bar status-available">🟢 Disponibile</div>`;
+                }
+
+                // VISUALIZZAZIONE ADMIN: BOTTONI (CLICCABILI)
+                // Se isAdmin è true, aggiungo la classe .visible, altrimenti restano display:none
+                const actionsClass = isAdmin ? 'card-actions visible' : 'card-actions';
 
                 listaContainer.innerHTML += `
                 <div class="book-card ${cardClass}">
@@ -601,7 +623,7 @@
 
                     ${statusHtml}
 
-                    <div class="card-actions">
+                    <div class="${actionsClass}">
                         <button class="btn ${btnClass}" onclick="togglePrestito('${libro.id}', ${libro.inPrestito})">
                             ${libro.inPrestito ? '↩️ Restituisci' : '🤝 Presta'}
                         </button>
@@ -618,17 +640,12 @@
         }
 
         function aggiornaFiltriGeneri() {
-            // Estrae TUTTI i generi unici da TUTTI i libri (gestendo sia array che stringhe)
             let tuttiIGeneri = new Set();
             tuttiILibri.forEach(libro => {
-                if (Array.isArray(libro.generi)) {
-                    libro.generi.forEach(g => tuttiIGeneri.add(g));
-                } else if (libro.genere) {
-                    tuttiIGeneri.add(libro.genere);
-                }
+                if (Array.isArray(libro.generi)) libro.generi.forEach(g => tuttiIGeneri.add(g));
+                else if (libro.genere) tuttiIGeneri.add(libro.genere);
             });
             const generiOrdinati = [...tuttiIGeneri].sort();
-
             const container = document.getElementById('listaCheckboxGeneri');
             container.innerHTML = '';
             generiOrdinati.forEach(g => {
@@ -637,18 +654,14 @@
                 <label class="checkbox-item">
                     <input type="checkbox" value="${g}" ${isChecked} onchange="cambiaStatoGenere(this)">
                     <span>${g}</span>
-                </label>
-                `;
+                </label>`;
             });
         }
 
         window.cambiaStatoGenere = function(checkbox) {
             const val = checkbox.value;
-            if(checkbox.checked) {
-                generiSelezionati.push(val);
-            } else {
-                generiSelezionati = generiSelezionati.filter(g => g !== val);
-            }
+            if(checkbox.checked) generiSelezionati.push(val);
+            else generiSelezionati = generiSelezionati.filter(g => g !== val);
             
             const btn = document.getElementById('btnFiltroGeneri');
             if(generiSelezionati.length === 0) {
@@ -669,7 +682,6 @@
             document.getElementById('listaCheckboxGeneri').classList.remove('show');
             window.scrollTo(0,0);
         }
-
     </script>
 </body>
 </html>
