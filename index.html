@@ -12,20 +12,14 @@
             --primary-light: #a29bfe;
             --bg-body: #dfe6e9;
             --surface: #ffffff;
-            
             --text-main: #2d3436;
             --text-sub: #636e72;
-            
             --danger: #ff7675;
             --success: #55efc4;
             --edit: #ffeaa7;
-            
             --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
             --shadow-float: 0 15px 35px rgba(108, 92, 231, 0.25);
-            
             --radius: 24px;
-
-            /* Colori Sedi */
             --loc-bellocchio: #81ecec;
             --loc-annunziata: #fab1a0;
         }
@@ -116,8 +110,8 @@
         .book-title { font-size: 1.2rem; font-weight: 700; margin: 0; color: var(--text-main); letter-spacing: -0.5px; }
         .book-author { color: var(--text-sub); font-size: 0.95rem; margin: 4px 0 12px 0; font-weight: 400; }
 
-        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #2d3436; } 
+        .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+        .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; color: #2d3436; } 
         .badge-info { background: #f1f2f6; color: var(--text-sub); }
 
         .loan-alert { 
@@ -141,33 +135,14 @@
 
         .btn-block { width: 100%; margin-top: 15px; background: var(--primary); color: white; padding: 18px; font-size: 1.05rem; box-shadow: var(--shadow-float); }
 
-        /* --- MODAL PERSONALIZZATO (NUOVO) --- */
-        .custom-modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4); z-index: 2000;
-            align-items: center; justify-content: center;
-            backdrop-filter: blur(5px);
-            animation: fadeIn 0.2s ease-out;
-        }
+        /* MODAL */
+        .custom-modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px); animation: fadeIn 0.2s ease-out; }
         .custom-modal-overlay.active { display: flex; }
-
-        .custom-modal-box {
-            background: white; width: 85%; max-width: 350px;
-            padding: 25px; border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            text-align: center;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
+        .custom-modal-box { background: white; width: 85%; max-width: 350px; padding: 25px; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); text-align: center; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .modal-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; font-family: 'Pacifico', cursive; }
         .modal-message { font-size: 1rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.5; }
-        
-        .modal-input {
-            width: 100%; padding: 12px; border: 2px solid #f1f2f6; border-radius: 12px;
-            margin-bottom: 20px; font-size: 1rem; outline: none;
-        }
+        .modal-input { width: 100%; padding: 12px; border: 2px solid #f1f2f6; border-radius: 12px; margin-bottom: 20px; font-size: 1rem; outline: none; }
         .modal-input:focus { border-color: var(--primary); }
-
         .modal-buttons { display: flex; gap: 10px; justify-content: center; }
         .modal-btn { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
         .modal-btn-cancel { background: #f1f2f6; color: var(--text-sub); }
@@ -254,56 +229,18 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Genere Letterario</label>
-                    <select id="inGenere" class="form-control">
-                        <option value="" disabled selected>Seleziona un genere...</option>
-                        <optgroup label="Narrativa">
-                            <option value="Narrativa Contemporanea">Narrativa Contemporanea</option>
-                            <option value="Classici">Classici</option>
-                            <option value="Giallo / Thriller">Giallo / Thriller</option>
-                            <option value="Fantasy">Fantasy</option>
-                            <option value="Fantascienza">Fantascienza</option>
-                            <option value="Avventura">Avventura</option>
-                            <option value="Romanzo Storico">Romanzo Storico</option>
-                            <option value="Horror / Gotico">Horror / Gotico</option>
-                            <option value="Rosa / Romance">Rosa / Romance</option>
-                            <option value="Umoristico">Umoristico</option>
-                            <option value="Poesia">Poesia</option>
-                            <option value="Teatro / Drammaturgia">Teatro / Drammaturgia</option>
-                            <option value="Racconti / Antologie">Racconti / Antologie</option>
-                        </optgroup>
-                        <optgroup label="Ragazzi e Infanzia">
-                            <option value="Albi Illustrati">Albi Illustrati</option>
-                            <option value="Fiabe e Favole">Fiabe e Favole</option>
-                            <option value="Prime Letture">Prime Letture (6-8 anni)</option>
-                            <option value="Narrativa per Ragazzi">Narrativa per Ragazzi (9-12)</option>
-                            <option value="Young Adult">Young Adult</option>
-                            <option value="Miti e Leggende">Miti e Leggende</option>
-                        </optgroup>
-                        <optgroup label="Fumetti e Graphic Novel">
-                            <option value="Fumetti">Fumetti</option>
-                            <option value="Graphic Novel">Graphic Novel</option>
-                            <option value="Manga">Manga</option>
-                        </optgroup>
-                        <optgroup label="Saggistica">
-                            <option value="Storia">Storia</option>
-                            <option value="Biografie">Biografie</option>
-                            <option value="Scienza / Natura">Scienza / Natura</option>
-                            <option value="Arte / Architettura">Arte / Architettura</option>
-                            <option value="Filosofia">Filosofia</option>
-                            <option value="Psicologia">Psicologia</option>
-                            <option value="Religione / Spiritualità">Religione / Spiritualità</option>
-                            <option value="Attualità / Politica">Attualità / Politica</option>
-                            <option value="Musica / Cinema">Musica / Cinema</option>
-                            <option value="Viaggi / Guide">Viaggi / Guide</option>
-                            <option value="Cucina">Cucina</option>
-                            <option value="Hobby / Fai da te">Hobby / Fai da te</option>
-                        </optgroup>
-                        <optgroup label="Altro">
-                            <option value="Dizionari / Enciclopedie">Dizionari / Enciclopedie</option>
-                            <option value="Scolastica">Scolastica</option>
-                            <option value="Lingue Straniere">Lingue Straniere</option>
-                        </optgroup>
+                    <label>Generi (Opzionali, max 3)</label>
+                    
+                    <select id="inGenere1" class="form-control" style="margin-bottom: 8px;">
+                        <option value="">-- Seleziona Genere 1 --</option>
+                    </select>
+                    
+                    <select id="inGenere2" class="form-control" style="margin-bottom: 8px;">
+                        <option value="">-- Seleziona Genere 2 --</option>
+                    </select>
+                    
+                    <select id="inGenere3" class="form-control">
+                        <option value="">-- Seleziona Genere 3 --</option>
                     </select>
                 </div>
 
@@ -315,7 +252,7 @@
     <div id="customModal" class="custom-modal-overlay">
         <div class="custom-modal-box">
             <div class="modal-title">GiuliaTeca</div>
-            <div id="modalMessage" class="modal-message">Messaggio di sistema</div>
+            <div id="modalMessage" class="modal-message"></div>
             <input type="text" id="modalInput" class="modal-input" style="display:none;" placeholder="Scrivi qui...">
             <div class="modal-buttons">
                 <button id="btnModalCancel" class="modal-btn modal-btn-cancel">Annulla</button>
@@ -345,9 +282,41 @@
         let generiSelezionati = []; 
         let idLibroInModifica = null;
 
-        // --- SISTEMA DI POP-UP CUSTOM (MODALI) ---
-        // Sostituisce alert(), confirm() e prompt()
+        // LISTA GENERI CENTRALIZZATA
+        const listaGeneri = {
+            "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror / Gotico", "Rosa / Romance", "Umoristico", "Poesia", "Teatro / Drammaturgia", "Racconti / Antologie"],
+            "Ragazzi": ["Albi Illustrati", "Fiabe e Favole", "Prime Letture", "Narrativa per Ragazzi", "Young Adult", "Miti e Leggende"],
+            "Fumetti": ["Fumetti", "Graphic Novel", "Manga"],
+            "Saggistica": ["Storia", "Biografie", "Scienza / Natura", "Arte / Architettura", "Filosofia", "Psicologia", "Religione / Spiritualità", "Attualità / Politica", "Musica / Cinema", "Viaggi / Guide", "Cucina", "Hobby / Fai da te"],
+            "Altro": ["Dizionari / Enciclopedie", "Scolastica", "Lingue Straniere"]
+        };
+
+        // Popola i 3 select con i generi all'avvio
+        function popolaOpzioniGeneri() {
+            const selects = ['inGenere1', 'inGenere2', 'inGenere3'];
+            let htmlOptions = '<option value="">-- Seleziona --</option>';
+
+            for (const [gruppo, generi] of Object.entries(listaGeneri)) {
+                htmlOptions += `<optgroup label="${gruppo}">`;
+                generi.forEach(g => {
+                    htmlOptions += `<option value="${g}">${g}</option>`;
+                });
+                htmlOptions += `</optgroup>`;
+            }
+
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                // Manteniamo il placeholder corretto
+                const placeholder = id.slice(-1);
+                el.innerHTML = `<option value="">-- Seleziona Genere ${placeholder} --</option>` + htmlOptions;
+            });
+        }
         
+        // Eseguiamo subito
+        popolaOpzioniGeneri();
+
+
+        // --- MODALE ---
         function showCustomModal(type, message, placeholder = "") {
             return new Promise((resolve) => {
                 const modal = document.getElementById('customModal');
@@ -356,12 +325,10 @@
                 const btnCancel = document.getElementById('btnModalCancel');
                 const btnConfirm = document.getElementById('btnModalConfirm');
 
-                // Configura il modale
                 msgEl.innerText = message;
                 inputEl.value = "";
                 inputEl.placeholder = placeholder;
                 
-                // Gestione visibilità elementi in base al tipo
                 if (type === 'alert') {
                     inputEl.style.display = 'none';
                     btnCancel.style.display = 'none';
@@ -379,10 +346,8 @@
                 modal.classList.add('active');
                 if(type === 'prompt') setTimeout(() => inputEl.focus(), 100);
 
-                // Gestione Click
                 const close = (result) => {
                     modal.classList.remove('active');
-                    // Rimuovi listener per evitare duplicati
                     btnConfirm.onclick = null;
                     btnCancel.onclick = null;
                     resolve(result);
@@ -392,22 +357,18 @@
                     if (type === 'prompt') close(inputEl.value);
                     else close(true);
                 };
-                
                 btnCancel.onclick = () => {
                     if (type === 'prompt') close(null);
                     else close(false);
                 };
             });
         }
-
-        // Funzioni Helper per semplificare il codice
         window.customAlert = (msg) => showCustomModal('alert', msg);
         window.customConfirm = (msg) => showCustomModal('confirm', msg);
         window.customPrompt = (msg) => showCustomModal('prompt', msg);
 
 
         // --- LOGICA APP ---
-
         onSnapshot(colRef, (snapshot) => {
             tuttiILibri = [];
             snapshot.forEach(doc => {
@@ -448,14 +409,21 @@
             const editore = document.getElementById('inEditore').value.trim();
             const anno = document.getElementById('inAnno').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
-            let genere = document.getElementById('inGenere').value; 
             const sede = document.getElementById('inSede').value;
+            
+            // RACCOLTA GENERI (Fino a 3)
+            const g1 = document.getElementById('inGenere1').value;
+            const g2 = document.getElementById('inGenere2').value;
+            const g3 = document.getElementById('inGenere3').value;
+            // Creo un array pulito rimuovendo quelli vuoti
+            const generi = [g1, g2, g3].filter(g => g !== "");
 
             if(!titolo || !autore) { await customAlert("⚠️ Manca Titolo o Autore!"); return; }
-            if(!genere) { await customAlert("⚠️ Seleziona un genere!"); return; }
+            // Rimosso obbligo genere
+            // if(generi.length === 0) { await customAlert("⚠️ Seleziona almeno un genere!"); return; }
 
             try {
-                const datiLibro = { titolo, autore, editore, anno, isbn, genere, sede };
+                const datiLibro = { titolo, autore, editore, anno, isbn, generi, sede };
                 
                 if (idLibroInModifica) {
                     await updateDoc(doc(db, "libri", idLibroInModifica), datiLibro);
@@ -493,8 +461,20 @@
                     document.getElementById('inEditore').value = libro.editore || "";
                     document.getElementById('inAnno').value = libro.anno || "";
                     document.getElementById('inIsbn').value = libro.isbn || "";
-                    document.getElementById('inGenere').value = libro.genere || ""; 
                     document.getElementById('inSede').value = libro.sede || "Altro";
+
+                    // COMPATIBILITÀ VECCHI LIBRI (Stringa vs Array)
+                    let listaGeneriLibro = [];
+                    if (Array.isArray(libro.generi)) {
+                        listaGeneriLibro = libro.generi;
+                    } else if (libro.genere) {
+                        listaGeneriLibro = [libro.genere];
+                    }
+
+                    // Riempio i 3 select
+                    document.getElementById('inGenere1').value = listaGeneriLibro[0] || "";
+                    document.getElementById('inGenere2').value = listaGeneriLibro[1] || "";
+                    document.getElementById('inGenere3').value = listaGeneriLibro[2] || "";
 
                     idLibroInModifica = id;
                     document.getElementById('titoloForm').innerText = "Modifica Libro ✏️";
@@ -511,7 +491,9 @@
             document.getElementById('inEditore').value = '';
             document.getElementById('inAnno').value = '';
             document.getElementById('inIsbn').value = '';
-            document.getElementById('inGenere').value = '';
+            document.getElementById('inGenere1').value = '';
+            document.getElementById('inGenere2').value = '';
+            document.getElementById('inGenere3').value = '';
         }
 
         window.togglePrestito = async function(id, statoAttuale) {
@@ -547,6 +529,14 @@
                 const anno = libro.anno ? libro.anno.toString() : "";
                 const sede = libro.sede ? libro.sede.toLowerCase() : "";
 
+                // GESTIONE LISTA GENERI LIBRO (Compatibilità)
+                let generiLibro = [];
+                if (Array.isArray(libro.generi)) {
+                    generiLibro = libro.generi;
+                } else if (libro.genere) {
+                    generiLibro = [libro.genere];
+                }
+
                 const matchTesto = 
                     titolo.includes(ricerca) || 
                     autore.includes(ricerca) ||
@@ -554,7 +544,8 @@
                     anno.includes(ricerca) ||
                     sede.includes(ricerca);
                 
-                const matchGenere = (generiSelezionati.length === 0) || generiSelezionati.includes(libro.genere);
+                // Filtro generi: Se ho selezionato filtri, controllo se il libro ha ALMENO UNO dei generi selezionati
+                const matchGenere = (generiSelezionati.length === 0) || generiSelezionati.some(gSel => generiLibro.includes(gSel));
 
                 return matchTesto && matchGenere;
             });
@@ -579,7 +570,16 @@
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
                 if(sedeText.includes('Annunziata')) sedeClass = 'loc-annunziata';
 
-                const styleGenere = colorePerGenere(libro.genere);
+                // GENERAZIONE PILLOLE GENERI
+                let generiLibro = [];
+                if (Array.isArray(libro.generi)) generiLibro = libro.generi;
+                else if (libro.genere) generiLibro = [libro.genere];
+
+                let htmlBadgesGeneri = '';
+                generiLibro.forEach(g => {
+                    const style = colorePerGenere(g);
+                    htmlBadgesGeneri += `<span class="badge" style="${style}">${g}</span>`;
+                });
 
                 listaContainer.innerHTML += `
                 <div class="book-card ${cardClass}">
@@ -593,7 +593,7 @@
                     </div>
                     
                     <div class="badges">
-                        <span class="badge" style="${styleGenere}">${libro.genere}</span>
+                        ${htmlBadgesGeneri}
                         ${libro.editore ? `<span class="badge badge-info">📖 ${libro.editore}</span>` : ''}
                         ${libro.anno ? `<span class="badge badge-info">📅 ${libro.anno}</span>` : ''}
                         ${libro.isbn ? `<span class="badge badge-info">||| ${libro.isbn}</span>` : ''}
@@ -618,11 +618,20 @@
         }
 
         function aggiornaFiltriGeneri() {
-            const generiUnici = [...new Set(tuttiILibri.map(l => l.genere))].sort();
+            // Estrae TUTTI i generi unici da TUTTI i libri (gestendo sia array che stringhe)
+            let tuttiIGeneri = new Set();
+            tuttiILibri.forEach(libro => {
+                if (Array.isArray(libro.generi)) {
+                    libro.generi.forEach(g => tuttiIGeneri.add(g));
+                } else if (libro.genere) {
+                    tuttiIGeneri.add(libro.genere);
+                }
+            });
+            const generiOrdinati = [...tuttiIGeneri].sort();
+
             const container = document.getElementById('listaCheckboxGeneri');
-            
             container.innerHTML = '';
-            generiUnici.forEach(g => {
+            generiOrdinati.forEach(g => {
                 const isChecked = generiSelezionati.includes(g) ? 'checked' : '';
                 container.innerHTML += `
                 <label class="checkbox-item">
