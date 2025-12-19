@@ -7,28 +7,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* --- NUOVA PALETTE TENUE (AZZURRO & VERDE MENTA) --- */
-            --primary: #778beb; /* Azzurro Polvere */
-            --accent: #b8e994;  /* Verde Menta Chiaro */
+            /* --- PALETTE MODERN SOFT (INDIGO & PEARL) --- */
+            --primary: #6c5ce7;       /* Indaco Soft (Moderno ed elegante) */
+            --primary-light: #a29bfe; /* Lilla per sfondi chiari */
+            --bg-body: #dfe6e9;       /* Grigio Perla (Sfondo moderno piatto) */
+            --surface: #ffffff;       /* Bianco Puro */
             
-            /* Sfondo sfumato tenue cielo/menta */
-            --bg-gradient: linear-gradient(135deg, #eaf6ff 0%, #f0fff4 100%);
+            --text-main: #2d3436;     /* Grigio Antracite (non nero) */
+            --text-sub: #636e72;      /* Grigio Medio */
             
-            --surface: rgba(255, 255, 255, 0.95);
-            --text: #2d3436;
-            --text-light: #636e72;
+            /* Stati funzionali moderni */
+            --danger: #ff7675;        /* Rosa Corallo */
+            --success: #55efc4;       /* Verde Acqua */
+            --edit: #ffeaa7;          /* Crema */
             
-            /* Stati funzionali (Versioni pastello) */
-            --danger: #fab1a0; /* Rosso corallo tenue per prestiti */
-            --success: #78e08f; /* Verde pastello */
-            --edit: #ffeaa7;   /* Giallo pastello per modifica */
+            /* Ombra moderna "diffusa" */
+            --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+            --shadow-float: 0 15px 35px rgba(108, 92, 231, 0.25);
             
-            --shadow: 0 8px 30px rgba(119, 139, 235, 0.15); /* Ombra azzurrina */
-            --radius: 20px;
+            --radius: 24px; /* Angoli molto arrotondati */
 
-            /* Colori Sedi (In tinta pastello) */
-            --loc-bellocchio: #81ecec; /* Ciano tenue */
-            --loc-annunziata: #55efc4; /* Verde acqua tenue */
+            /* Colori Sedi */
+            --loc-bellocchio: #81ecec; /* Ciano Tenue */
+            --loc-annunziata: #fab1a0; /* Pesca Tenue */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -36,144 +37,208 @@
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0; padding: 0;
-            background: var(--bg-gradient); background-attachment: fixed;
-            color: var(--text); min-height: 100vh; padding-bottom: 90px;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
         }
 
-        /* HEADER MODIFICATO */
+        /* HEADER: CLEAN & FLOATING */
         header {
-            background: var(--surface); padding: 20px 20px;
-            text-align: center; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
-            box-shadow: var(--shadow); position: sticky; top: 0; z-index: 50;
-            backdrop-filter: blur(10px); 
-            /* Modifica per impilare titolo e sottotitolo */
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background: rgba(255, 255, 255, 0.9); /* Quasi trasparente */
+            padding: 15px 25px;
+            position: sticky; top: 0; z-index: 50;
+            backdrop-filter: blur(20px); /* Effetto vetro moderno */
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            display: flex; justify-content: space-between; align-items: center;
         }
+
+        .logo-container {
+            display: flex; align-items: center; gap: 10px; cursor: pointer; flex: 1;
+            transition: opacity 0.2s;
+        }
+        .logo-container:active { opacity: 0.7; }
+
+        .logo-icon-svg {
+            width: 38px; height: 38px;
+            fill: var(--primary);
+        }
+
+        .text-group { display: flex; flex-direction: column; }
+
         .logo { 
             font-family: 'Pacifico', cursive; 
-            font-size: 2.1rem; /* Aumentato del 15% (era 1.8rem) */
-            color: var(--primary); margin: 0; 
-            /* Ombra testo adattata al nuovo verde menta */
-            text-shadow: 2px 2px 0px rgba(184, 233, 148, 0.4);
+            font-size: 1.9rem; /* +15% circa */
+            color: var(--text-main); margin: 0; line-height: 1;
         }
-        /* Nuovo stile per il sottotitolo */
+        /* Coloro solo la "G" e la "T" per stile */
+        .logo span { color: var(--primary); }
+        
         .subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 5px 0 0 0;
+            font-size: 0.7rem;
+            color: var(--text-sub);
+            margin: 3px 0 0 2px;
             font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
-        .container { max-width: 600px; margin: 20px auto; padding: 0 15px; }
-
-        /* NAVIGAZIONE */
-        .bottom-nav {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: var(--surface); backdrop-filter: blur(10px);
-            padding: 12px; border-radius: 35px; display: flex; justify-content: space-around;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 100; border: 1px solid rgba(255,255,255,0.2);
+        /* BOTTONE AGGIUNGI FLUTTUANTE */
+        .header-add-btn {
+            background: var(--primary);
+            color: white;
+            width: 44px; height: 44px;
+            border-radius: 16px; /* Squircle (tra cerchio e quadrato) */
+            border: none;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-float);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            flex-shrink: 0;
         }
-        .nav-item { border: none; background: none; color: var(--text-light); font-size: 0.9rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 16px; border-radius: 25px; transition: all 0.3s; cursor: pointer; }
-        .nav-item.active { background-color: var(--primary); color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(119, 139, 235, 0.4); }
+        .header-add-btn svg { width: 22px; height: 22px; fill: white; stroke: white; stroke-width: 1.5; }
+        .header-add-btn:active { transform: scale(0.92); }
 
-        /* RICERCA */
-        .search-area { margin-bottom: 25px; }
+        .container { max-width: 650px; margin: 30px auto; padding: 0 20px; }
+
+        /* INPUT RICERCA MODERNO (Stile iOS) */
+        .search-area { margin-bottom: 30px; }
         .search-input { 
-            width: 100%; padding: 16px 20px; border-radius: 30px; border: 2px solid transparent; 
-            background: var(--surface); box-shadow: 0 4px 15px rgba(0,0,0,0.03); 
-            font-size: 1rem; color: var(--text); margin-bottom: 10px; outline: none; transition: border 0.3s;
+            width: 100%; padding: 18px 24px; 
+            border-radius: 20px; 
+            border: none; 
+            background: #ffffff; /* Bianco su grigio */
+            box-shadow: var(--shadow-card);
+            font-size: 1rem; color: var(--text-main); 
+            margin-bottom: 12px; outline: none; 
+            transition: transform 0.2s;
         }
-        .search-input:focus { border-color: var(--accent); }
+        .search-input:focus { transform: translateY(-2px); }
+        .search-input::placeholder { color: #b2bec3; }
 
-        /* MENU A TENDINA MULTI-SELECT */
+        /* MENU FILTRO */
         .filter-dropdown-container { position: relative; width: 100%; }
         .filter-toggle-btn {
-            width: 100%; padding: 14px 20px; background: rgba(255,255,255,0.8);
-            border: 2px solid var(--accent); border-radius: 25px; text-align: left;
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; color: var(--text);
+            width: 100%; padding: 12px 20px; 
+            background: transparent;
+            border: 2px solid rgba(108, 92, 231, 0.15); /* Bordo sottile colorato */
+            border-radius: 15px; 
+            text-align: left;
+            font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600;
+            color: var(--primary);
             cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: background 0.2s;
         }
-        .filter-toggle-btn::after { content: '▼'; font-size: 0.8rem; color: var(--primary); }
+        .filter-toggle-btn:active { background: rgba(108, 92, 231, 0.05); }
+        .filter-toggle-btn::after { content: '▼'; font-size: 0.7rem; color: var(--primary); opacity: 0.7; }
+
         .genre-checkbox-list {
-            display: none; background: white; border-radius: 20px; padding: 15px; margin-top: 10px;
-            box-shadow: var(--shadow); max-height: 300px; overflow-y: auto; border: 1px solid rgba(0,0,0,0.05);
-            animation: slideDown 0.2s ease-out;
+            display: none; background: white; border-radius: 20px; padding: 20px; margin-top: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+            max-height: 350px; overflow-y: auto; 
+            border: none;
+            animation: slideDown 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: absolute; width: 100%; z-index: 20;
         }
         .genre-checkbox-list.show { display: block; }
-        .checkbox-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f1f2f6; cursor: pointer; }
+        
+        .checkbox-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f6fa; cursor: pointer; }
         .checkbox-item:last-child { border-bottom: none; }
-        .checkbox-item input[type="checkbox"] { width: 20px; height: 20px; margin-right: 15px; accent-color: var(--primary); cursor: pointer; }
-        .checkbox-item span { font-size: 1rem; color: var(--text); }
-        @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+        .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--primary); cursor: pointer; }
+        .checkbox-item span { font-size: 0.95rem; color: var(--text-main); font-weight: 500; }
+        @keyframes slideDown { from { opacity:0; transform:translateY(-10px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
 
-        /* CARD LIBRO */
+        /* CARD LIBRO MODERNA */
         .book-card { 
-            background: var(--surface); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; overflow: hidden; 
-            border: 1px solid rgba(0,0,0,0.02);
+            background: var(--surface); 
+            border-radius: var(--radius); 
+            padding: 24px; 
+            margin-bottom: 20px; 
+            box-shadow: var(--shadow-card); 
+            display: flex; flex-direction: column; position: relative; overflow: hidden; 
+            border: 1px solid white; /* Bordo bianco per risaltare sul grigio */
+            transition: transform 0.2s;
         }
-        .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); }
-        .book-card.borrowed::before { background: var(--accent); }
+        .book-card:active { transform: scale(0.99); }
+        
+        .book-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--success); opacity: 0.8; }
+        .book-card.borrowed::before { background: var(--danger); }
 
+        /* TAG SEDE */
         .location-tag {
-            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 10px; display: inline-block; padding: 4px 10px; border-radius: 6px; color: white;
+            font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 12px; display: inline-block; padding: 5px 12px; border-radius: 30px; 
             align-self: flex-start;
         }
-        .loc-bellocchio { background-color: var(--loc-bellocchio); color: var(--text); } /* Testo scuro su sfondo chiaro */
-        .loc-annunziata { background-color: var(--loc-annunziata); color: var(--text); }
-        .loc-altro { background-color: var(--text-light); color: white; }
+        .loc-bellocchio { background-color: var(--loc-bellocchio); color: #006266; }
+        .loc-annunziata { background-color: var(--loc-annunziata); color: #b33939; }
+        .loc-altro { background-color: #b2bec3; color: white; }
 
-        .book-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .book-title { font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text); }
-        .book-author { color: var(--text-light); font-size: 0.95rem; margin: 4px 0 8px 0; }
+        .book-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 5px; }
+        .book-title { font-size: 1.2rem; font-weight: 700; margin: 0; color: var(--text-main); letter-spacing: -0.5px; }
+        .book-author { color: var(--text-sub); font-size: 0.95rem; margin: 4px 0 12px 0; font-weight: 400; }
 
-        .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; }
-        /* Badges adattati ai nuovi colori */
-        .badge { background: rgba(184, 233, 148, 0.3); color: var(--primary); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
-        .badge-gray { background: rgba(0,0,0,0.05); color: var(--text-light); }
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .badge { background: #f1f2f6; color: var(--text-sub); padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; }
+        .badge-main { background: var(--primary-light); color: white; } /* Per il genere */
 
         .loan-alert { 
-            background: rgba(250, 177, 160, 0.2); color: #d63031; /* Rosso un po' più deciso per il testo di alert */
-            padding: 10px; border-radius: 10px; font-size: 0.9rem; margin-bottom: 15px; 
-            display: flex; align-items: center; gap: 8px; font-weight: 500;
+            background: #ffeaa7; color: #d63031;
+            padding: 12px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 20px; 
+            display: flex; align-items: center; gap: 10px; font-weight: 600;
         }
 
         /* BOTTONI AZIONE */
-        .card-actions { display: flex; gap: 8px; margin-top: 5px; flex-wrap: wrap;}
-        .btn { padding: 12px; border: none; border-radius: 15px; font-weight: 600; cursor: pointer; font-size: 0.85rem; display: flex; justify-content: center; align-items: center; gap: 6px; transition: transform 0.1s; }
-        .btn:active { transform: scale(0.98); }
+        .card-actions { display: flex; gap: 10px; margin-top: auto; }
+        .btn { padding: 14px; border: none; border-radius: 16px; font-weight: 600; cursor: pointer; font-size: 0.9rem; display: flex; justify-content: center; align-items: center; gap: 8px; transition: opacity 0.2s; }
+        .btn:active { opacity: 0.8; }
         
-        .btn-action { background: var(--primary); color: white; flex: 2; box-shadow: 0 4px 10px rgba(119, 139, 235, 0.3); }
-        .btn-return { background: var(--accent); color: var(--text); flex: 2; box-shadow: 0 4px 10px rgba(184, 233, 148, 0.4); }
+        .btn-action { background: var(--primary); color: white; flex: 1; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
+        .btn-return { background: var(--text-main); color: white; flex: 1; }
         
-        /* Modifica ed Elimina (Colori pastello) */
-        .btn-edit { background: var(--edit); color: #d35400; flex: 1; border: 1px solid rgba(0,0,0,0.05); }
-        .btn-delete { background: transparent; color: var(--text-light); flex: 0; border: 1px solid rgba(0,0,0,0.1); padding: 12px 16px;}
+        .btn-edit { background: #f1f2f6; color: var(--text-main); width: 48px; flex: none; }
+        .btn-delete { background: transparent; color: #b2bec3; width: 40px; flex: none; font-size: 0.8rem; }
 
         /* FORM */
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; color: var(--text); font-size: 0.9rem; }
-        .form-control { width: 100%; padding: 14px; border-radius: 15px; border: 1px solid rgba(0,0,0,0.08); font-size: 1rem; background: rgba(255,255,255,0.6); }
-        #inSede { background-color: rgba(184, 233, 148, 0.2); border: 2px solid var(--accent); color: var(--text); font-weight: 500; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-left: 5px;}
+        .form-control { width: 100%; padding: 16px; border-radius: 18px; border: none; font-size: 1rem; background: #f1f2f6; color: var(--text-main); transition: background 0.2s; }
+        .form-control:focus { background: #ffffff; box-shadow: 0 0 0 2px var(--primary-light); outline: none; }
+        #inSede { background-color: #e3f2fd; color: #2980b9; font-weight: 600; }
         
-        .btn-block { width: 100%; margin-top: 10px; background: var(--primary); color: white; padding: 16px; font-size: 1rem; }
-        .view-section { display: none; animation: fadeUp 0.3s ease; }
+        .btn-block { width: 100%; margin-top: 15px; background: var(--primary); color: white; padding: 18px; font-size: 1.05rem; box-shadow: var(--shadow-float); }
+
+        /* ANIMAZIONI E UTILS */
+        .view-section { display: none; animation: fadeUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
         .view-section.active { display: block; }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
-        #loader { text-align: center; color: var(--primary); font-weight: bold; margin-top: 20px; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        #loader { text-align: center; color: var(--primary); font-weight: 600; margin-top: 30px; letter-spacing: 1px;}
     </style>
 </head>
 <body>
 
     <header>
-        <h1 class="logo">📚 GiuliaTeca</h1>
-        <p class="subtitle">la biblioteca delle scuole di Giulianova</p>
+        <div class="logo-container" onclick="cambiaVista('home')">
+            <svg class="logo-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="none" opacity="0"/>
+                <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5zM6.5 6c-1.2 0-2.4.15-3.5.5v11.5c1.1-.35 2.3-.5 3.5-.5 1.7 0 4.15.65 5.5 1.5V8C10.65 7.15 8.2 6.5 6.5 6zm3.6 6.13c-.22.61-.41 1.25-.56 1.87-.29-1.38-.85-2.67-1.59-3.82.78.53 1.5 1.19 2.15 1.95z"/>
+            </svg>
+            
+            <div class="text-group">
+                <h1 class="logo"><span>G</span>iulia<span>T</span>eca</h1>
+                <p class="subtitle">la biblioteca delle scuole di Giulianova</p>
+            </div>
+        </div>
+
+        <button class="header-add-btn" onclick="preparaAggiunta()" title="Aggiungi Libro">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+        </button>
     </header>
 
     <div class="container">
-        <div id="loader">Lettura database... ☁️</div>
+        <div id="loader">CARICAMENTO...</div>
 
         <div id="view-home" class="view-section active">
             <div class="search-area">
@@ -189,15 +254,15 @@
             
             <div id="bookList"></div>
             
-            <div id="emptyState" style="text-align:center; color:var(--text-light); display:none; margin-top:50px; opacity:0.7;">
-                <h3 style="margin:0;">Nessun libro trovato 🍂</h3>
-                <p>Prova a cercare altro!</p>
+            <div id="emptyState" style="text-align:center; color:var(--text-sub); display:none; margin-top:60px;">
+                <h3 style="margin:0; font-weight:500;">Nessun risultato 🔭</h3>
+                <p style="font-size:0.9rem;">Prova a cambiare ricerca</p>
             </div>
         </div>
 
         <div id="view-add" class="view-section">
-            <div class="book-card">
-                <h2 style="margin-top:0; color:var(--primary); font-family:'Pacifico'; font-weight:400;" id="titoloForm">Nuovo Libro</h2>
+            <div class="book-card" style="border:none;">
+                <h2 style="margin-top:0; color:var(--primary); font-family:'Poppins'; font-weight:700;" id="titoloForm">Nuovo Libro</h2>
                 
                 <div class="form-group">
                     <label>📍 Dove si trova?</label>
@@ -236,15 +301,10 @@
                     <datalist id="datalistGeneri"></datalist>
                 </div>
 
-                <button id="btnSalva" class="btn btn-block" onclick="gestisciSalvataggio()">Salva nel Cloud ☁️</button>
+                <button id="btnSalva" class="btn btn-block" onclick="gestisciSalvataggio()">Salva nel Cloud ✨</button>
             </div>
         </div>
     </div>
-
-    <nav class="bottom-nav">
-        <button class="nav-item active" onclick="cambiaVista('home')" id="nav-home"><span>📚</span> Home</button>
-        <button class="nav-item" onclick="preparaAggiunta()" id="nav-add"><span>➕</span> Aggiungi</button>
-    </nav>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -297,13 +357,13 @@
                     await updateDoc(docRef, {
                         titolo, autore, editore, anno, isbn, genere, sede
                     });
-                    alert("Libro aggiornato con successo! ✅");
+                    alert("Libro aggiornato! ✅");
                 } else {
                     await addDoc(colRef, {
                         titolo, autore, editore, anno, isbn, genere, sede,
                         inPrestito: false, prestatoA: "", dataPrestito: ""
                     });
-                    alert("Nuovo libro salvato! ☁️");
+                    alert("Libro salvato! ✨");
                 }
                 
                 pulisciForm();
@@ -318,7 +378,7 @@
             pulisciForm();
             idLibroInModifica = null;
             document.getElementById('titoloForm').innerText = "Nuovo Libro";
-            document.getElementById('btnSalva').innerText = "Salva nel Cloud ☁️";
+            document.getElementById('btnSalva').innerText = "Salva nel Cloud ✨";
             cambiaVista('add');
         }
 
@@ -336,7 +396,7 @@
 
                     idLibroInModifica = id;
                     document.getElementById('titoloForm').innerText = "Modifica Libro ✏️";
-                    document.getElementById('btnSalva').innerText = "🔄 Aggiorna Dati";
+                    document.getElementById('btnSalva').innerText = "Salva Modifiche";
                     
                     cambiaVista('add');
                 }
@@ -429,10 +489,10 @@
                     </div>
                     
                     <div class="badges">
-                        <span class="badge">${libro.genere}</span>
-                        ${libro.editore ? `<span class="badge badge-gray">📖 ${libro.editore}</span>` : ''}
-                        ${libro.anno ? `<span class="badge badge-gray">📅 ${libro.anno}</span>` : ''}
-                        ${libro.isbn ? `<span class="badge badge-gray">||| ${libro.isbn}</span>` : ''}
+                        <span class="badge badge-main">${libro.genere}</span>
+                        ${libro.editore ? `<span class="badge">📖 ${libro.editore}</span>` : ''}
+                        ${libro.anno ? `<span class="badge">📅 ${libro.anno}</span>` : ''}
+                        ${libro.isbn ? `<span class="badge">||| ${libro.isbn}</span>` : ''}
                     </div>
 
                     ${statusHtml}
@@ -441,7 +501,7 @@
                         <button class="btn ${btnClass}" onclick="togglePrestito('${libro.id}', ${libro.inPrestito})">
                             ${libro.inPrestito ? '↩️ Restituisci' : '🤝 Presta'}
                         </button>
-                        <button class="btn btn-edit" onclick="modificaLibro('${libro.id}')">✏️ Modifica</button>
+                        <button class="btn btn-edit" onclick="modificaLibro('${libro.id}')">✏️</button>
                         <button class="btn btn-delete" onclick="elimina('${libro.id}')">🗑️</button>
                     </div>
                 </div>`;
@@ -488,8 +548,12 @@
             const btn = document.getElementById('btnFiltroGeneri');
             if(generiSelezionati.length === 0) {
                 btn.innerText = "📂 Filtra per Generi (Tutti)";
+                btn.style.background = "transparent";
+                btn.style.color = "var(--primary)";
             } else {
-                btn.innerText = `📂 Generi selezionati: ${generiSelezionati.length}`;
+                btn.innerText = `📂 ${generiSelezionati.length} generi selezionati`;
+                btn.style.background = "var(--primary)";
+                btn.style.color = "white";
             }
             applicaFiltri();
         }
@@ -497,9 +561,8 @@
         window.cambiaVista = function(vista) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + vista).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('nav-' + vista).classList.add('active');
             document.getElementById('listaCheckboxGeneri').classList.remove('show');
+            window.scrollTo(0,0);
         }
 
     </script>
