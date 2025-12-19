@@ -77,7 +77,6 @@
         .search-input:focus { transform: translateY(-2px); }
 
         .filter-dropdown-container { position: relative; width: 100%; }
-
         .filter-toggle-btn {
             width: 100%; padding: 12px 20px; background: transparent;
             border: 2px solid rgba(108, 92, 231, 0.15); border-radius: 15px; 
@@ -86,27 +85,12 @@
         }
         .filter-toggle-btn::after { content: '▼'; font-size: 0.7rem; color: var(--primary); opacity: 0.7; }
 
-        /* --- CORREZIONE CSS PER LA TENDINA CHE SBOARDAVA --- */
         .genre-checkbox-list {
-            display: none; 
-            background: white; 
-            border-radius: 20px; 
-            padding: 20px; 
-            margin-top: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
-            max-height: 350px; 
-            overflow-y: auto; 
-            
-            position: absolute; 
-            /* Fix sbordamento: ancoriamo a sinistra e destra invece che usare width 100% */
-            left: 0;
-            right: 0;
-            width: auto; 
-            z-index: 100; /* Z-index alto per stare sopra a tutto */
-            box-sizing: border-box; /* Assicura che il padding non allarghi il box */
+            display: none; background: white; border-radius: 20px; padding: 20px; margin-top: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); max-height: 350px; overflow-y: auto; 
+            position: absolute; left: 0; right: 0; width: auto; z-index: 100; box-sizing: border-box;
         }
         .genre-checkbox-list.show { display: block; }
-        
         .checkbox-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f6fa; cursor: pointer; }
         .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--primary); }
 
@@ -133,7 +117,6 @@
         .book-author { color: var(--text-sub); font-size: 0.95rem; margin: 4px 0 12px 0; font-weight: 400; }
 
         .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        
         .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #2d3436; } 
         .badge-info { background: #f1f2f6; color: var(--text-sub); }
 
@@ -152,17 +135,49 @@
         /* FORM */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-left: 5px;}
-        
         .form-control { width: 100%; padding: 16px; border-radius: 18px; border: none; font-size: 1rem; background: #f1f2f6; color: var(--text-main); transition: background 0.2s; }
         .form-control:focus { background: #ffffff; box-shadow: 0 0 0 2px var(--primary-light); outline: none; }
-        
         select.form-control { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1em; }
 
         .btn-block { width: 100%; margin-top: 15px; background: var(--primary); color: white; padding: 18px; font-size: 1.05rem; box-shadow: var(--shadow-float); }
 
-        .view-section { display: none; animation: fadeUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+        /* --- MODAL PERSONALIZZATO (NUOVO) --- */
+        .custom-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 2000;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.2s ease-out;
+        }
+        .custom-modal-overlay.active { display: flex; }
+
+        .custom-modal-box {
+            background: white; width: 85%; max-width: 350px;
+            padding: 25px; border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; font-family: 'Pacifico', cursive; }
+        .modal-message { font-size: 1rem; color: var(--text-main); margin-bottom: 20px; line-height: 1.5; }
+        
+        .modal-input {
+            width: 100%; padding: 12px; border: 2px solid #f1f2f6; border-radius: 12px;
+            margin-bottom: 20px; font-size: 1rem; outline: none;
+        }
+        .modal-input:focus { border-color: var(--primary); }
+
+        .modal-buttons { display: flex; gap: 10px; justify-content: center; }
+        .modal-btn { flex: 1; padding: 12px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.95rem; }
+        .modal-btn-cancel { background: #f1f2f6; color: var(--text-sub); }
+        .modal-btn-confirm { background: var(--primary); color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .view-section { display: none; }
         .view-section.active { display: block; }
-        @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
         #loader { text-align: center; color: var(--primary); font-weight: 600; margin-top: 30px; letter-spacing: 1px;}
     </style>
 </head>
@@ -190,7 +205,6 @@
         <div id="view-home" class="view-section active">
             <div class="search-area">
                 <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cerca titolo, autore, editore..." oninput="applicaFiltri()">
-                
                 <div class="filter-dropdown-container">
                     <button class="filter-toggle-btn" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
                         📂 Filtra per Generi (Tutti)
@@ -198,9 +212,7 @@
                     <div id="listaCheckboxGeneri" class="genre-checkbox-list"></div>
                 </div>
             </div>
-            
             <div id="bookList"></div>
-            
             <div id="emptyState" style="text-align:center; color:var(--text-sub); display:none; margin-top:60px;">
                 <h3 style="margin:0; font-weight:500;">Nessun risultato 🔭</h3>
                 <p style="font-size:0.9rem;">Prova a cambiare ricerca</p>
@@ -228,7 +240,6 @@
                     <label>Autore</label>
                     <input type="text" id="inAutore" class="form-control" placeholder="Es. J.K. Rowling">
                 </div>
-                
                 <div class="form-group">
                     <label>Casa Editrice</label>
                     <input type="text" id="inEditore" class="form-control" placeholder="Es. Salani">
@@ -237,7 +248,6 @@
                     <label>Anno Pubblicazione</label>
                     <input type="number" id="inAnno" class="form-control" placeholder="Es. 1997">
                 </div>
-
                 <div class="form-group">
                     <label>ISBN (Opzionale)</label>
                     <input type="tel" id="inIsbn" class="form-control" placeholder="Codice a barre">
@@ -302,6 +312,18 @@
         </div>
     </div>
 
+    <div id="customModal" class="custom-modal-overlay">
+        <div class="custom-modal-box">
+            <div class="modal-title">GiuliaTeca</div>
+            <div id="modalMessage" class="modal-message">Messaggio di sistema</div>
+            <input type="text" id="modalInput" class="modal-input" style="display:none;" placeholder="Scrivi qui...">
+            <div class="modal-buttons">
+                <button id="btnModalCancel" class="modal-btn modal-btn-cancel">Annulla</button>
+                <button id="btnModalConfirm" class="modal-btn modal-btn-confirm">OK</button>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -323,6 +345,69 @@
         let generiSelezionati = []; 
         let idLibroInModifica = null;
 
+        // --- SISTEMA DI POP-UP CUSTOM (MODALI) ---
+        // Sostituisce alert(), confirm() e prompt()
+        
+        function showCustomModal(type, message, placeholder = "") {
+            return new Promise((resolve) => {
+                const modal = document.getElementById('customModal');
+                const msgEl = document.getElementById('modalMessage');
+                const inputEl = document.getElementById('modalInput');
+                const btnCancel = document.getElementById('btnModalCancel');
+                const btnConfirm = document.getElementById('btnModalConfirm');
+
+                // Configura il modale
+                msgEl.innerText = message;
+                inputEl.value = "";
+                inputEl.placeholder = placeholder;
+                
+                // Gestione visibilità elementi in base al tipo
+                if (type === 'alert') {
+                    inputEl.style.display = 'none';
+                    btnCancel.style.display = 'none';
+                    btnConfirm.innerText = "OK";
+                } else if (type === 'confirm') {
+                    inputEl.style.display = 'none';
+                    btnCancel.style.display = 'block';
+                    btnConfirm.innerText = "Sì";
+                } else if (type === 'prompt') {
+                    inputEl.style.display = 'block';
+                    btnCancel.style.display = 'block';
+                    btnConfirm.innerText = "OK";
+                }
+
+                modal.classList.add('active');
+                if(type === 'prompt') setTimeout(() => inputEl.focus(), 100);
+
+                // Gestione Click
+                const close = (result) => {
+                    modal.classList.remove('active');
+                    // Rimuovi listener per evitare duplicati
+                    btnConfirm.onclick = null;
+                    btnCancel.onclick = null;
+                    resolve(result);
+                };
+
+                btnConfirm.onclick = () => {
+                    if (type === 'prompt') close(inputEl.value);
+                    else close(true);
+                };
+                
+                btnCancel.onclick = () => {
+                    if (type === 'prompt') close(null);
+                    else close(false);
+                };
+            });
+        }
+
+        // Funzioni Helper per semplificare il codice
+        window.customAlert = (msg) => showCustomModal('alert', msg);
+        window.customConfirm = (msg) => showCustomModal('confirm', msg);
+        window.customPrompt = (msg) => showCustomModal('prompt', msg);
+
+
+        // --- LOGICA APP ---
+
         onSnapshot(colRef, (snapshot) => {
             tuttiILibri = [];
             snapshot.forEach(doc => {
@@ -330,12 +415,10 @@
             });
             tuttiILibri.sort((a, b) => a.titolo.localeCompare(b.titolo));
             document.getElementById('loader').style.display = 'none';
-            
             aggiornaFiltriGeneri();
             applicaFiltri();
         });
 
-        // Funzione per assegnare i colori ai generi
         window.colorePerGenere = function(genere) {
             const colors = {
                 purple: "background:#dcd6f7; color:#424874;", 
@@ -347,10 +430,8 @@
                 cyan:   "background:#cff4fc; color:#055160;", 
                 gray:   "background:#e2e3e5; color:#383d41;"  
             };
-
             if(!genere) return colors.gray;
             const g = genere.toLowerCase();
-
             if(g.includes("giallo") || g.includes("thriller") || g.includes("horror")) return colors.red;
             if(g.includes("fantasy") || g.includes("fantascienza") || g.includes("avventura")) return colors.cyan;
             if(g.includes("rosa") || g.includes("romance")) return colors.pink;
@@ -358,7 +439,6 @@
             if(g.includes("fumetti") || g.includes("manga") || g.includes("graphic") || g.includes("umoristico")) return colors.yellow;
             if(g.includes("saggistica") || g.includes("storia") || g.includes("scienza") || g.includes("biografie")) return colors.blue;
             if(g.includes("narrativa") || g.includes("classici") || g.includes("poesia") || g.includes("teatro")) return colors.purple;
-
             return colors.gray; 
         }
 
@@ -371,28 +451,28 @@
             let genere = document.getElementById('inGenere').value; 
             const sede = document.getElementById('inSede').value;
 
-            if(!titolo || !autore) { alert("Manca Titolo o Autore!"); return; }
-            if(!genere) { alert("Seleziona un genere!"); return; }
+            if(!titolo || !autore) { await customAlert("⚠️ Manca Titolo o Autore!"); return; }
+            if(!genere) { await customAlert("⚠️ Seleziona un genere!"); return; }
 
             try {
                 const datiLibro = { titolo, autore, editore, anno, isbn, genere, sede };
                 
                 if (idLibroInModifica) {
                     await updateDoc(doc(db, "libri", idLibroInModifica), datiLibro);
-                    alert("Libro aggiornato! ✅");
+                    await customAlert("Libro aggiornato! ✅");
                 } else {
                     await addDoc(colRef, {
                         ...datiLibro,
                         inPrestito: false, prestatoA: "", dataPrestito: ""
                     });
-                    alert("Libro salvato! ✨");
+                    await customAlert("Libro salvato! ✨");
                 }
                 
                 pulisciForm();
                 cambiaVista('home');
 
             } catch(e) {
-                alert("Errore: " + e.message);
+                await customAlert("Errore: " + e.message);
             }
         }
 
@@ -404,8 +484,8 @@
             cambiaVista('add');
         }
 
-        window.modificaLibro = function(id) {
-            if(confirm("Vuoi modificare i dati di questo libro?")) {
+        window.modificaLibro = async function(id) {
+            if(await customConfirm("Vuoi modificare i dati di questo libro?")) {
                 const libro = tuttiILibri.find(l => l.id === id);
                 if(libro) {
                     document.getElementById('inTitolo').value = libro.titolo || "";
@@ -437,12 +517,12 @@
         window.togglePrestito = async function(id, statoAttuale) {
             const docRef = doc(db, "libri", id);
             if(statoAttuale) {
-                if(confirm("Libro restituito?")) {
+                if(await customConfirm("Il libro è stato restituito?")) {
                     await updateDoc(docRef, { inPrestito: false, prestatoA: "", dataPrestito: "" });
                 }
             } else {
-                const nome = prompt("A chi lo presti?");
-                if(nome) {
+                const nome = await customPrompt("A chi stai prestando il libro?");
+                if(nome && nome.trim() !== "") {
                     const oggi = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
                     await updateDoc(docRef, { inPrestito: true, prestatoA: nome, dataPrestito: oggi });
                 }
@@ -450,7 +530,7 @@
         }
 
         window.elimina = async function(id) {
-            if(confirm("Sei sicuro di voler eliminare definitivamente questo libro?")) {
+            if(await customConfirm("Sei sicuro di voler eliminare definitivamente questo libro?")) {
                 await deleteDoc(doc(db, "libri", id));
             }
         }
