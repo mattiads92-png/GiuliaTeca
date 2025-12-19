@@ -76,6 +76,8 @@
         }
         .search-input:focus { transform: translateY(-2px); }
 
+        .filter-dropdown-container { position: relative; width: 100%; }
+
         .filter-toggle-btn {
             width: 100%; padding: 12px 20px; background: transparent;
             border: 2px solid rgba(108, 92, 231, 0.15); border-radius: 15px; 
@@ -84,12 +86,27 @@
         }
         .filter-toggle-btn::after { content: '▼'; font-size: 0.7rem; color: var(--primary); opacity: 0.7; }
 
+        /* --- CORREZIONE CSS PER LA TENDINA CHE SBOARDAVA --- */
         .genre-checkbox-list {
-            display: none; background: white; border-radius: 20px; padding: 20px; margin-top: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15); max-height: 350px; overflow-y: auto; 
-            position: absolute; width: 100%; z-index: 20;
+            display: none; 
+            background: white; 
+            border-radius: 20px; 
+            padding: 20px; 
+            margin-top: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+            max-height: 350px; 
+            overflow-y: auto; 
+            
+            position: absolute; 
+            /* Fix sbordamento: ancoriamo a sinistra e destra invece che usare width 100% */
+            left: 0;
+            right: 0;
+            width: auto; 
+            z-index: 100; /* Z-index alto per stare sopra a tutto */
+            box-sizing: border-box; /* Assicura che il padding non allarghi il box */
         }
         .genre-checkbox-list.show { display: block; }
+        
         .checkbox-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f5f6fa; cursor: pointer; }
         .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--primary); }
 
@@ -117,7 +134,6 @@
 
         .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         
-        /* Stile base badge, il colore specifico viene iniettato via JS */
         .badge { padding: 6px 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 600; color: #2d3436; } 
         .badge-info { background: #f1f2f6; color: var(--text-sub); }
 
@@ -137,7 +153,6 @@
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-main); font-size: 0.9rem; margin-left: 5px;}
         
-        /* Select stilizzata */
         .form-control { width: 100%; padding: 16px; border-radius: 18px; border: none; font-size: 1rem; background: #f1f2f6; color: var(--text-main); transition: background 0.2s; }
         .form-control:focus { background: #ffffff; box-shadow: 0 0 0 2px var(--primary-light); outline: none; }
         
@@ -232,7 +247,6 @@
                     <label>Genere Letterario</label>
                     <select id="inGenere" class="form-control">
                         <option value="" disabled selected>Seleziona un genere...</option>
-                        
                         <optgroup label="Narrativa">
                             <option value="Narrativa Contemporanea">Narrativa Contemporanea</option>
                             <option value="Classici">Classici</option>
@@ -248,7 +262,6 @@
                             <option value="Teatro / Drammaturgia">Teatro / Drammaturgia</option>
                             <option value="Racconti / Antologie">Racconti / Antologie</option>
                         </optgroup>
-
                         <optgroup label="Ragazzi e Infanzia">
                             <option value="Albi Illustrati">Albi Illustrati</option>
                             <option value="Fiabe e Favole">Fiabe e Favole</option>
@@ -257,13 +270,11 @@
                             <option value="Young Adult">Young Adult</option>
                             <option value="Miti e Leggende">Miti e Leggende</option>
                         </optgroup>
-
                         <optgroup label="Fumetti e Graphic Novel">
                             <option value="Fumetti">Fumetti</option>
                             <option value="Graphic Novel">Graphic Novel</option>
                             <option value="Manga">Manga</option>
                         </optgroup>
-
                         <optgroup label="Saggistica">
                             <option value="Storia">Storia</option>
                             <option value="Biografie">Biografie</option>
@@ -278,7 +289,6 @@
                             <option value="Cucina">Cucina</option>
                             <option value="Hobby / Fai da te">Hobby / Fai da te</option>
                         </optgroup>
-
                         <optgroup label="Altro">
                             <option value="Dizionari / Enciclopedie">Dizionari / Enciclopedie</option>
                             <option value="Scolastica">Scolastica</option>
@@ -327,16 +337,15 @@
 
         // Funzione per assegnare i colori ai generi
         window.colorePerGenere = function(genere) {
-            // Palette colori pastello
             const colors = {
-                purple: "background:#dcd6f7; color:#424874;", // Narrativa, Classici
-                red:    "background:#ffcccc; color:#b33939;", // Giallo, Horror
-                blue:   "background:#d1ecef; color:#0c2461;", // Scienza, Saggistica
-                green:  "background:#d4edda; color:#155724;", // Ragazzi, Natura
-                yellow: "background:#fff3cd; color:#856404;", // Fumetti, Umoristico
-                pink:   "background:#f8d7da; color:#721c24;", // Rosa
-                cyan:   "background:#cff4fc; color:#055160;", // Fantasy
-                gray:   "background:#e2e3e5; color:#383d41;"  // Altro
+                purple: "background:#dcd6f7; color:#424874;", 
+                red:    "background:#ffcccc; color:#b33939;", 
+                blue:   "background:#d1ecef; color:#0c2461;", 
+                green:  "background:#d4edda; color:#155724;", 
+                yellow: "background:#fff3cd; color:#856404;", 
+                pink:   "background:#f8d7da; color:#721c24;", 
+                cyan:   "background:#cff4fc; color:#055160;", 
+                gray:   "background:#e2e3e5; color:#383d41;"  
             };
 
             if(!genere) return colors.gray;
@@ -350,7 +359,7 @@
             if(g.includes("saggistica") || g.includes("storia") || g.includes("scienza") || g.includes("biografie")) return colors.blue;
             if(g.includes("narrativa") || g.includes("classici") || g.includes("poesia") || g.includes("teatro")) return colors.purple;
 
-            return colors.gray; // Default
+            return colors.gray; 
         }
 
         window.gestisciSalvataggio = async function() {
@@ -359,7 +368,6 @@
             const editore = document.getElementById('inEditore').value.trim();
             const anno = document.getElementById('inAnno').value.trim();
             const isbn = document.getElementById('inIsbn').value.trim();
-            // Prendo il valore dalla Select
             let genere = document.getElementById('inGenere').value; 
             const sede = document.getElementById('inSede').value;
 
@@ -405,7 +413,6 @@
                     document.getElementById('inEditore').value = libro.editore || "";
                     document.getElementById('inAnno').value = libro.anno || "";
                     document.getElementById('inIsbn').value = libro.isbn || "";
-                    // Imposta la select del genere
                     document.getElementById('inGenere').value = libro.genere || ""; 
                     document.getElementById('inSede').value = libro.sede || "Altro";
 
@@ -492,7 +499,6 @@
                 if(sedeText.includes('Bellocchio')) sedeClass = 'loc-bellocchio';
                 if(sedeText.includes('Annunziata')) sedeClass = 'loc-annunziata';
 
-                // Calcolo stile colore genere
                 const styleGenere = colorePerGenere(libro.genere);
 
                 listaContainer.innerHTML += `
@@ -532,7 +538,6 @@
         }
 
         function aggiornaFiltriGeneri() {
-            // Continua a prendere i generi dal DB per il filtro, così se ci sono vecchi libri non si rompe
             const generiUnici = [...new Set(tuttiILibri.map(l => l.genere))].sort();
             const container = document.getElementById('listaCheckboxGeneri');
             
