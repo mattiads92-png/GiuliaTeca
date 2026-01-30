@@ -198,6 +198,20 @@
             margin-bottom: 12px;
         }
 
+        .chips-container {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .chip {
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
         .status-row {
             display: flex;
             flex-direction: column;
@@ -301,22 +315,6 @@
         }
 
         .view-section.active {
-            display: block;
-        }
-
-        .genre-list {
-            display: none;
-            background: white;
-            position: absolute;
-            z-index: 100;
-            width: 100%;
-            box-shadow: var(--shadow-2);
-            border-radius: 8px;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        .genre-list.show {
             display: block;
         }
     </style>
@@ -452,6 +450,26 @@
         let isAdmin = localStorage.getItem('giuliateca_admin') === 'true';
         let idLibroInModifica = null;
 
+        // --- GENERI ORIGINALI ---
+        const listaGeneriOriginali = {
+            "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror", "Rosa", "Umoristico", "Poesia"],
+            "Ragazzi": ["Albi Illustrati", "Fiabe", "Prime Letture", "Narrativa Ragazzi", "Young Adult", "Miti"],
+            "Fumetti": ["Fumetti", "Graphic Novel", "Manga"],
+            "Saggistica": ["Storia", "Biografie", "Scienza", "Arte", "Filosofia", "Psicologia", "Religione", "Attualità", "Musica", "Viaggi", "Cucina"],
+            "Altro": ["Dizionari", "Scolastica", "Lingue"]
+        };
+
+        function popolaOpzioniGeneri() {
+            let html = '<option value="">-- Seleziona --</option>';
+            for (const [grp, gens] of Object.entries(listaGeneriOriginali)) {
+                html += `<optgroup label="${grp}">`;
+                gens.forEach(g => html += `<option value="${g}">${g}</option>`);
+                html += `</optgroup>`;
+            }
+            ['inGenere1','inGenere2','inGenere3'].forEach(id => document.getElementById(id).innerHTML = html);
+        }
+        popolaOpzioniGeneri();
+
         // --- AUTH ---
         window.login = async function() {
             const p = await customPrompt("Password Admin:", true);
@@ -483,6 +501,16 @@
             ).join('');
         }
 
+        window.colorePerGenere = function(genere) {
+            const g = (genere || "").toLowerCase();
+            if(g.includes("giallo") || g.includes("horror")) return "background:#fce8e6; color:#c5221f;";
+            if(g.includes("fantasy") || g.includes("fantascienza")) return "background:#e8f0fe; color:#1967d2;";
+            if(g.includes("ragazzi") || g.includes("fiabe")) return "background:#e6f4ea; color:#137333;";
+            if(g.includes("fumetti") || g.includes("manga")) return "background:#fef7e0; color:#ea8600;";
+            if(g.includes("narrativa") || g.includes("classici")) return "background:#f3e8fd; color:#7627bb;";
+            return "background:#f1f3f4; color:#3c4043;";
+        }
+
         // --- FIREBASE ---
         onSnapshot(colRef, (snap) => {
             tuttiILibri = snap.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -500,6 +528,9 @@
                 (l.titolo + l.autore).toLowerCase().includes(query)
             );
 
+            if(filtrati.length === 0) document.getElementById('emptyState').style.display = 'block';
+            else document.getElementById('emptyState').style.display = 'none';
+
             filtrati.forEach(l => {
                 const copieTot = parseInt(l.copieTotali || 1);
                 const prestiti = l.prestitiAttivi || [];
@@ -508,10 +539,15 @@
                 let statusColor = disponibilità > 0 ? 'var(--md-success)' : 'var(--md-error)';
                 let statusText = disponibilità > 0 ? `Disponibile (${disponibilità} su ${copieTot} copie)` : `Esaurito (0 su ${copieTot} copie)`;
 
+                const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
+                let chipsHtml = '';
+                gens.forEach(g => chipsHtml += `<span class="chip" style="${colorePerGenere(g)}">${g}</span>`);
+                if(l.editore) chipsHtml += `<span class="chip" style="background:#f1f3f4;">${l.editore}</span>`;
+
                 let prestitiHtml = prestiti.map((p, idx) => `
                     <div class="prestito-item">
                         <span>${p.nome} (${p.data})</span>
-                        ${isAdmin ? `<button onclick="restituisci('${l.id}', ${idx})" style="border:none; background:none; color:blue; cursor:pointer;">Reso</button>` : ''}
+                        ${isAdmin ? `<button onclick="restituisci('${l.id}', ${idx})" style="border:none; background:none; color:#1a73e8; font-weight:bold; cursor:pointer;">Reso</button>` : ''}
                     </div>
                 `).join('');
 
@@ -520,14 +556,15 @@
                         <span class="location-badge ${l.sede?.includes('Bellocchio') ? 'loc-bellocchio' : 'loc-annunziata'}">${l.sede || 'Altro'}</span>
                         <h3 class="book-title">${l.titolo}</h3>
                         <div class="book-author">di ${l.autore}</div>
+                        <div class="chips-container">${chipsHtml}</div>
                         <div class="status-row">
                             <b style="color:${statusColor}">${statusText}</b>
                             ${isAdmin ? prestitiHtml : ''}
                         </div>
                         <div class="admin-actions ${isAdmin ? 'visible' : ''}">
-                            <button class="btn btn-filled" onclick="presta('${l.id}')" ${disponibilità <= 0 ? 'disabled' : ''}>Presta Copia</button>
+                            <button class="btn btn-filled" onclick="presta('${l.id}')" ${disponibilità <= 0 ? 'disabled' : ''}>Presta</button>
                             <button class="btn" onclick="modificaLibro('${l.id}')">Modifica</button>
-                            <button class="btn" style="color:red" onclick="eliminaLibro('${l.id}')">Elimina</button>
+                            <button class="btn" style="color:var(--md-error)" onclick="eliminaLibro('${l.id}')">Elimina</button>
                         </div>
                     </div>
                 `;
@@ -539,7 +576,7 @@
             const autoreRaw = document.getElementById('inAutore').value.trim();
             const copie = parseInt(document.getElementById('inCopie').value) || 1;
 
-            if(!titolo || !autoreRaw) return customAlert("Campi obbligatori mancanti");
+            if(!titolo || !autoreRaw) return customAlert("Titolo e autore obbligatori");
 
             const dati = {
                 titolo,
@@ -549,15 +586,23 @@
                 editore: document.getElementById('inEditore').value,
                 anno: document.getElementById('inAnno').value,
                 isbn: document.getElementById('inIsbn').value,
-                generi: [document.getElementById('inGenere1').value, document.getElementById('inGenere2').value, document.getElementById('inGenere3').value].filter(g => g)
+                generi: [
+                    document.getElementById('inGenere1').value, 
+                    document.getElementById('inGenere2').value, 
+                    document.getElementById('inGenere3').value
+                ].filter(g => g !== "")
             };
 
-            if(idLibroInModifica) {
-                await updateDoc(doc(db, "libri", idLibroInModifica), dati);
-            } else {
-                await addDoc(colRef, { ...dati, prestitiAttivi: [] });
-            }
-            cambiaVista('home');
+            try {
+                if(idLibroInModifica) {
+                    await updateDoc(doc(db, "libri", idLibroInModifica), dati);
+                    await customAlert("Libro aggiornato");
+                } else {
+                    await addDoc(colRef, { ...dati, prestitiAttivi: [] });
+                    await customAlert("Libro aggiunto");
+                }
+                cambiaVista('home');
+            } catch(e) { await customAlert("Errore: " + e.message); }
         }
 
         window.presta = async function(id) {
@@ -580,14 +625,30 @@
         window.modificaLibro = function(id) {
             const l = tuttiILibri.find(x => x.id === id);
             idLibroInModifica = id;
+            document.getElementById('titoloForm').innerText = "Modifica Libro";
             document.getElementById('inTitolo').value = l.titolo;
             document.getElementById('inAutore').value = l.autore;
             document.getElementById('inCopie').value = l.copieTotali || 1;
             document.getElementById('inSede').value = l.sede;
+            document.getElementById('inEditore').value = l.editore || "";
+            document.getElementById('inAnno').value = l.anno || "";
+            document.getElementById('inIsbn').value = l.isbn || "";
+            
+            const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
+            document.getElementById('inGenere1').value = gens[0] || "";
+            document.getElementById('inGenere2').value = gens[1] || "";
+            document.getElementById('inGenere3').value = gens[2] || "";
+            
             cambiaVista('add');
         }
 
-        window.preparaAggiunta = () => { idLibroInModifica = null; cambiaVista('add'); };
+        window.preparaAggiunta = () => { 
+            idLibroInModifica = null; 
+            document.getElementById('titoloForm').innerText = "Nuovo Libro";
+            document.querySelectorAll('.form-input').forEach(i => { if(i.tagName === 'INPUT') i.value = ''; });
+            document.getElementById('inCopie').value = 1;
+            cambiaVista('add'); 
+        };
         
         window.eliminaLibro = async (id) => { 
             if(await customConfirm("Eliminare definitivamente?")) await deleteDoc(doc(db, "libri", id)); 
@@ -630,10 +691,6 @@
         window.customConfirm = (m) => showModal('confirm', m);
         window.customPrompt = (m, p) => showModal('prompt', m, p);
 
-        // Popola generi (esempio ridotto per brevità)
-        const gList = ["Narrativa", "Giallo", "Fantasy", "Saggistica", "Fumetti"];
-        let gOpt = '<option value="">--</option>' + gList.map(g => `<option value="${g}">${g}</option>`).join('');
-        ['inGenere1', 'inGenere2', 'inGenere3'].forEach(id => document.getElementById(id).innerHTML = gOpt);
     </script>
 </body>
 </html>
