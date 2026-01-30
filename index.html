@@ -354,11 +354,6 @@
             color: white;
         }
 
-        .btn-filled:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
-
         /* --- MODALS --- */
         .modal-overlay {
             display: none;
@@ -610,11 +605,11 @@
             applicaFiltri();
         }
 
+        // --- FUNZIONE OTTIMIZZATA PER PERFORMANCE (BATCH RENDERING) ---
         window.applicaFiltri = function() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const container = document.getElementById('bookList');
-            container.innerHTML = '';
-
+            
             const filtrati = tuttiILibri.filter(l => {
                 const matchSearch = (l.titolo + l.autore).toLowerCase().includes(query);
                 const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
@@ -623,6 +618,9 @@
             });
 
             document.getElementById('emptyState').style.display = filtrati.length === 0 ? 'block' : 'none';
+
+            // Utilizziamo un accumulatore stringa per evitare continui reflow del DOM
+            let htmlBuffer = '';
 
             filtrati.forEach(l => {
                 const copieTot = parseInt(l.copieTotali || 1);
@@ -642,7 +640,7 @@
                     </div>
                 `).join('');
 
-                container.innerHTML += `
+                htmlBuffer += `
                     <div class="book-card">
                         <span class="location-badge ${l.sede?.includes('Bellocchio') ? 'loc-bellocchio' : 'loc-annunziata'}">${l.sede || 'Altro'}</span>
                         <h3 class="book-title">${l.titolo}</h3>
@@ -660,6 +658,9 @@
                     </div>
                 `;
             });
+
+            // Iniezione unica nel DOM
+            container.innerHTML = htmlBuffer;
         }
 
         window.gestisciSalvataggio = async function() {
