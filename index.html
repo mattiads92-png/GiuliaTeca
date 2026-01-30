@@ -450,7 +450,6 @@
         let isAdmin = localStorage.getItem('giuliateca_admin') === 'true';
         let idLibroInModifica = null;
 
-        // --- GENERI ORIGINALI ---
         const listaGeneriOriginali = {
             "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror", "Rosa", "Umoristico", "Poesia"],
             "Ragazzi": ["Albi Illustrati", "Fiabe", "Prime Letture", "Narrativa Ragazzi", "Young Adult", "Miti"],
@@ -470,7 +469,6 @@
         }
         popolaOpzioniGeneri();
 
-        // --- AUTH ---
         window.login = async function() {
             const p = await customPrompt("Password Admin:", true);
             if(p === "scuola2025") {
@@ -494,7 +492,6 @@
             applicaFiltri();
         }
 
-        // --- UTILS ---
         function formattaAutore(s) {
             return s.toLowerCase().split(/([ .])/).map(p => 
                 (p.length > 0 && /[a-z]/.test(p[0])) ? p[0].toUpperCase() + p.slice(1) : p
@@ -511,7 +508,6 @@
             return "background:#f1f3f4; color:#3c4043;";
         }
 
-        // --- FIREBASE ---
         onSnapshot(colRef, (snap) => {
             tuttiILibri = snap.docs.map(d => ({ id: d.id, ...d.data() }));
             tuttiILibri.sort((a,b) => a.titolo.localeCompare(b.titolo));
@@ -654,16 +650,31 @@
             if(await customConfirm("Eliminare definitivamente?")) await deleteDoc(doc(db, "libri", id)); 
         };
 
+        /* --- MODIFICA RICHIESTA: ESPORTAZIONE EXCEL CON ISBN E GENERI --- */
         window.esportaExcel = function() {
-            let csv = "Titolo;Autore;Sede;Copie Totali;Copie Disponibili\n";
+            if(tuttiILibri.length === 0) return customAlert("Nessun dato da esportare");
+            
+            // Intestazione specifica richiesta: Titolo, Autore, Sede, Copie Totali, Generi, ISBN
+            let csv = "Titolo;Autore;Sede;Copie Totali;Generi;ISBN\n";
+            
             tuttiILibri.forEach(l => {
-                const disp = (l.copieTotali || 1) - (l.prestitiAttivi?.length || 0);
-                csv += `"${l.titolo}";"${l.autore}";"${l.sede}";${l.copieTotali || 1};${disp}\n`;
+                const gens = Array.isArray(l.generi) ? l.generi.join(", ") : (l.genere || "");
+                const riga = [
+                    l.titolo || "",
+                    l.autore || "",
+                    l.sede || "",
+                    l.copieTotali || 1,
+                    gens,
+                    l.isbn || ""
+                ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(";");
+                
+                csv += riga + "\n";
             });
+
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "Inventario_GiuliaTeca.csv";
+            link.download = "GiuliaTeca_Inventario_" + new Date().toLocaleDateString() + ".csv";
             link.click();
         }
 
@@ -673,7 +684,6 @@
             window.scrollTo(0,0);
         }
 
-        // --- MODALI ---
         function showModal(type, msg, isPwd) {
             return new Promise(res => {
                 const m = document.getElementById('customModal');
