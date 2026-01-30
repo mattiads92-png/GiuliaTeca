@@ -25,15 +25,11 @@
             --shadow-2: 0 4px 6px rgba(32,33,36,0.18);
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--md-background);
             color: var(--md-text-primary);
             min-height: 100vh;
@@ -43,280 +39,122 @@
         header {
             background: var(--md-surface);
             padding: 12px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            position: sticky; top: 0; z-index: 50;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            flex: 1;
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; flex: 1; }
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background: var(--md-primary);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 24px;
-            font-family: 'Google Sans', sans-serif;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 24px; font-family: 'Google Sans', sans-serif;
         }
+        .text-group { display: flex; flex-direction: column; }
+        .logo { font-family: 'Google Sans', sans-serif; font-size: 1.4rem; margin: 0; line-height: 1.1; font-weight: 500; }
+        .subtitle { font-size: 0.75rem; color: var(--md-text-secondary); margin: 2px 0 0 0; }
 
-        .text-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .logo {
-            font-family: 'Google Sans', sans-serif;
-            font-size: 1.4rem;
-            color: var(--md-text-primary);
-            margin: 0;
-            line-height: 1.1;
-            font-weight: 500;
-        }
-
-        .subtitle {
-            font-size: 0.75rem;
-            color: var(--md-text-secondary);
-            margin: 2px 0 0 0;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
+        .header-actions { display: flex; gap: 8px; align-items: center; }
         .icon-btn {
-            background: transparent;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--md-text-secondary);
+            background: transparent; border: none;
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: var(--md-text-secondary);
             transition: background 0.2s;
         }
-
-        .icon-btn:hover {
-            background: rgba(0,0,0,0.05);
-        }
-
-        .icon-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        .fab-add {
-            background: var(--md-primary);
-            color: white;
-            box-shadow: var(--shadow-1);
-        }
+        .icon-btn:hover { background: rgba(0,0,0,0.05); }
+        .icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+        .fab-add { background: var(--md-primary); color: white; box-shadow: var(--shadow-1); }
 
         /* --- CONTAINER --- */
-        .container {
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 0 16px;
-        }
+        .container { max-width: 700px; margin: 20px auto; padding: 0 16px; }
 
-        .search-area {
-            margin-bottom: 20px;
-        }
-
+        /* SEARCH & FILTERS */
+        .search-area { margin-bottom: 20px; }
         .search-input-wrapper {
             position: relative;
             box-shadow: var(--shadow-1);
             border-radius: 24px;
             background: white;
         }
-
         .search-input {
-            width: 100%;
-            padding: 14px 20px 14px 50px;
-            border-radius: 24px;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            outline: none;
+            width: 100%; padding: 14px 20px 14px 50px;
+            border-radius: 24px; border: none; outline: none; font-size: 1rem;
         }
+        .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--md-text-secondary); }
 
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--md-text-secondary);
+        .filter-dropdown-container { margin-top: 12px; position: relative; }
+        .filter-chip {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 16px; background: white;
+            border: 1px solid #dadce0; border-radius: 18px;
+            font-size: 0.875rem; font-weight: 500; color: var(--md-text-secondary);
+            cursor: pointer; transition: all 0.2s;
         }
+        .filter-chip.active { background: #e8f0fe; color: var(--md-primary); border-color: transparent; }
+        
+        .genre-list {
+            display: none; background: white; border-radius: 8px; 
+            padding: 8px 0; margin-top: 4px;
+            box-shadow: var(--shadow-2); 
+            position: absolute; left: 0; right: 0; z-index: 100;
+            max-height: 250px; overflow-y: auto;
+        }
+        .genre-list.show { display: block; }
+        .checkbox-item { 
+            display: flex; align-items: center; padding: 10px 16px; 
+            cursor: pointer; transition: background 0.1s;
+        }
+        .checkbox-item:hover { background: #f5f5f5; }
+        .checkbox-item input { width: 18px; height: 18px; margin-right: 12px; accent-color: var(--md-primary); }
 
         /* --- CARDS --- */
         .book-card {
             background: var(--md-surface);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-            border: 1px solid #dadce0;
+            border-radius: 12px; padding: 16px; margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12); border: 1px solid #dadce0;
         }
-
         .location-badge {
-            font-size: 0.7rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            display: inline-block;
+            font-size: 0.7rem; font-weight: 500; text-transform: uppercase;
+            padding: 4px 8px; border-radius: 4px; margin-bottom: 8px; display: inline-block;
         }
-
-        .book-title {
-            font-family: 'Google Sans', sans-serif;
-            font-size: 1.1rem;
-            margin: 0 0 4px 0;
-        }
-
-        .book-author {
-            font-size: 0.9rem;
-            color: var(--md-text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .chips-container {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 12px;
-        }
-
-        .chip {
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
+        .book-title { font-family: 'Google Sans', sans-serif; font-size: 1.1rem; margin: 0 0 4px 0; }
+        .book-author { font-size: 0.9rem; color: var(--md-text-secondary); margin-bottom: 12px; }
+        .chips-container { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+        .chip { padding: 4px 10px; border-radius: 16px; font-size: 0.75rem; font-weight: 500; }
 
         .status-row {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding-top: 12px;
-            border-top: 1px solid #f1f3f4;
-            font-size: 0.85rem;
+            display: flex; flex-direction: column; gap: 4px;
+            padding-top: 12px; border-top: 1px solid #f1f3f4; font-size: 0.85rem;
         }
-
         .prestito-item {
-            display: flex;
-            justify-content: space-between;
-            color: var(--md-error);
-            font-size: 0.8rem;
-            background: #fff5f5;
-            padding: 4px 8px;
-            border-radius: 4px;
-            margin-top: 4px;
+            display: flex; justify-content: space-between;
+            color: var(--md-error); font-size: 0.8rem;
+            background: #fff5f5; padding: 4px 8px; border-radius: 4px; margin-top: 4px;
         }
 
         /* --- ADMIN SECTION --- */
-        .admin-actions {
-            display: none;
-            gap: 8px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #f1f3f4;
-        }
-
-        .admin-actions.visible {
-            display: flex;
-        }
+        .admin-actions { display: none; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f3f4; }
+        .admin-actions.visible { display: flex; }
 
         /* --- FORM --- */
-        .form-card {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: var(--shadow-1);
-        }
+        .form-card { background: white; padding: 24px; border-radius: 12px; box-shadow: var(--shadow-1); }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 0.8rem; color: var(--md-text-secondary); margin-bottom: 4px; font-weight: 500; }
+        .form-input { width: 100%; padding: 10px; border: 1px solid #dadce0; border-radius: 4px; font-size: 1rem; }
 
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--md-text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .btn {
-            padding: 10px 16px;
-            border-radius: 20px;
-            border: none;
-            font-weight: 500;
-            cursor: pointer;
-            font-family: 'Google Sans', sans-serif;
-        }
-
-        .btn-filled {
-            background: var(--md-primary);
-            color: white;
-        }
+        .btn { padding: 10px 16px; border-radius: 20px; border: none; font-weight: 500; cursor: pointer; font-family: 'Google Sans', sans-serif; }
+        .btn-filled { background: var(--md-primary); color: white; }
 
         /* --- MODALS --- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal-box { background: white; width: 90%; max-width: 350px; padding: 24px; border-radius: 28px; }
 
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-box {
-            background: white;
-            width: 90%;
-            max-width: 350px;
-            padding: 24px;
-            border-radius: 28px;
-        }
-
-        .view-section {
-            display: none;
-        }
-
-        .view-section.active {
-            display: block;
-        }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
     </style>
 </head>
 
@@ -356,6 +194,13 @@
                     </span>
                     <input type="text" id="searchInput" class="search-input" placeholder="Cerca titolo, autore..." oninput="applicaFiltri()">
                 </div>
+                <div class="filter-dropdown-container">
+                    <button class="filter-chip" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
+                        <span>Filtra per genere</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                    </button>
+                    <div id="listaCheckboxGeneri" class="genre-list"></div>
+                </div>
             </div>
             <div id="bookList"></div>
             <div id="emptyState" style="text-align:center; display:none; margin-top:60px;">Nessun libro trovato.</div>
@@ -364,22 +209,9 @@
         <div id="view-add" class="view-section">
             <div class="form-card">
                 <h2 id="titoloForm">Nuovo Libro</h2>
-                
-                <div class="form-group">
-                    <label class="form-label">Titolo</label>
-                    <input type="text" id="inTitolo" class="form-input">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Autore</label>
-                    <input type="text" id="inAutore" class="form-input">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Numero di Copie Possedute</label>
-                    <input type="number" id="inCopie" class="form-input" value="1" min="1">
-                </div>
-
+                <div class="form-group"><label class="form-label">Titolo</label><input type="text" id="inTitolo" class="form-input"></div>
+                <div class="form-group"><label class="form-label">Autore</label><input type="text" id="inAutore" class="form-input"></div>
+                <div class="form-group"><label class="form-label">Numero di Copie</label><input type="number" id="inCopie" class="form-input" value="1" min="1"></div>
                 <div class="form-group">
                     <label class="form-label">Sede</label>
                     <select id="inSede" class="form-input">
@@ -388,27 +220,17 @@
                         <option value="Altro">Altro</option>
                     </select>
                 </div>
-
-                <div class="form-group">
-                    <label class="form-label">Casa Editrice</label>
-                    <input type="text" id="inEditore" class="form-input">
-                </div>
-
+                <div class="form-group"><label class="form-label">Casa Editrice</label><input type="text" id="inEditore" class="form-input"></div>
                 <div class="form-group">
                     <label class="form-label">Anno / ISBN</label>
-                    <div style="display:flex; gap:8px;">
-                        <input type="number" id="inAnno" class="form-input" placeholder="Anno">
-                        <input type="text" id="inIsbn" class="form-input" placeholder="ISBN">
-                    </div>
+                    <div style="display:flex; gap:8px;"><input type="number" id="inAnno" class="form-input" placeholder="Anno"><input type="text" id="inIsbn" class="form-input" placeholder="ISBN"></div>
                 </div>
-
                 <div class="form-group">
                     <label class="form-label">Generi (Max 3)</label>
                     <select id="inGenere1" class="form-input" style="margin-bottom:4px;"></select>
                     <select id="inGenere2" class="form-input" style="margin-bottom:4px;"></select>
                     <select id="inGenere3" class="form-input"></select>
                 </div>
-
                 <div style="display:flex; gap:10px; margin-top:20px;">
                     <button class="btn" onclick="cambiaVista('home')">Annulla</button>
                     <button class="btn btn-filled" onclick="gestisciSalvataggio()">Salva</button>
@@ -434,12 +256,9 @@
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {  
-            apiKey: "AIzaSyAJWYojOgxzKyibGSKnsWa0UPcVaqr4s3E",
-            authDomain: "giuliateca-ar.firebaseapp.com",
-            projectId: "giuliateca-ar",
-            storageBucket: "giuliateca-ar.firebasestorage.app",
-            messagingSenderId: "533414638110",
-            appId: "1:533414638110:web:8a613a7e6b1fc02e17f40f"
+            apiKey: "AIzaSyAJWYojOgxzKyibGSKnsWa0UPcVaqr4s3E", authDomain: "giuliateca-ar.firebaseapp.com",
+            projectId: "giuliateca-ar", storageBucket: "giuliateca-ar.firebasestorage.app",
+            messagingSenderId: "533414638110", appId: "1:533414638110:web:8a613a7e6b1fc02e17f40f"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -447,6 +266,7 @@
         const colRef = collection(db, "libri");
         
         let tuttiILibri = [];
+        let generiSelezionati = [];
         let isAdmin = localStorage.getItem('giuliateca_admin') === 'true';
         let idLibroInModifica = null;
 
@@ -471,18 +291,10 @@
 
         window.login = async function() {
             const p = await customPrompt("Password Admin:", true);
-            if(p === "scuola2025") {
-                isAdmin = true;
-                localStorage.setItem('giuliateca_admin', 'true');
-                aggiornaUI();
-            } else if(p) { await customAlert("Errata"); }
+            if(p === "scuola2025") { isAdmin = true; localStorage.setItem('giuliateca_admin', 'true'); aggiornaUI(); }
+            else if(p) { await customAlert("Errata"); }
         }
-
-        window.logout = function() {
-            isAdmin = false;
-            localStorage.removeItem('giuliateca_admin');
-            aggiornaUI();
-        }
+        window.logout = function() { isAdmin = false; localStorage.removeItem('giuliateca_admin'); aggiornaUI(); }
 
         function aggiornaUI() {
             document.getElementById('btnLogin').style.display = isAdmin ? 'none' : 'flex';
@@ -493,9 +305,7 @@
         }
 
         function formattaAutore(s) {
-            return s.toLowerCase().split(/([ .])/).map(p => 
-                (p.length > 0 && /[a-z]/.test(p[0])) ? p[0].toUpperCase() + p.slice(1) : p
-            ).join('');
+            return s.toLowerCase().split(/([ .])/).map(p => (p.length > 0 && /[a-z]/.test(p[0])) ? p[0].toUpperCase() + p.slice(1) : p).join('');
         }
 
         window.colorePerGenere = function(genere) {
@@ -512,32 +322,59 @@
             tuttiILibri = snap.docs.map(d => ({ id: d.id, ...d.data() }));
             tuttiILibri.sort((a,b) => a.titolo.localeCompare(b.titolo));
             document.getElementById('loader').style.display = 'none';
+            aggiornaFiltriGeneri();
             aggiornaUI();
         });
+
+        // LOGICA FILTRI RIPRISTINATA
+        window.toggleMenuGeneri = () => document.getElementById('listaCheckboxGeneri').classList.toggle('show');
+
+        function aggiornaFiltriGeneri() {
+            let gens = new Set();
+            tuttiILibri.forEach(l => {
+                const arr = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
+                arr.forEach(g => gens.add(g));
+            });
+            const cont = document.getElementById('listaCheckboxGeneri');
+            cont.innerHTML = '';
+            [...gens].sort().forEach(g => {
+                const checked = generiSelezionati.includes(g) ? 'checked' : '';
+                cont.innerHTML += `<label class="checkbox-item"><input type="checkbox" value="${g}" ${checked} onchange="cambiaFiltro(this)"><span>${g}</span></label>`;
+            });
+        }
+
+        window.cambiaFiltro = function(el) {
+            if(el.checked) generiSelezionati.push(el.value);
+            else generiSelezionati = generiSelezionati.filter(x => x !== el.value);
+            const btn = document.getElementById('btnFiltroGeneri');
+            btn.classList.toggle('active', generiSelezionati.length > 0);
+            btn.querySelector('span').innerText = generiSelezionati.length > 0 ? `${generiSelezionati.length} generi` : `Filtra per genere`;
+            applicaFiltri();
+        }
 
         window.applicaFiltri = function() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const container = document.getElementById('bookList');
             container.innerHTML = '';
 
-            const filtrati = tuttiILibri.filter(l => 
-                (l.titolo + l.autore).toLowerCase().includes(query)
-            );
+            const filtrati = tuttiILibri.filter(l => {
+                const matchSearch = (l.titolo + l.autore).toLowerCase().includes(query);
+                const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
+                const matchGen = generiSelezionati.length === 0 || generiSelezionati.some(sel => gens.includes(sel));
+                return matchSearch && matchGen;
+            });
 
-            if(filtrati.length === 0) document.getElementById('emptyState').style.display = 'block';
-            else document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('emptyState').style.display = filtrati.length === 0 ? 'block' : 'none';
 
             filtrati.forEach(l => {
                 const copieTot = parseInt(l.copieTotali || 1);
                 const prestiti = l.prestitiAttivi || [];
                 const disponibilità = copieTot - prestiti.length;
-                
                 let statusColor = disponibilità > 0 ? 'var(--md-success)' : 'var(--md-error)';
                 let statusText = disponibilità > 0 ? `Disponibile (${disponibilità} su ${copieTot} copie)` : `Esaurito (0 su ${copieTot} copie)`;
 
                 const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
-                let chipsHtml = '';
-                gens.forEach(g => chipsHtml += `<span class="chip" style="${colorePerGenere(g)}">${g}</span>`);
+                let chipsHtml = gens.map(g => `<span class="chip" style="${colorePerGenere(g)}">${g}</span>`).join('');
                 if(l.editore) chipsHtml += `<span class="chip" style="background:#f1f3f4;">${l.editore}</span>`;
 
                 let prestitiHtml = prestiti.map((p, idx) => `
@@ -571,39 +408,21 @@
             const titolo = document.getElementById('inTitolo').value.trim();
             const autoreRaw = document.getElementById('inAutore').value.trim();
             const copie = parseInt(document.getElementById('inCopie').value) || 1;
-
             if(!titolo || !autoreRaw) return customAlert("Titolo e autore obbligatori");
 
             const dati = {
-                titolo,
-                autore: formattaAutore(autoreRaw),
-                copieTotali: copie,
-                sede: document.getElementById('inSede').value,
-                editore: document.getElementById('inEditore').value,
-                anno: document.getElementById('inAnno').value,
-                isbn: document.getElementById('inIsbn').value,
-                generi: [
-                    document.getElementById('inGenere1').value, 
-                    document.getElementById('inGenere2').value, 
-                    document.getElementById('inGenere3').value
-                ].filter(g => g !== "")
+                titolo, autore: formattaAutore(autoreRaw), copieTotali: copie, sede: document.getElementById('inSede').value,
+                editore: document.getElementById('inEditore').value, anno: document.getElementById('inAnno').value, isbn: document.getElementById('inIsbn').value,
+                generi: [document.getElementById('inGenere1').value, document.getElementById('inGenere2').value, document.getElementById('inGenere3').value].filter(g => g !== "")
             };
 
-            try {
-                if(idLibroInModifica) {
-                    await updateDoc(doc(db, "libri", idLibroInModifica), dati);
-                    await customAlert("Libro aggiornato");
-                } else {
-                    await addDoc(colRef, { ...dati, prestitiAttivi: [] });
-                    await customAlert("Libro aggiunto");
-                }
-                cambiaVista('home');
-            } catch(e) { await customAlert("Errore: " + e.message); }
+            if(idLibroInModifica) await updateDoc(doc(db, "libri", idLibroInModifica), dati);
+            else await addDoc(colRef, { ...dati, prestitiAttivi: [] });
+            cambiaVista('home');
         }
 
         window.presta = async function(id) {
-            const nome = await customPrompt("Nome studente:");
-            if(!nome) return;
+            const nome = await customPrompt("Nome studente:"); if(!nome) return;
             const l = tuttiILibri.find(x => x.id === id);
             const prestiti = l.prestitiAttivi || [];
             prestiti.push({ nome, data: new Date().toLocaleDateString() });
@@ -611,10 +430,9 @@
         }
 
         window.restituisci = async function(id, index) {
-            if(!await customConfirm("Confermi il rientro della copia?")) return;
+            if(!await customConfirm("Confermi il rientro?")) return;
             const l = tuttiILibri.find(x => x.id === id);
-            const prestiti = [...l.prestitiAttivi];
-            prestiti.splice(index, 1);
+            const prestiti = [...l.prestitiAttivi]; prestiti.splice(index, 1);
             await updateDoc(doc(db, "libri", id), { prestitiAttivi: prestiti });
         }
 
@@ -629,69 +447,44 @@
             document.getElementById('inEditore').value = l.editore || "";
             document.getElementById('inAnno').value = l.anno || "";
             document.getElementById('inIsbn').value = l.isbn || "";
-            
             const gens = Array.isArray(l.generi) ? l.generi : (l.genere ? [l.genere] : []);
             document.getElementById('inGenere1').value = gens[0] || "";
             document.getElementById('inGenere2').value = gens[1] || "";
             document.getElementById('inGenere3').value = gens[2] || "";
-            
             cambiaVista('add');
         }
 
         window.preparaAggiunta = () => { 
-            idLibroInModifica = null; 
-            document.getElementById('titoloForm').innerText = "Nuovo Libro";
+            idLibroInModifica = null; document.getElementById('titoloForm').innerText = "Nuovo Libro";
             document.querySelectorAll('.form-input').forEach(i => { if(i.tagName === 'INPUT') i.value = ''; });
-            document.getElementById('inCopie').value = 1;
-            cambiaVista('add'); 
+            document.getElementById('inCopie').value = 1; cambiaVista('add'); 
         };
         
-        window.eliminaLibro = async (id) => { 
-            if(await customConfirm("Eliminare definitivamente?")) await deleteDoc(doc(db, "libri", id)); 
-        };
+        window.eliminaLibro = async (id) => { if(await customConfirm("Eliminare?")) await deleteDoc(doc(db, "libri", id)); };
 
-        /* --- MODIFICA RICHIESTA: ESPORTAZIONE EXCEL CON ISBN E GENERI --- */
         window.esportaExcel = function() {
-            if(tuttiILibri.length === 0) return customAlert("Nessun dato da esportare");
-            
-            // Intestazione specifica richiesta: Titolo, Autore, Sede, Copie Totali, Generi, ISBN
             let csv = "Titolo;Autore;Sede;Copie Totali;Generi;ISBN\n";
-            
             tuttiILibri.forEach(l => {
                 const gens = Array.isArray(l.generi) ? l.generi.join(", ") : (l.genere || "");
-                const riga = [
-                    l.titolo || "",
-                    l.autore || "",
-                    l.sede || "",
-                    l.copieTotali || 1,
-                    gens,
-                    l.isbn || ""
-                ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(";");
-                
-                csv += riga + "\n";
+                csv += `"${l.titolo}";"${l.autore}";"${l.sede}";${l.copieTotali || 1};"${gens}";"${l.isbn || ""}"\n`;
             });
-
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = "GiuliaTeca_Inventario_" + new Date().toLocaleDateString() + ".csv";
-            link.click();
+            link.href = URL.createObjectURL(blob); link.download = "GiuliaTeca_Export.csv"; link.click();
         }
 
         window.cambiaVista = (v) => {
             document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
             document.getElementById('view-'+v).classList.add('active');
+            document.getElementById('listaCheckboxGeneri').classList.remove('show');
             window.scrollTo(0,0);
         }
 
         function showModal(type, msg, isPwd) {
             return new Promise(res => {
-                const m = document.getElementById('customModal');
-                const inp = document.getElementById('modalInput');
+                const m = document.getElementById('customModal'); const inp = document.getElementById('modalInput');
                 document.getElementById('modalMessage').innerText = msg;
-                inp.style.display = (type === 'prompt') ? 'block' : 'none';
-                inp.type = isPwd ? 'password' : 'text';
-                inp.value = '';
+                inp.style.display = (type === 'prompt') ? 'block' : 'none'; inp.type = isPwd ? 'password' : 'text'; inp.value = '';
                 m.classList.add('active');
                 document.getElementById('btnConfirm').onclick = () => { m.classList.remove('active'); res(type === 'prompt' ? inp.value : true); };
                 document.getElementById('btnCancel').onclick = () => { m.classList.remove('active'); res(null); };
@@ -700,7 +493,6 @@
         window.customAlert = (m) => showModal('alert', m);
         window.customConfirm = (m) => showModal('confirm', m);
         window.customPrompt = (m, p) => showModal('prompt', m, p);
-
     </script>
 </body>
 </html>
