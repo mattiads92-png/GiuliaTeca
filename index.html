@@ -107,6 +107,22 @@
         /* --- CONTAINER --- */
         .container { max-width: 750px; margin: 20px auto; padding: 0 16px; }
 
+        /* STATS BOX ADMIN */
+        .admin-stats {
+            display: none;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-1);
+            border: 1px solid #e0e0e0;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .admin-stats.visible { display: flex; }
+        .stats-label { font-size: 0.85rem; color: var(--md-text-secondary); font-weight: 500; }
+        .stats-value { font-family: 'Google Sans'; font-size: 1.2rem; color: var(--md-primary); font-weight: 700; }
+
         /* SEARCH AREA */
         .search-area { margin-bottom: 25px; }
         .search-input-wrapper {
@@ -264,6 +280,11 @@
     <div class="container">
         <div id="loader">Caricamento in corso...</div>
 
+        <div id="statsAdmin" class="admin-stats">
+            <span class="stats-label">📊 STATO ARCHIVIO:</span>
+            <span id="statsLabel" class="stats-value">0 / 0</span>
+        </div>
+
         <div id="view-home" class="view-section active">
             <div class="search-area">
                 <div class="search-input-wrapper">
@@ -357,10 +378,10 @@
         let idLibroInModifica = null;
 
         const listaGeneriOriginali = {
-            "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror", "Rosa", "Umoristico", "Poesia"],
-            "Ragazzi": ["Albi Illustrati", "Fiabe", "Prime Letture", "Narrativa Ragazzi", "Young Adult", "Miti"],
+            "Narrativa": ["Narrativa Contemporanea", "Classici", "Giallo / Thriller", "Fantasy", "Fantascienza", "Avventura", "Romanzo Storico", "Horror", "Rosa", "Umoristico", "Poesia", "Intercultura"],
+            "Ragazzi": ["Albi Illustrati", "Fiabe", "Prime Letture", "Narrativa Ragazzi", "Young Adult", "Miti", "Mitologia"],
             "Fumetti": ["Fumetti", "Graphic Novel", "Manga"],
-            "Saggistica": ["Storia", "Biografie", "Scienza", "Arte", "Filosofia", "Psicologia", "Religione", "Attualità", "Musica", "Viaggi", "Cucina"],
+            "Saggistica": ["Storia", "Biografie", "Scienza", "Arte", "Filosofia", "Psicologia", "Religione", "Attualità", "Musica", "Viaggi", "Cucina", "Sport"],
             "Altro": ["Dizionari", "Scolastica", "Lingue"]
         };
 
@@ -395,11 +416,27 @@
             document.getElementById('btnExport').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('btnAdd').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('btnLogout').style.display = isAdmin ? 'flex' : 'none';
+            document.getElementById('statsAdmin').classList.toggle('visible', isAdmin);
+            calcolaStats();
             applicaFiltri();
         }
 
+        function calcolaStats() {
+            if(!isAdmin) return;
+            let totale = 0;
+            let prestiti = 0;
+            tuttiILibri.forEach(l => {
+                const c = parseInt(l.copieTotali || 1);
+                const p = (l.prestitiAttivi || []).length;
+                totale += c;
+                prestiti += p;
+            });
+            const disponibili = totale - prestiti;
+            document.getElementById('statsLabel').innerText = `${disponibili} / ${totale}`;
+        }
+
         function formattaAutore(s) {
-            return s.toLowerCase().split(/([ .])/).map(p => 
+            return s.toLowerCase().split(/([ .-])/).map(p => 
                 (p.length > 0 && /[a-z]/.test(p[0])) ? p[0].toUpperCase() + p.slice(1) : p
             ).join('');
         }
@@ -407,7 +444,7 @@
         window.colorePerGenere = function(genere) {
             const g = (genere || "").toLowerCase();
             if(g.includes("giallo") || g.includes("horror")) return "background:#fce8e6; color:#c5221f;";
-            if(g.includes("fantasy") || g.includes("fantascienza")) return "background:#e8f0fe; color:#1967d2;";
+            if(g.includes("fantasy") || g.includes("fantascienza") || g.includes("mitologia") || g.includes("miti")) return "background:#e8f0fe; color:#1967d2;";
             if(g.includes("ragazzi") || g.includes("fiabe")) return "background:#e6f4ea; color:#137333;";
             if(g.includes("fumetti") || g.includes("manga")) return "background:#fef7e0; color:#ea8600;";
             if(g.includes("narrativa") || g.includes("classici")) return "background:#f3e8fd; color:#7627bb;";
