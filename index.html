@@ -314,10 +314,11 @@
                 <div class="form-group"><label class="form-label">Numero di Copie</label><input type="number" id="inCopie" class="form-input" value="1" min="1"></div>
                 <div class="form-group">
                     <label class="form-label">Sede</label>
-                    <select id="inSede" class="form-input">
+                    <select id="inSede" class="form-input" onchange="gestisciNuovaSede()">
                         <option value="Biblioteca Bellocchio">Biblioteca Bellocchio</option>
                         <option value="Biblioteca Annunziata">Biblioteca Annunziata</option>
                         <option value="Altro">Altro</option>
+                        <option value="_nuova_" style="font-weight:bold; color:var(--md-primary);">+ Aggiungi nuova scuola...</option>
                     </select>
                 </div>
                 <div class="form-group"><label class="form-label">Casa Editrice</label><input type="text" id="inEditore" class="form-input"></div>
@@ -543,6 +544,23 @@
             container.innerHTML = htmlBuffer;
         }
 
+        window.gestisciNuovaSede = async function() {
+            const select = document.getElementById('inSede');
+            if (select.value === '_nuova_') {
+                const nuovaSede = await customPrompt("Inserisci il nome della nuova scuola/sede:");
+                if (nuovaSede && nuovaSede.trim() !== '') {
+                    const opt = document.createElement('option');
+                    opt.value = nuovaSede.trim();
+                    opt.textContent = nuovaSede.trim();
+                    // Inserisci prima dell'opzione "+ Aggiungi nuova scuola..."
+                    select.insertBefore(opt, select.querySelector('option[value="_nuova_"]'));
+                    select.value = nuovaSede.trim();
+                } else {
+                    select.selectedIndex = 0; // Torna alla prima opzione se l'utente annulla
+                }
+            }
+        };
+
         window.gestisciSalvataggio = async function() {
             const titolo = document.getElementById('inTitolo').value.trim();
             const autoreRaw = document.getElementById('inAutore').value.trim();
@@ -591,7 +609,17 @@
             document.getElementById('inTitolo').value = l.titolo;
             document.getElementById('inAutore').value = l.autore;
             document.getElementById('inCopie').value = l.copieTotali || 1;
-            document.getElementById('inSede').value = l.sede;
+            
+            const selectSede = document.getElementById('inSede');
+            // Se la sede del libro non è nella lista, la aggiungiamo temporaneamente per permetterne la visualizzazione
+            if (l.sede && !Array.from(selectSede.options).some(o => o.value === l.sede)) {
+                const opt = document.createElement('option');
+                opt.value = l.sede;
+                opt.textContent = l.sede;
+                selectSede.insertBefore(opt, selectSede.querySelector('option[value="_nuova_"]'));
+            }
+            selectSede.value = l.sede || "Altro";
+
             document.getElementById('inEditore').value = l.editore || "";
             document.getElementById('inAnno').value = l.anno || "";
             document.getElementById('inIsbn').value = l.isbn || "";
@@ -607,6 +635,7 @@
             document.getElementById('titoloForm').innerText = "Nuovo Volume";
             document.querySelectorAll('.form-input').forEach(i => { if(i.tagName === 'INPUT') i.value = ''; });
             document.getElementById('inCopie').value = 1; 
+            document.getElementById('inSede').selectedIndex = 0;
             cambiaVista('add'); 
         };
         
