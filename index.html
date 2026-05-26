@@ -16,10 +16,6 @@
             --md-error: #d93025;
             --md-success: #188038;
             --md-warning: #f9ab00;
-            --loc-bellocchio: #e8f0fe;
-            --loc-bellocchio-text: #1967d2;
-            --loc-annunziata: #fce8e6;
-            --loc-annunziata-text: #c5221f;
             --radius: 16px;
             --shadow-1: 0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.24);
             --shadow-2: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
@@ -37,7 +33,21 @@
             background-color: var(--md-background);
             color: var(--md-text-primary);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
+        /* --- FOOTER ASSISTENZA --- */
+        #footerAdmin {
+            display: none;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        #footerAdmin a { color: white; text-decoration: none; font-weight: bold; }
 
         /* --- HEADER & ANIMATED LOGO --- */
         header {
@@ -97,7 +107,6 @@
             font-weight: 800; 
             letter-spacing: -0.5px; 
             color: var(--md-primary);
-            /* Effetto moderno: ombra netta + ombra sfocata per profondità */
             text-shadow: 2px 2px 0px rgba(26, 115, 232, 0.15), 0px 4px 8px rgba(26, 115, 232, 0.25);
         }
         
@@ -123,7 +132,7 @@
         .fab-add:hover { background: #1765cc; transform: translateY(-2px); }
 
         /* --- CONTAINER --- */
-        .container { max-width: 750px; margin: 20px auto; padding: 0 16px; }
+        .container { max-width: 750px; margin: 20px auto; padding: 0 16px; flex: 1; width: 100%; }
 
         /* STATS BOX ADMIN */
         .admin-stats {
@@ -361,6 +370,11 @@
         </div>
     </div>
 
+    <footer id="footerAdmin">
+        Hai bisogno di supporto? Contattaci su 
+        <a href="https://wa.me/393470804088" target="_blank">WhatsApp: +39 347 0804088</a>
+    </footer>
+
     <div id="customModal" class="modal-overlay">
         <div class="modal-box">
             <h3 id="modalTitle" style="margin-top:0; color:var(--md-primary);">GiuliaTeca</h3>
@@ -435,6 +449,7 @@
             document.getElementById('btnAdd').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('btnLogout').style.display = isAdmin ? 'flex' : 'none';
             document.getElementById('statsAdmin').classList.toggle('visible', isAdmin);
+            document.getElementById('footerAdmin').style.display = isAdmin ? 'block' : 'none';
             calcolaStats();
             applicaFiltri();
         }
@@ -536,20 +551,20 @@
                 `).join('');
 
                 let costinaColore = '#8e24aa'; // Default Altro (Viola)
-                let sfondoColore = '#fcf4ff'; // Default Altro (Lilla chiaro)
+                let sfondoColore = '#f3e5f5'; // Default Altro (Lilla pastello)
                 let textColore = '#520b6e';
 
                 if(l.sede?.includes('Bellocchio')) {
                     costinaColore = '#1a73e8'; // Blu
-                    sfondoColore = '#f4f8ff'; // Azzurrino
+                    sfondoColore = '#e3f2fd'; // Azzurro pastello
                     textColore = '#0d47a1';
                 } else if (l.sede?.includes('Annunziata')) {
                     costinaColore = '#d93025'; // Rosso
-                    sfondoColore = '#fff0f0'; // Rosina
+                    sfondoColore = '#ffebf0'; // Rosa pastello
                     textColore = '#b71c1c';
                 } else if (l.sede?.includes('De Amicis')) {
                     costinaColore = '#188038'; // Verde
-                    sfondoColore = '#f0fcf4'; // Verdino
+                    sfondoColore = '#e5faf0'; // Verde pastello
                     textColore = '#0a5220';
                 }
 
