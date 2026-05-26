@@ -535,22 +535,21 @@
                     </div>
                 `).join('');
 
-                // Logica assegnazione colori pastello per le sedi
                 let costinaColore = '#8e24aa'; // Default Altro (Viola)
-                let sfondoColore = '#F7EAFB'; // Default Altro (Lilla pastello visibile)
+                let sfondoColore = '#fcf4ff'; // Default Altro (Lilla chiaro)
                 let textColore = '#520b6e';
 
                 if(l.sede?.includes('Bellocchio')) {
                     costinaColore = '#1a73e8'; // Blu
-                    sfondoColore = '#ECF4FD'; // Azzurro pastello visibile
+                    sfondoColore = '#f4f8ff'; // Azzurrino
                     textColore = '#0d47a1';
                 } else if (l.sede?.includes('Annunziata')) {
                     costinaColore = '#d93025'; // Rosso
-                    sfondoColore = '#FCEAE9'; // Rosso pastello visibile
+                    sfondoColore = '#fff0f0'; // Rosina
                     textColore = '#b71c1c';
                 } else if (l.sede?.includes('De Amicis')) {
                     costinaColore = '#188038'; // Verde
-                    sfondoColore = '#D4F7DE'; // Verde pastello visibile
+                    sfondoColore = '#f0fcf4'; // Verdino
                     textColore = '#0a5220';
                 }
 
