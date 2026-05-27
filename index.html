@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GiuliaTeca</title>
+    <!-- Font Nunito per il titolo -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,17 +38,27 @@
             flex-direction: column;
         }
 
-        /* --- FOOTER ASSISTENZA  --- */
+        /* Il contenitore principale si espande per spingere il footer in basso */
+        .page-wrapper {
+            flex: 1;
+        }
+
+        /* --- FOOTER ASSISTENZA --- */
         #footerAdmin {
             display: none;
             background: #25d366;
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 15px;
             font-size: 0.9rem;
-            margin-top: auto;
+            width: 100%;
         }
-        #footerAdmin a { color: white; text-decoration: none; font-weight: bold; }
+        
+        #footerAdmin a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
         /* --- HEADER & ANIMATED LOGO --- */
         header {
@@ -97,7 +108,10 @@
             100% { transform: scale(1); }
         }
 
-        .text-group { display: flex; flex-direction: column; }
+        .text-group {
+            display: flex;
+            flex-direction: column;
+        }
         
         .logo { 
             font-family: 'Nunito', sans-serif; 
@@ -118,21 +132,54 @@
             font-weight: 700; 
         }
 
-        .header-actions { display: flex; gap: 8px; align-items: center; }
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
         .icon-btn {
-            background: transparent; border: none;
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; color: var(--md-text-secondary);
+            background: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--md-text-secondary);
             transition: all 0.2s;
         }
-        .icon-btn:hover { background: rgba(0,0,0,0.05); color: var(--md-primary); }
-        .icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
-        .fab-add { background: var(--md-primary); color: white; box-shadow: var(--shadow-1); }
-        .fab-add:hover { background: #1765cc; transform: translateY(-2px); }
+
+        .icon-btn:hover {
+            background: rgba(0,0,0,0.05);
+            color: var(--md-primary);
+        }
+
+        .icon-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .fab-add {
+            background: var(--md-primary);
+            color: white;
+            box-shadow: var(--shadow-1);
+        }
+
+        .fab-add:hover {
+            background: #1765cc;
+            transform: translateY(-2px);
+        }
 
         /* --- CONTAINER --- */
-        .container { max-width: 750px; margin: 20px auto; padding: 0 16px; flex: 1; width: 100%; }
+        .container {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
 
         /* STATS BOX ADMIN */
         .admin-stats {
@@ -146,12 +193,29 @@
             justify-content: space-between;
             align-items: center;
         }
-        .admin-stats.visible { display: flex; }
-        .stats-label { font-size: 0.85rem; color: var(--md-text-secondary); font-weight: 500; }
-        .stats-value { font-family: 'Google Sans'; font-size: 1.2rem; color: var(--md-primary); font-weight: 700; }
+
+        .admin-stats.visible {
+            display: flex;
+        }
+
+        .stats-label {
+            font-size: 0.85rem;
+            color: var(--md-text-secondary);
+            font-weight: 500;
+        }
+
+        .stats-value {
+            font-family: 'Google Sans';
+            font-size: 1.2rem;
+            color: var(--md-primary);
+            font-weight: 700;
+        }
 
         /* SEARCH AREA */
-        .search-area { margin-bottom: 25px; }
+        .search-area {
+            margin-bottom: 25px;
+        }
+
         .search-input-wrapper {
             position: relative;
             box-shadow: var(--shadow-1);
@@ -160,46 +224,102 @@
             border: 1px solid transparent;
             transition: all 0.3s ease;
         }
+
         .search-input-wrapper:focus-within {
             box-shadow: var(--shadow-2);
             border-color: #e8f0fe;
         }
-        .search-input {
-            width: 100%; padding: 16px 20px 16px 55px;
-            border-radius: 28px; border: none; outline: none; font-size: 1rem;
-        }
-        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--md-primary); }
 
-        .filter-dropdown-container { margin-top: 15px; }
-        .filter-chip {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 20px; background: white;
-            border: 1px solid #e0e0e0; border-radius: 20px;
-            font-size: 0.9rem; font-weight: 500; color: var(--md-text-secondary);
-            cursor: pointer; transition: all 0.2s;
+        .search-input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            border-radius: 28px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
         }
-        .filter-chip.active { background: #e8f0fe; color: var(--md-primary); border-color: var(--md-primary); }
-        .filter-chip:hover { background: #f1f3f4; }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--md-primary);
+        }
+
+        .filter-dropdown-container {
+            margin-top: 15px;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--md-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-chip.active {
+            background: #e8f0fe;
+            color: var(--md-primary);
+            border-color: var(--md-primary);
+        }
+
+        .filter-chip:hover {
+            background: #f1f3f4;
+        }
         
         .genre-list {
-            display: none; background: white; border-radius: 12px; 
-            padding: 8px 0; margin-top: 8px;
+            display: none;
+            background: white;
+            border-radius: 12px; 
+            padding: 8px 0;
+            margin-top: 8px;
             box-shadow: var(--shadow-2); 
-            position: absolute; left: 0; right: 0; z-index: 100;
-            max-height: 280px; overflow-y: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            max-height: 280px;
+            overflow-y: auto;
             border: 1px solid #f1f3f4;
         }
-        .genre-list.show { display: block; animation: fadeInDown 0.3s ease; }
+
+        .genre-list.show {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .checkbox-item { 
-            display: flex; align-items: center; padding: 12px 20px; 
-            cursor: pointer; transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            padding: 12px 20px; 
+            cursor: pointer;
+            transition: background 0.2s;
         }
-        .checkbox-item:hover { background: #f8f9fa; }
-        .checkbox-item input { width: 18px; height: 18px; margin-right: 15px; accent-color: var(--md-primary); }
+
+        .checkbox-item:hover {
+            background: #f8f9fa;
+        }
+
+        .checkbox-item input {
+            width: 18px;
+            height: 18px;
+            margin-right: 15px;
+            accent-color: var(--md-primary);
+        }
 
         /* --- BOOK THEMED CARDS --- */
         .book-card {
@@ -219,157 +339,286 @@
         }
 
         .location-badge {
-            font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-            padding: 4px 10px; border-radius: 6px; margin-bottom: 10px; display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: inline-block;
             letter-spacing: 0.5px;
             background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .book-title { font-family: 'Google Sans', sans-serif; font-size: 1.25rem; margin: 0 0 6px 0; color: #1a1b1e; }
-        .book-author { font-size: 0.95rem; color: var(--md-text-secondary); margin-bottom: 15px; font-style: italic; }
+
+        .book-title {
+            font-family: 'Google Sans', sans-serif;
+            font-size: 1.25rem;
+            margin: 0 0 6px 0;
+            color: #1a1b1e;
+        }
+
+        .book-author {
+            font-size: 0.95rem;
+            color: var(--md-text-secondary);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
         
-        .chips-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
-        .chip { padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(0,0,0,0.05); }
+        .chips-container {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .chip {
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
 
         .status-row {
-            display: flex; flex-direction: column; gap: 6px;
-            padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.9rem;
         }
 
         .prestito-item {
-            display: flex; justify-content: space-between;
-            color: var(--md-error); font-size: 0.85rem;
-            background: #fff8f8; padding: 8px 12px; border-radius: 8px; border-left: 3px solid var(--md-error);
+            display: flex;
+            justify-content: space-between;
+            color: var(--md-error);
+            font-size: 0.85rem;
+            background: #fff8f8;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 3px solid var(--md-error);
         }
 
         /* --- ANIMATIONS FOR LIST --- */
         .fade-in-up {
             animation: fadeInUp 0.5s ease backwards;
         }
+
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- ADMIN SECTION --- */
-        .admin-actions { display: none; gap: 10px; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); }
-        .admin-actions.visible { display: flex; }
+        .admin-actions {
+            display: none;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .admin-actions.visible {
+            display: flex;
+        }
 
         /* --- FORM & MODALS --- */
-        .form-card { background: white; padding: 30px; border-radius: 20px; box-shadow: var(--shadow-2); }
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; font-size: 0.85rem; color: var(--md-text-secondary); margin-bottom: 6px; font-weight: 600; }
-        .form-input { 
-            width: 100%; padding: 12px 15px; border: 1px solid #dadce0; 
-            border-radius: 10px; font-size: 1rem; transition: border-color 0.2s;
+        .form-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-2);
         }
-        .form-input:focus { border-color: var(--md-primary); outline: none; }
 
-        .btn { padding: 12px 24px; border-radius: 12px; border: none; font-weight: 600; cursor: pointer; font-family: 'Google Sans', sans-serif; transition: all 0.2s; }
-        .btn-filled { background: var(--md-primary); color: white; box-shadow: 0 4px 6px rgba(26,115,232,0.2); }
-        .btn-filled:hover { background: #1765cc; transform: translateY(-1px); box-shadow: 0 6px 12px rgba(26,115,232,0.3); }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(32,33,36,0.6); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-        .modal-overlay.active { display: flex; }
-        .modal-box { background: white; width: 90%; max-width: 380px; padding: 30px; border-radius: 28px; box-shadow: var(--shadow-2); }
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--md-text-secondary);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
 
-        .view-section { display: none; }
-        .view-section.active { display: block; }
+        .form-input { 
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #dadce0; 
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--md-primary);
+            outline: none;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Google Sans', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .btn-filled {
+            background: var(--md-primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(26,115,232,0.2);
+        }
+
+        .btn-filled:hover {
+            background: #1765cc;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(26,115,232,0.3);
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(32,33,36,0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-box {
+            background: white;
+            width: 90%;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: var(--shadow-2);
+        }
+
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="logo-container" onclick="cambiaVista('home')">
-            <div class="logo-icon">G</div>
-            <div class="text-group">
-                <h1 class="logo">GiuliaTeca</h1>
-                <p class="subtitle">Biblioteca delle Scuole</p>
-            </div>
-        </div>
-        <div class="header-actions">
-            <button id="btnLogin" class="icon-btn" onclick="login()" title="Login">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-            </button>
-            <button id="btnExport" class="icon-btn" style="display:none;" onclick="esportaExcel()" title="Esporta CSV">
-                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            </button>
-            <button id="btnAdd" class="icon-btn fab-add" style="display:none;" onclick="preparaAggiunta()" title="Aggiungi">
-                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-            </button>
-            <button id="btnLogout" class="icon-btn" style="display:none; color: var(--md-error);" onclick="logout()" title="Esci">
-                <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
-            </button>
-        </div>
-    </header>
-
-    <div class="container">
-        <div id="loader">Caricamento in corso...</div>
-
-        <div id="statsAdmin" class="admin-stats">
-            <span class="stats-label">📊 STATO ARCHIVIO:</span>
-            <span id="statsLabel" class="stats-value">0 / 0</span>
-        </div>
-
-        <div id="view-home" class="view-section active">
-            <div class="search-area">
-                <div class="search-input-wrapper">
-                    <span class="search-icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    </span>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Cerca un libro o un autore..." oninput="applicaFiltri()">
-                </div>
-                <div class="filter-dropdown-container">
-                    <button class="filter-chip" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
-                        <span>Tutti i generi</span>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
-                    </button>
-                    <div id="listaCheckboxGeneri" class="genre-list"></div>
+    <div class="page-wrapper">
+        <header>
+            <div class="logo-container" onclick="cambiaVista('home')">
+                <div class="logo-icon">G</div>
+                <div class="text-group">
+                    <h1 class="logo">GiuliaTeca</h1>
+                    <p class="subtitle">Biblioteca delle Scuole</p>
                 </div>
             </div>
-            <div id="bookList"></div>
-            <div id="emptyState" style="text-align:center; display:none; margin-top:60px; color: var(--md-text-secondary);">
-                Nessun volume trovato nell'archivio.
+            <div class="header-actions">
+                <button id="btnLogin" class="icon-btn" onclick="login()" title="Login">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                </button>
+                <button id="btnExport" class="icon-btn" style="display:none;" onclick="esportaExcel()" title="Esporta CSV">
+                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                </button>
+                <button id="btnAdd" class="icon-btn fab-add" style="display:none;" onclick="preparaAggiunta()" title="Aggiungi">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </button>
+                <button id="btnLogout" class="icon-btn" style="display:none; color: var(--md-error);" onclick="logout()" title="Esci">
+                    <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                </button>
             </div>
-        </div>
+        </header>
 
-        <div id="view-add" class="view-section">
-            <div class="form-card">
-                <h2 id="titoloForm" style="margin-top:0; font-family:'Google Sans';">Gestione Volume</h2>
-                <div class="form-group"><label class="form-label">Titolo</label><input type="text" id="inTitolo" class="form-input" placeholder="Inserisci titolo completo"></div>
-                <div class="form-group"><label class="form-label">Autore</label><input type="text" id="inAutore" class="form-input" placeholder="nome cognome"></div>
-                <div class="form-group"><label class="form-label">Numero di Copie</label><input type="number" id="inCopie" class="form-input" value="1" min="1"></div>
-                <div class="form-group">
-                    <label class="form-label">Sede</label>
-                    <select id="inSede" class="form-input">
-                        <option value="Biblioteca Bellocchio">Biblioteca Bellocchio</option>
-                        <option value="Biblioteca Annunziata">Biblioteca Annunziata</option>
-                        <option value="Biblioteca De Amicis">Biblioteca De Amicis</option>
-                        <option value="Altro">Altro</option>
-                    </select>
-                </div>
-                <div class="form-group"><label class="form-label">Casa Editrice</label><input type="text" id="inEditore" class="form-input"></div>
-                <div class="form-group">
-                    <label class="form-label">Anno / ISBN</label>
-                    <div style="display:flex; gap:10px;">
-                        <input type="number" id="inAnno" class="form-input" placeholder="Anno">
-                        <input type="text" id="inIsbn" class="form-input" placeholder="ISBN">
+        <div class="container">
+            <div id="loader">Caricamento in corso...</div>
+            <div id="statsAdmin" class="admin-stats">
+                <span class="stats-label">📊 STATO ARCHIVIO:</span>
+                <span id="statsLabel" class="stats-value">0 / 0</span>
+            </div>
+            
+            <div id="view-home" class="view-section active">
+                <div class="search-area">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </span>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Cerca un libro o un autore..." oninput="applicaFiltri()">
+                    </div>
+                    <div class="filter-dropdown-container">
+                        <button class="filter-chip" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
+                            <span>Tutti i generi</span>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="listaCheckboxGeneri" class="genre-list"></div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Generi</label>
-                    <select id="inGenere1" class="form-input" style="margin-bottom:10px;"></select>
-                    <select id="inGenere2" class="form-input" style="margin-bottom:10px;"></select>
-                    <select id="inGenere3" class="form-input"></select>
+                <div id="bookList"></div>
+                <div id="emptyState" style="text-align:center; display:none; margin-top:60px; color: var(--md-text-secondary);">
+                    Nessun volume trovato nell'archivio.
                 </div>
-                <div style="display:flex; gap:12px; margin-top:30px;">
-                    <button class="btn" style="background:#f1f3f4; color:#3c4043;" onclick="cambiaVista('home')">Annulla</button>
-                    <button class="btn btn-filled" onclick="gestisciSalvataggio()">Salva nel Database</button>
+            </div>
+
+            <div id="view-add" class="view-section">
+                <div class="form-card">
+                    <h2 id="titoloForm" style="margin-top:0; font-family:'Google Sans';">Gestione Volume</h2>
+                    <div class="form-group">
+                        <label class="form-label">Titolo</label>
+                        <input type="text" id="inTitolo" class="form-input" placeholder="Inserisci titolo completo">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Autore</label>
+                        <input type="text" id="inAutore" class="form-input" placeholder="nome cognome">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Numero di Copie</label>
+                        <input type="number" id="inCopie" class="form-input" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sede</label>
+                        <select id="inSede" class="form-input">
+                            <option value="Biblioteca Bellocchio">Biblioteca Bellocchio</option>
+                            <option value="Biblioteca Annunziata">Biblioteca Annunziata</option>
+                            <option value="Biblioteca De Amicis">Biblioteca De Amicis</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Casa Editrice</label>
+                        <input type="text" id="inEditore" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Anno / ISBN</label>
+                        <div style="display:flex; gap:10px;">
+                            <input type="number" id="inAnno" class="form-input" placeholder="Anno">
+                            <input type="text" id="inIsbn" class="form-input" placeholder="ISBN">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Generi</label>
+                        <select id="inGenere1" class="form-input" style="margin-bottom:10px;"></select>
+                        <select id="inGenere2" class="form-input" style="margin-bottom:10px;"></select>
+                        <select id="inGenere3" class="form-input"></select>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:30px;">
+                        <button class="btn" style="background:#f1f3f4; color:#3c4043;" onclick="cambiaVista('home')">Annulla</button>
+                        <button class="btn btn-filled" onclick="gestisciSalvataggio()">Salva nel Database</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- BANNER ASSISTENZA -->
     <footer id="footerAdmin">
         Hai bisogno di supporto? Contattaci su 
         <a href="https://wa.me/393470804088" target="_blank">WhatsApp: +39 347 0804088</a>
