@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>GiuliaTeca</title>
+    <!-- Font Nunito per il titolo -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -33,6 +34,30 @@
             background-color: var(--md-background);
             color: var(--md-text-primary);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Il contenitore principale si espande per spingere il footer in basso */
+        .page-wrapper {
+            flex: 1;
+        }
+
+        /* --- FOOTER ASSISTENZA --- */
+        #footerAdmin {
+            display: none;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        
+        #footerAdmin a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         /* --- HEADER & ANIMATED LOGO --- */
@@ -504,7 +529,7 @@
             font-family: 'Nunito', sans-serif;
             font-weight: 800;
             font-size: 0.95rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
         #waAdminBtn.visible {
@@ -516,6 +541,16 @@
             box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
         }
 
+        /* Stile quando ridotto a pallino */
+        #waAdminBtn.wa-minimized {
+            padding: 12px;
+            border-radius: 50%;
+        }
+
+        #waAdminBtn.wa-minimized span {
+            display: none;
+        }
+
         .wa-icon {
             width: 24px;
             height: 24px;
@@ -525,109 +560,112 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo-container" onclick="cambiaVista('home')">
-            <div class="logo-icon">G</div>
-            <div class="text-group">
-                <h1 class="logo">GiuliaTeca</h1>
-                <p class="subtitle">Biblioteca Istituto Comprensivo 1 - Giulianova</p>
+    <div class="page-wrapper">
+        <header>
+            <div class="logo-container" onclick="cambiaVista('home')">
+                <div class="logo-icon">G</div>
+                <div class="text-group">
+                    <h1 class="logo">GiuliaTeca</h1>
+                    <p class="subtitle">Biblioteca Istituto Comprensivo 1 - Giulianova</p>
+                </div>
             </div>
-        </div>
-        <div class="header-actions">
-            <button id="btnLogin" class="icon-btn" onclick="login()" title="Login">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
-            </button>
-            <button id="btnExport" class="icon-btn" style="display:none;" onclick="esportaExcel()" title="Esporta CSV">
-                <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            </button>
-            <button id="btnAdd" class="icon-btn fab-add" style="display:none;" onclick="preparaAggiunta()" title="Aggiungi">
-                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-            </button>
-            <button id="btnLogout" class="icon-btn" style="display:none; color: var(--md-error);" onclick="logout()" title="Esci">
-                <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
-            </button>
-        </div>
-    </header>
+            <div class="header-actions">
+                <button id="btnLogin" class="icon-btn" onclick="login()" title="Login">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                </button>
+                <button id="btnExport" class="icon-btn" style="display:none;" onclick="esportaExcel()" title="Esporta CSV">
+                    <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                </button>
+                <button id="btnAdd" class="icon-btn fab-add" style="display:none;" onclick="preparaAggiunta()" title="Aggiungi">
+                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                </button>
+                <button id="btnLogout" class="icon-btn" style="display:none; color: var(--md-error);" onclick="logout()" title="Esci">
+                    <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                </button>
+            </div>
+        </header>
 
-    <div class="container">
-        <div id="loader">Caricamento in corso...</div>
-        
-        <div id="statsAdmin" class="admin-stats">
-            <span class="stats-label">📊 STATO ARCHIVIO:</span>
-            <span id="statsLabel" class="stats-value">0 / 0</span>
-        </div>
-        
-        <div id="view-home" class="view-section active">
-            <div class="search-area">
-                <div class="search-input-wrapper">
-                    <span class="search-icon">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-                    </span>
-                    <input type="text" id="searchInput" class="search-input" placeholder="Cerca un libro o un autore..." oninput="applicaFiltri()">
-                </div>
-                <div class="filter-dropdown-container">
-                    <button class="filter-chip" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
-                        <span>Tutti i generi</span>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
-                    </button>
-                    <div id="listaCheckboxGeneri" class="genre-list"></div>
-                </div>
+        <div class="container">
+            <div id="loader">Caricamento in corso...</div>
+            
+            <div id="statsAdmin" class="admin-stats">
+                <span class="stats-label">📊 STATO ARCHIVIO:</span>
+                <span id="statsLabel" class="stats-value">0 / 0</span>
             </div>
-            <div id="bookList"></div>
-            <div id="emptyState" style="text-align:center; display:none; margin-top:60px; color: var(--md-text-secondary);">
-                Nessun volume trovato nell'archivio.
-            </div>
-        </div>
-
-        <div id="view-add" class="view-section">
-            <div class="form-card">
-                <h2 id="titoloForm" style="margin-top:0; font-family:'Google Sans';">Gestione Volume</h2>
-                <div class="form-group">
-                    <label class="form-label">Titolo</label>
-                    <input type="text" id="inTitolo" class="form-input" placeholder="Inserisci titolo completo">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Autore</label>
-                    <input type="text" id="inAutore" class="form-input" placeholder="nome cognome">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Numero di Copie</label>
-                    <input type="number" id="inCopie" class="form-input" value="1" min="1">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Sede</label>
-                    <select id="inSede" class="form-input">
-                        <option value="Biblioteca Bellocchio">Biblioteca Bellocchio</option>
-                        <option value="Biblioteca Annunziata">Biblioteca Annunziata</option>
-                        <option value="Biblioteca De Amicis">Biblioteca De Amicis</option>
-                        <option value="Altro">Altro</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Casa Editrice</label>
-                    <input type="text" id="inEditore" class="form-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Anno / ISBN</label>
-                    <div style="display:flex; gap:10px;">
-                        <input type="number" id="inAnno" class="form-input" placeholder="Anno">
-                        <input type="text" id="inIsbn" class="form-input" placeholder="ISBN">
+            
+            <div id="view-home" class="view-section active">
+                <div class="search-area">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">
+                            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        </span>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Cerca un libro o un autore..." oninput="applicaFiltri()">
+                    </div>
+                    <div class="filter-dropdown-container">
+                        <button class="filter-chip" onclick="toggleMenuGeneri()" id="btnFiltroGeneri">
+                            <span>Tutti i generi</span>
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </button>
+                        <div id="listaCheckboxGeneri" class="genre-list"></div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Generi</label>
-                    <select id="inGenere1" class="form-input" style="margin-bottom:10px;"></select>
-                    <select id="inGenere2" class="form-input" style="margin-bottom:10px;"></select>
-                    <select id="inGenere3" class="form-input"></select>
+                <div id="bookList"></div>
+                <div id="emptyState" style="text-align:center; display:none; margin-top:60px; color: var(--md-text-secondary);">
+                    Nessun volume trovato nell'archivio.
                 </div>
-                <div style="display:flex; gap:12px; margin-top:30px;">
-                    <button class="btn" style="background:#f1f3f4; color:#3c4043;" onclick="cambiaVista('home')">Annulla</button>
-                    <button class="btn btn-filled" onclick="gestisciSalvataggio()">Salva nel Database</button>
+            </div>
+
+            <div id="view-add" class="view-section">
+                <div class="form-card">
+                    <h2 id="titoloForm" style="margin-top:0; font-family:'Google Sans';">Gestione Volume</h2>
+                    <div class="form-group">
+                        <label class="form-label">Titolo</label>
+                        <input type="text" id="inTitolo" class="form-input" placeholder="Inserisci titolo completo">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Autore</label>
+                        <input type="text" id="inAutore" class="form-input" placeholder="nome cognome">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Numero di Copie</label>
+                        <input type="number" id="inCopie" class="form-input" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Sede</label>
+                        <select id="inSede" class="form-input">
+                            <option value="Biblioteca Bellocchio">Biblioteca Bellocchio</option>
+                            <option value="Biblioteca Annunziata">Biblioteca Annunziata</option>
+                            <option value="Biblioteca De Amicis">Biblioteca De Amicis</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Casa Editrice</label>
+                        <input type="text" id="inEditore" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Anno / ISBN</label>
+                        <div style="display:flex; gap:10px;">
+                            <input type="number" id="inAnno" class="form-input" placeholder="Anno">
+                            <input type="text" id="inIsbn" class="form-input" placeholder="ISBN">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Generi</label>
+                        <select id="inGenere1" class="form-input" style="margin-bottom:10px;"></select>
+                        <select id="inGenere2" class="form-input" style="margin-bottom:10px;"></select>
+                        <select id="inGenere3" class="form-input"></select>
+                    </div>
+                    <div style="display:flex; gap:12px; margin-top:30px;">
+                        <button class="btn" style="background:#f1f3f4; color:#3c4043;" onclick="cambiaVista('home')">Annulla</button>
+                        <button class="btn btn-filled" onclick="gestisciSalvataggio()">Salva nel Database</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- BANNER ASSISTENZA WHATSAPP FLOTTANTE -->
     <a href="https://wa.me/393470804088" target="_blank" id="waAdminBtn" title="Assistenza">
         <span>Contatta per l'assistenza</span>
         <svg class="wa-icon" viewBox="0 0 24 24">
@@ -711,7 +749,10 @@
             document.getElementById('statsAdmin').classList.toggle('visible', isAdmin);
             
             // Accende o spegne il bottone WhatsApp
-            document.getElementById('waAdminBtn').classList.toggle('visible', isAdmin);
+            const waBtn = document.getElementById('waAdminBtn');
+            if (waBtn) {
+                waBtn.classList.toggle('visible', isAdmin);
+            }
             
             calcolaStats();
             applicaFiltri();
@@ -945,6 +986,16 @@
             document.getElementById('view-'+v).classList.add('active');
             document.getElementById('listaCheckboxGeneri').classList.remove('show');
             window.scrollTo(0,0);
+
+            // Gestione linguetta WhatsApp
+            const waBtn = document.getElementById('waAdminBtn');
+            if (waBtn) {
+                if (v === 'add') {
+                    waBtn.classList.add('wa-minimized');
+                } else {
+                    waBtn.classList.remove('wa-minimized');
+                }
+            }
         }
 
         function showModal(type, msg, isPwd) {
